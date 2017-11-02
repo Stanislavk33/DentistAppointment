@@ -1,0 +1,26 @@
+<div>
+  This is the code we used for testing.
+  <div *ngFor="let data of testDatas">
+    {{data.name}} isSmart: {{data.smart}}
+  </div>
+  <div class="clarity-test">
+    <div>
+      Clarity works if you can see a well styled blueish cool flat button here:
+      <button class="btn btn-primary">Clarity works!</button>
+    </div>
+    <div>
+      And a Clarity datagrid here:
+      <clr-datagrid>
+        <clr-dg-column>Name</clr-dg-column>
+        <clr-dg-column>Is smart</clr-dg-column>
+
+        <clr-dg-row *ngFor="let data of testDatas">
+          <clr-dg-cell>{{data.name}}</clr-dg-cell>
+          <clr-dg-cell>{{data.smart}}</clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>{{testDatas.length}} users</clr-dg-footer>
+      </clr-datagrid>
+    </div>
+  </div>
+</div>
