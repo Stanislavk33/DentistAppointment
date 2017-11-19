@@ -2,32 +2,11 @@
   <header class="header header-6">
     Dentists Appointment System
   </header>
-  <nav class="subnav">
-    <div>SubNav Option 1</div>
-    <div>SubNav Option 2</div>
-    <div>SubNav Option 3</div>
-    <div>SubNav Option 4</div>
-    <div>SubNav Option 5</div>
-    <div>SubNav Option 6</div>
-    <div>SubNav Option 7</div>
+  <nav>
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/search" routerLinkActive="active">SEARCH</a>
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a routerLink="/register" routerLinkActive="active">Register</a>
   </nav>
-
-  <div class="content-container">
-    <div class="content-area">
-      Actual content.
-      <primary_test></primary_test>
-    </div>
-
-    <nav _ngcontent-c4="" class="sidenav">
-      <ul _ngcontent-c4="" class="nav-list">
-        <li>SideNav Link 1</li>
-        <li>SideNav Link 2</li>
-        <li>SideNav Link 3</li>
-        <li>SideNav Link 4</li>
-        <li>SideNav Link 5</li>
-        <li>SideNav Link 6</li>
-        <li>SideNav Link 7</li>
-      </ul>
-    </nav>
-  </div>
+  <router-outlet></router-outlet>
 </div>
