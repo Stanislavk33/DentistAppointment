@@ -19,9 +19,9 @@ export class PrimaryTestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getTestData()
-        .subscribe(datas => this.testDatas = datas,
-                   error => console.log(error));
+    // this.service.getTestData()
+    //     .subscribe(datas => this.testDatas = datas,
+    //                error => console.log(error));
   }
 
 

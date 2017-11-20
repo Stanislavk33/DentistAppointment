@@ -8,11 +8,27 @@ import { RouterModule } from "@angular/router";
 import { ClarityModule } from "clarity-angular";
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./shared/app/app.component";
+import { SearchComponent } from "./shared/search/search.component";
+import { LoginComponent } from "./shared/login/login.component";
+import { HomeComponent } from "./shared/home/home.component";
+import { RegisterComponent } from "./shared/register/register.component";
+
+/*const appRoutes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'search', component: SearchComponent },
+  { path: '**', component: SearchComponent }
+];*/
 
 @NgModule({
   declarations: [
     AppComponent,
-    PrimaryTestComponent
+    PrimaryTestComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +37,13 @@ import { AppComponent } from "./shared/app/app.component";
     FormsModule,
     JsonpModule,
     RouterModule,
-    ClarityModule
+    ClarityModule,
+    RouterModule.forRoot([
+                           { path: 'home', component: HomeComponent },
+                           { path: 'register', component: RegisterComponent },
+                           { path: 'login', component: LoginComponent },
+                           { path: 'search', component: SearchComponent },
+                         ])
   ],
   providers: [
     PrimaryTestService
