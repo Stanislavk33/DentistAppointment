@@ -1,0 +1,16 @@
+clr-datagrid {
+  max-width: 600px;
+}
+
+.calendar {
+  display: inline-block;
+}
+
+.profile-card {
+  width: 750px;
+  display: inline-block;
+}
+
+.card {
+  width: 500px;
+}

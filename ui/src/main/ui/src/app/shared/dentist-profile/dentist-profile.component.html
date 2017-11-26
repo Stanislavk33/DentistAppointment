@@ -1,0 +1,36 @@
+<div class="profile-container">
+  <div>
+    <div *ngIf="isAvailable()" class="profile-card">
+      <div class="row">
+        <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="card-header">
+              {{dentist.firstName}} + {{dentist.lastName}}
+            </div>
+            <div class="card-block">
+              <div class="card-title">
+                {{dentist.city}}
+              </div>
+              <div class="card-text">
+                Something about the dentist.
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-sm btn-link">Save Appointment</button>
+              <button class="btn btn-sm btn-link">Read more</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      Dentist + {{dentist.firstName}}  {{dentist.lastName}}
+    </div>
+
+    <div class="calendar">
+      <appointments-calendar></appointments-calendar>
+    </div>
+  </div>
+  <div class="ratings">
+    <dentist-rating></dentist-rating>
+  </div>
+</div>
+
