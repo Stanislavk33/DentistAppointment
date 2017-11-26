@@ -18,9 +18,7 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-    @Autowired
-    UserService userService;
-
+    
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
         return new UserRegistrationDto();
