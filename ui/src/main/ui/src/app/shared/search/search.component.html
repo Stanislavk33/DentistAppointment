@@ -1,79 +1,86 @@
-<div class="search-container">
+<div class="search-container bgimg">
   <div class="search-box">
-    <div class="test">
-      <clr-dropdown>
-        <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
-          Select City
-          <clr-icon shape="caret down"></clr-icon>
-        </button>
-        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-          <label class="dropdown-header">Select a City</label>
-          <button type="button" clrDropdownItem (click)="selected('Sofia')">Sofia</button>
-          <button type="button" clrDropdownItem (click)="selected('Varna')">Varna</button>
-          <button type="button" clrDropdownItem (click)="selected('Stara Zagora')">Stra Zagora</button>
-          <button type="button" clrDropdownItem (click)="selected('Sliven')">Sliven</button>
-        </clr-dropdown-menu>
-      </clr-dropdown>
-    </div>
-    <form class="search-city">
-    <section class="form-block">
-      <label>Search by name: </label>
-      <div class="form-group">
-        <label>Name:</label>
-        <input type="text" #titleInput>
+      <div class="city-dropdown">
+        <clr-dropdown>
+          <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+            {{currentCity}}
+            <clr-icon shape="caret down"></clr-icon>
+          </button>
+          <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+            <label class="dropdown-header">Select a City</label>
+            <button type="button" clrDropdownItem (click)="selected('Sofia')">Sofia</button>
+            <button type="button" clrDropdownItem (click)="selected('Varna')">Varna</button>
+            <button type="button" clrDropdownItem (click)="selected('Stara Zagora')">Stra Zagora</button>
+            <button type="button" clrDropdownItem (click)="selected('Sliven')">Sliven</button>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+        <!--<span *ngIf="city">{{city}}</span>-->
       </div>
-    </section>
-    <button class="btn btn-primary" (click) = "searchByName(titleInput.value)">Search</button>
+
+      <div class="rating-dropdown">
+        <clr-dropdown>
+          <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+            {{currentRating}}
+            <clr-icon shape="caret down"></clr-icon>
+          </button>
+          <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+            <button type="button" clrDropdownItem (click)="rating('asc')">Ascending</button>
+            <button type="button" clrDropdownItem (click)="rating('desc')">Descending</button>
+          </clr-dropdown-menu>
+          <!--<span *ngIf="rating2">{{rating2}}</span>-->
+        </clr-dropdown>
+      </div>
+
+      <div class="type-dropdown">
+        <clr-dropdown>
+          <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+            {{currentType}}
+            <clr-icon shape="caret down"></clr-icon>
+          </button>
+          <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+            <button type="button" clrDropdownItem (click)="typeDentist('orthodont')">Orthodont</button>
+            <button type="button" clrDropdownItem (click)="typeDentist('normal')">Normal</button>
+            <button type="button" clrDropdownItem (click)="typeDentist('test')">Test</button>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+        <!--<span *ngIf="type">{{type}}</span>-->
+      </div>
+
+    <form class="search-name">
+      <section class="form-block">
+        <div class="form-group">
+          <label>Search by name:</label>
+          <input type="text" #titleInput>
+        </div>
+      </section>
+      <button class="btn btn-primary" (click) = "searchByName(titleInput.value)">Search</button>
     </form>
-    <div class="sort-rating">
-      <clr-dropdown>
-        <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
-          Sort By Rating
-          <clr-icon shape="caret down"></clr-icon>
-        </button>
-        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-          <button type="button" clrDropdownItem (click)="rating('asc')">Ascending</button>
-          <button type="button" clrDropdownItem (click)="rating('desc')">Descending</button>
-        </clr-dropdown-menu>
-      </clr-dropdown>
-    </div>
-    <div class="type-search">
-      <clr-dropdown>
-        <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
-          Search by Type
-          <clr-icon shape="caret down"></clr-icon>
-        </button>
-        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-          <button type="button" clrDropdownItem (click)="typeDentist('orthodont')">Orthodont</button>
-          <button type="button" clrDropdownItem (click)="typeDentist('normal')">Normal</button>
-          <button type="button" clrDropdownItem (click)="typeDentist('test')">Test</button>
-        </clr-dropdown-menu>
-      </clr-dropdown>
+
+    <div class="search-results">
+      <clr-datagrid>
+        <clr-dg-column>First Name</clr-dg-column>
+        <clr-dg-column>Last Name</clr-dg-column>
+        <clr-dg-column>City</clr-dg-column>
+        <clr-dg-column>Rating</clr-dg-column>
+        <clr-dg-column>Type</clr-dg-column>
+        <clr-dg-column>View</clr-dg-column>
+
+        <clr-dg-row *ngFor="let dentist of dentists">
+          <clr-dg-cell>{{dentist.firstName}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.lastName}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.city}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.rating}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.dentistType}}</clr-dg-cell>
+          <clr-dg-cell>
+            <a [routerLink]="['result',dentist.id]">View Profile</a>
+          </clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>{{dentists.length}} users</clr-dg-footer>
+      </clr-datagrid>
     </div>
   </div>
-
-  <div class="search-results">
-    <clr-datagrid>
-      <clr-dg-column>First Name</clr-dg-column>
-      <clr-dg-column>Last Name</clr-dg-column>
-      <clr-dg-column>City</clr-dg-column>
-      <clr-dg-column>Rating</clr-dg-column>
-      <clr-dg-column>Type</clr-dg-column>
-      <clr-dg-column>View</clr-dg-column>
-
-      <clr-dg-row *ngFor="let dentist of dentists">
-        <clr-dg-cell>{{dentist.firstName}}</clr-dg-cell>
-        <clr-dg-cell>{{dentist.lastName}}</clr-dg-cell>
-        <clr-dg-cell>{{dentist.city}}</clr-dg-cell>
-        <clr-dg-cell>{{dentist.rating}}</clr-dg-cell>
-        <clr-dg-cell>{{dentist.dentistType}}</clr-dg-cell>
-        <clr-dg-cell>
-          <a [routerLink]="['result',dentist.id]">View Profile</a>
-        </clr-dg-cell>
-      </clr-dg-row>
-
-      <clr-dg-footer>{{dentists.length}} users</clr-dg-footer>
-    </clr-datagrid>
+  <div class="events">
+    <events></events>
   </div>
 </div>
-<events></events>

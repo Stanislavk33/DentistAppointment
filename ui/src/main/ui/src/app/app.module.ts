@@ -14,8 +14,11 @@ import {SearchService} from "./shared/search/search.service";
 import {DentistProfileComponent} from "./shared/dentist-profile/dentist-profile.component";
 import {AppRoutingModule} from "./shared/app-routing.module";
 import {EventsComponent} from "./shared/search/events/events.component";
-import {AppointmentsCalendarComponent} from "./shared/dentist-profile/appointments-calendar/appointments-calendar.component";
 import {DentistRatingComponent} from "./shared/dentist-profile/dentist-rating/dentist-rating.component";
+import {EditProfileComponent} from "./shared/edit-profile/edit-profile-component";
+import {ChangePasswordComponent} from "./shared/edit-profile/change-password/change-password-component";
+import {CalendarModule} from "./shared/dentist-profile/appointments-calendar/calendar.module";
+import {CalendarComponent} from "./shared/dentist-profile/appointments-calendar/calendar.component";
 
 
 @NgModule({
@@ -27,8 +30,9 @@ import {DentistRatingComponent} from "./shared/dentist-profile/dentist-rating/de
     SearchComponent,
     DentistProfileComponent,
     EventsComponent,
-    AppointmentsCalendarComponent,
-    DentistRatingComponent
+    DentistRatingComponent,
+    EditProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,8 @@ import {DentistRatingComponent} from "./shared/dentist-profile/dentist-rating/de
     JsonpModule,
     RouterModule,
     ClarityModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CalendarModule
   ],
   providers: [
     SearchService

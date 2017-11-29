@@ -11,6 +11,9 @@ export class AppComponent implements OnInit {
   constructor() {
   }
 
+  showProfile(){
+
+  }
   ngOnInit() {
   }
 }

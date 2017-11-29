@@ -1,12 +1,26 @@
 <div class="main-container">
   <header class="header header-6">
-    Dentists Appointment System
   </header>
-  <nav>
-    <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/search" routerLinkActive="active">SEARCH</a>
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-    <a routerLink="/register" routerLinkActive="active">Register</a>
+  <nav class="header-navi">
+    <a class="nav" id="logo" routerLink="/home"></a>
+    <a class="nav" routerLink="/home" routerLinkActive="active">Home</a>
+    <a class="nav" routerLink="/search" routerLinkActive="active">SEARCH</a>
+    <a class="nav" routerLink="/login" routerLinkActive="active">Login</a>
+    <a class="nav" routerLink="/register" routerLinkActive="active">Register</a>
+    <clr-dropdown class="nav">
+      <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+        kalinavtodorova@gmail.com
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+        <a clrDropdownItem routerLink="/userprofile" routerLinkActive="active">Edit Profile</a>
+        <a clrDropdownItem routerLink="/changepass" routerLinkActive="active">Change Password</a>
+        <div class="dropdown-divider"></div>
+        <button type="button" clrDropdownItem>Log Out</button>
+      </clr-dropdown-menu>
+    </clr-dropdown>
   </nav>
-  <router-outlet></router-outlet>
+  <div class="wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </div>

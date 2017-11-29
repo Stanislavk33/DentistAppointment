@@ -2,15 +2,19 @@ clr-datagrid {
   max-width: 600px;
 }
 
-.calendar {
-  display: inline-block;
-}
-
 .profile-card {
-  width: 750px;
+  width: 600px;
   display: inline-block;
+  margin: 0;
+  padding: 0;
+
 }
 
 .card {
+  width: 500px;
+}
+
+.calendar {
+  display: inline-block;
   width: 500px;
 }

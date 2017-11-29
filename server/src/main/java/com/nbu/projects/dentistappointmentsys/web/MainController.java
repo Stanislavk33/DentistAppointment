@@ -36,7 +36,7 @@ public class MainController {
     @GetMapping("/api1")
     public String user1() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        return "asd1";
+        return name;
     }
 
     @GetMapping("/api2")
