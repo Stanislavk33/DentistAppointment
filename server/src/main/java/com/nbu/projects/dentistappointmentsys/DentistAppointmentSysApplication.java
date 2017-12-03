@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DentistAppointmentSysApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DentistAppointmentSysApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(DentistAppointmentSysApplication.class, args);
+  }
 }
