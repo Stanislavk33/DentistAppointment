@@ -1,27 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import {RegisterModel} from "./model/register.model";
+import {Constants} from "../models/constants";
+import {CommonService} from "../services/common.service";
+import {CommonUtil} from "../util/common.util";
 
 @Component({
-  selector: 'register-component',
-  templateUrl: 'register.component.html',
-  styleUrls: ["register.component.css"],
-  providers: []
-})
+              selector: 'register-component',
+              templateUrl: 'register.component.html',
+              styleUrls: ["register.component.scss"],
+              providers: []
+           })
 export class RegisterComponent implements OnInit {
-  constructor(private httpClient: HttpClient) {
-  }
 
-  ngOnInit() {
-  }
+   private model: RegisterModel = new RegisterModel();
+   private Constants = Constants;
 
-  one() {
-    this.httpClient.get("/api")
-      .subscribe(result => console.log(result), error => console.error(error));
-  }
+   constructor(private commonService: CommonService) {
+   }
 
-  two() {
-    this.httpClient.get("/api1")
-        .subscribe(result => console.log(result), error => console.error(error));
+   ngOnInit() {
+   }
 
-  }
+   onSubmit() {
+      this.commonService.register(this.model)
+          .subscribe(result => {
+                        console.log(result);
+                        CommonUtil.putSessionUser(result.user);
+                     },
+                     error => console.error(error));
+   }
 }
