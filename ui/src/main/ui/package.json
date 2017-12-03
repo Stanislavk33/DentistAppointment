@@ -27,6 +27,7 @@
     "clarity-icons": "^0.10.11",
     "clarity-ui": "^0.10.11",
     "core-js": "^2.4.1",
+    "daypilot-pro-angular": "https://npm.daypilot.org/daypilot-pro-angular/trial/8.4.3027.tar.gz",
     "registration": "^2.0.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
