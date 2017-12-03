@@ -46,14 +46,17 @@ clr-datagrid {
 
 .rating-dropdown {
   display: inline-block;
+  width: 180px;
 }
 
 .city-dropdown {
   display: inline-block;
+  width: 150px;
 }
 
 .type-dropdown {
   display: inline-block;
+  width: 150px;
 }
 
 .events {

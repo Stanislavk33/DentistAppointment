@@ -8,6 +8,7 @@
           </button>
           <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
             <label class="dropdown-header">Select a City</label>
+            <button type="button" clrDropdownItem (click)="selected('')"></button>
             <button type="button" clrDropdownItem (click)="selected('Sofia')">Sofia</button>
             <button type="button" clrDropdownItem (click)="selected('Varna')">Varna</button>
             <button type="button" clrDropdownItem (click)="selected('Stara Zagora')">Stra Zagora</button>
@@ -24,8 +25,9 @@
             <clr-icon shape="caret down"></clr-icon>
           </button>
           <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-            <button type="button" clrDropdownItem (click)="rating('asc')">Ascending</button>
-            <button type="button" clrDropdownItem (click)="rating('desc')">Descending</button>
+            <button type="button" clrDropdownItem (click)="selected('')"></button>
+            <button type="button" clrDropdownItem (click)="rating('Ascending')">Ascending</button>
+            <button type="button" clrDropdownItem (click)="rating('Descending')">Descending</button>
           </clr-dropdown-menu>
           <!--<span *ngIf="rating2">{{rating2}}</span>-->
         </clr-dropdown>
@@ -38,6 +40,7 @@
             <clr-icon shape="caret down"></clr-icon>
           </button>
           <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+            <button type="button" clrDropdownItem (click)="selected('Select a ')"></button>
             <button type="button" clrDropdownItem (click)="typeDentist('orthodont')">Orthodont</button>
             <button type="button" clrDropdownItem (click)="typeDentist('normal')">Normal</button>
             <button type="button" clrDropdownItem (click)="typeDentist('test')">Test</button>
@@ -75,8 +78,11 @@
             <a [routerLink]="['result',dentist.id]">View Profile</a>
           </clr-dg-cell>
         </clr-dg-row>
-
-        <clr-dg-footer>{{dentists.length}} users</clr-dg-footer>
+        <clr-dg-footer>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          of {{pagination.totalItems}} users
+          <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+        </clr-dg-footer>
       </clr-datagrid>
     </div>
   </div>

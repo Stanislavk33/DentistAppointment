@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
   public city;
   public rating2;
   public type;
-
+  public uid;
   public currentRating = 'Sort By Rating';
   public currentCity = 'Select City';
   public currentType = 'Type';
@@ -81,8 +81,12 @@ export class SearchComponent implements OnInit {
   }
 
   update() {
-    //this.userProfile.sendData();
+    this.service.getDentistsByRating('desc').subscribe(data => this.dentists = data,
+      error => console.log(error));
+    this.service.getUserId().subscribe(data => this.uid, err => console.log(err));
+    console.log(this.uid);
   }
-  ngOnInit() { }
-
+  ngOnInit() {
+   this.update();
+  }
 }

@@ -1,10 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
-import {Dentist} from "../search/dentist.model";
 
 @Injectable()
-export class DentistService{
+export class AppointmentsCalendarService{
 
   constructor(private httpClient: HttpClient) {
   }

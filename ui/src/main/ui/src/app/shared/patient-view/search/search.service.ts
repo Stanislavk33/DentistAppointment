@@ -31,7 +31,9 @@ export class SearchService{
     let URL = "dentists/type/" + type;
     return this.httpClient.get(URL);
   }
-
+   public getUserId(): Observable<string> {
+    return this.httpClient.get('uid');
+   }
   // public setPatient(): Observable<Patient[]> {
   //   return this.httpClient.get('user');
   // }
