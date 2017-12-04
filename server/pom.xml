@@ -48,7 +48,7 @@
         </dependency>
 
         <!-- asdasd -->
-
+		  <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -73,7 +73,7 @@
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
         </dependency>
-
+			-->
         <!-- bootstrap and jquery -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -94,6 +94,7 @@
         </dependency>
 
         <!-- testing -->
+		  <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -109,6 +110,7 @@
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
+			  -->
     </dependencies>
 
     <build>
