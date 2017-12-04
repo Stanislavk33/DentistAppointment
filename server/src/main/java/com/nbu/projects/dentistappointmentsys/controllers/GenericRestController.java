@@ -34,7 +34,7 @@ public class GenericRestController {
 
   @PostMapping("/authenticate")
   public LoginResultModel login(@RequestBody LoginModel loginModel) {
-
+    //TODO: Check if user is blocked.
     logger.info("Logging in as: " + loginModel.getEmail());
     User user = userRepository.findByEmail(loginModel.getEmail());
     if (user != null &&

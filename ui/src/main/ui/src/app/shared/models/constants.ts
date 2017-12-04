@@ -13,4 +13,6 @@ export class Constants {
    public static readonly TYPE_SURGEON: string = "SURGEON";
 
    public static readonly SESSION_USER: string = "currentUser";
+
+   public static readonly BLOCK_TRESHHOLD: number = 4;
 }

@@ -18,3 +18,5 @@
 /server/src/main/resources/static/scripts.bundle.js
 
 .idea/
+*.map
+/ui/src/main/ui/karma.conf.js

@@ -12,6 +12,9 @@ import {RegisterComponent} from "./shared/register/register.component";
 import {AppRoutingModule} from "./shared/app-routing.module";
 import {CommonService} from "./shared/services/common.service";
 import {ClientComponent} from "./shared/client/client.component";
+import {UsersService} from "./shared/services/users.service";
+import {AdminComponent} from "./shared/admin/admin.component";
+import {AdminService} from "./shared/services/admin.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import {ClientComponent} from "./shared/client/client.component";
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    ClientComponent
+    ClientComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import {ClientComponent} from "./shared/client/client.component";
     AppRoutingModule
   ],
   providers: [
-    CommonService
+    CommonService,
+    UsersService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })
