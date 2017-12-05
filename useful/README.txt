@@ -1,24 +1,47 @@
- 1. Build and run app.
- 1.1. To start the app first you will need:
- 1.1.1. a running MySQL server;
- 1.1.2. 'application.properties' filled correctly regarding your MySQL server (url, username and password).
+_,-;*'`How to run DentistAppointment project`'*;-,_
+Made the steps (step 1 excluded) while writing them so it should be considered as tested.
+1. Download and install:
+		JDK 1.8
+		Maven 3.5.2
+		Node v8.8.1
+		NPM 5.4.2
+		MySQL 1.4 - download link https://dev.mysql.com/downloads/installer/
+		*While installing MySQL keep track of the ports, user names and passwords that you pick.
 
- 1.2. Execute to build whole project (also deploys the ui in the server's static folder so Spring can use it):
-    ~in project directory~
-    mvn clean install
+2. Get a copy of the project. Unzip the downloaded copy somewhere ( <unzipped project folder> ).
 
- 1.3. To start the app:
- 1.3.1. Execute:
-      ~in server directory~
-      mvn spring-boot:run
- 1.3.2. Go to localhost:8080.
+3. Prepare MySQL server:
+3.1 Pick a <schema name> .
+3.2 Create a schema named <schema name> .
 
- 2. While working on the ui, (having the server running) you can execute:
-       ~ in ..\ui\src\main\ui directory ~
-       npm start
-    and see your changes going to localhost:4200. This will keep a server running and will
-    update files as you develop them. After updating the files it will automatically
-    refresh all browsers that have loaded it.
+4. Edit project's backend properties file so that it can successfully connect with your MySQL server
+4.1 Open <unzipped project folder>\DentistAppointment\server\src\main\resources\application.properties
+4.2 Edit the following lines:
+		spring.datasource.url=jdbc:mysql://localhost:3306/new
+		spring.datasource.username=root
+		spring.datasource.password=root
+	to:
+		spring.datasource.url=jdbc:mysql://localhost:<your port from MySQL setup>/<schema name>
+		spring.datasource.username=<your username from MySQL setup>
+		spring.datasource.password=<your password from MySQL setup>
+	*Default port for MySQL server is 3306.
 
- 3. Please import the code_style.xml file in your IntellijIdea Settings so we submit files with similarly written code.
-    (File > Settings... > Editor > Code Style > Scheme > ~gear drop down~ > Import Scheme > Intellij IDEA code style XML)
+5. Build the project
+5.1 Open cmd
+5.2 Change directory to the unzipped project (<unzipped project folder>\DentistAppointment\)
+	The directory should contain 
+					   .gitignore
+					   pom.xml
+					   README.md
+		<DIR>          server
+		<DIR>          ui
+		<DIR>          useful
+5.3 Use maven to build the project using command:
+		mvn clean install
+
+6. Run the project
+6.1 Change directory to <unzipped project folder>\DentistAppointment\server\
+6.2 Use mvn to run the app on port 8080:
+		mvn spring-boot:run
+
+7. Open the app using a *modern* browser at localhost:8080 .
