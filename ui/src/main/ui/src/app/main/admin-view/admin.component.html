@@ -1,0 +1,69 @@
+
+  <div *ngIf="dentists">
+    <h1>Dentists</h1>
+    <clr-datagrid>
+      <clr-dg-column>Dentist email</clr-dg-column>
+      <clr-dg-column>First name</clr-dg-column>
+      <clr-dg-column>Last name</clr-dg-column>
+      <clr-dg-column>Type</clr-dg-column>
+      <clr-dg-column>City</clr-dg-column>
+      <clr-dg-column>Times blacklisted</clr-dg-column>
+      <clr-dg-column>Block/Unblock</clr-dg-column>
+
+      <clr-dg-row *ngFor="let dentist of dentists">
+        <clr-dg-cell>{{dentist.email}}</clr-dg-cell>
+        <clr-dg-cell>{{dentist.firstName}}</clr-dg-cell>
+        <clr-dg-cell>{{dentist.lastName}}</clr-dg-cell>
+        <clr-dg-cell>{{dentist.dentistInfo.dentistType}}</clr-dg-cell>
+        <clr-dg-cell>{{dentist.dentistInfo.city}}</clr-dg-cell>
+        <clr-dg-cell>{{dentist.timesBlacklisted}}</clr-dg-cell>
+        <clr-dg-cell>
+          <button class="btn btn-warning"
+                  (click)="block(dentist, true)"
+                  *ngIf="dentist.timesBlacklisted < 4">
+            Block
+          </button>
+          <button class="btn btn-success"
+                  (click)="block(dentist, false)"
+                  *ngIf="dentist.timesBlacklisted >= 4">
+            Unblock
+          </button>
+        </clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>{{dentists.length}} dentist(s)</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+
+  <div *ngIf="patients">
+    <h1>Patients</h1>
+    <clr-datagrid>
+      <clr-dg-column>Patient email</clr-dg-column>
+      <clr-dg-column>First name</clr-dg-column>
+      <clr-dg-column>Last name</clr-dg-column>
+      <clr-dg-column>Times blacklisted</clr-dg-column>
+      <clr-dg-column>Block/Unblock</clr-dg-column>
+
+      <clr-dg-row *ngFor="let patient of patients">
+        <clr-dg-cell>{{patient.email}}</clr-dg-cell>
+        <clr-dg-cell>{{patient.firstName}}</clr-dg-cell>
+        <clr-dg-cell>{{patient.lastName}}</clr-dg-cell>
+        <clr-dg-cell>{{patient.timesBlacklisted}}</clr-dg-cell>
+        <clr-dg-cell>
+          <button class="btn btn-warning"
+                  (click)="block(patient, true)"
+                  *ngIf="patient.timesBlacklisted < 4">
+            Block
+          </button>
+          <button class="btn btn-success"
+                  (click)="block(patient, false)"
+                  *ngIf="patient.timesBlacklisted >= 4">
+            Unblock
+          </button>
+        </clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>{{patients.length}} patient(s)</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+
