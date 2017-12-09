@@ -16,11 +16,11 @@ export class CommonUtil {
    }
 
    public static getSessionUserRole(): string {
-      let user: UserModel = this.getSessionUser()
+      let user: UserModel = this.getSessionUser();
       return user ? user.role : "";
    }
   public static getSessionUserEmail(): string {
-    let user: UserModel = this.getSessionUser()
+    let user: UserModel = this.getSessionUser();
     return user ? user.email : "";
   }
 }
