@@ -31,4 +31,5 @@ export class DentistResultsComponent implements OnInit {
        .subscribe(result => this.dentists = result.users as DentistModel[],
          error => console.error(error));
    }
+
 }

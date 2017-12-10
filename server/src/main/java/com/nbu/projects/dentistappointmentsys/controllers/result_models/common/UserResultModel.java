@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class UserResultModel {
 
+  private Long id;
   private String email;
   private Role role;
   private String firstName;
@@ -19,7 +20,8 @@ public class UserResultModel {
   }
 
   public UserResultModel(User user) {
-    this(user.getEmail(),
+    this(user.getId(),
+         user.getEmail(),
          user.getRole(),
          user.getFirstName(),
          user.getLastName(),
@@ -28,13 +30,15 @@ public class UserResultModel {
          user.getDentistInfo());
   }
 
-  private UserResultModel(String email,
+  private UserResultModel(Long id,
+                          String email,
                           Role role,
                           String firstName,
                           String lastName,
                           Integer timesBlacklisted,
                           Set<Long> blacklist,
                           DentistInfo dentistInfo) {
+    this.id = id;
     this.email = email;
     this.role = role;
     this.firstName = firstName;
@@ -42,6 +46,14 @@ public class UserResultModel {
     this.timesBlacklisted = timesBlacklisted;
     this.blacklist = blacklist;
     this.dentistInfo = dentistInfo;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getEmail() {

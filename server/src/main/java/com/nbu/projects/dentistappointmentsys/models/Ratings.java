@@ -10,10 +10,10 @@ public class Ratings {
         private Long id;
 
         @Column(nullable = false)
-        private Long rater_id;
+        private Long raterId;
 
         @Column(nullable = false)
-        private Long rated_id;
+        private Long ratedId;
 
         @Column(nullable = false)
         private Double rate;
@@ -24,8 +24,8 @@ public class Ratings {
         public Ratings() { }
 
         public Ratings(Long rater_id, Long rated_id, Double rate, String comment) {
-                this.rater_id = rater_id;
-                this.rated_id = rated_id;
+                this.raterId = rater_id;
+                this.ratedId = rated_id;
                 this.rate = rate;
                 this.comment = comment;
         }
@@ -39,19 +39,19 @@ public class Ratings {
         }
 
         public Long getRater_id() {
-                return rater_id;
+                return raterId;
         }
 
         public void setRater_id(Long rater_id) {
-                this.rater_id = rater_id;
+                this.raterId = rater_id;
         }
 
         public Long getRated_id() {
-                return rated_id;
+                return ratedId;
         }
 
         public void setRated_id(Long rated_id) {
-                this.rated_id = rated_id;
+                this.ratedId = rated_id;
         }
 
         public Double getRate() {

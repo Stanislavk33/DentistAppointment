@@ -27,6 +27,8 @@ import {EditProfileComponent} from "./main/patient-view/patient-profile/edit-pro
 import {AppointmentsComponent} from "./main/patient-view/patient-profile/appointments/appointments.component";
 import {EventsComponent} from "./main/shared-components/dentist-search/events/events.component";
 import {DentistProfileComponent} from "./main/patient-view/dentist-profile/dentist-profile.component";
+import {RatingsService} from "./main/patient-view/dentist-profile/ratings/ratings.service";
+import {RatingsComponent} from "./main/patient-view/dentist-profile/ratings/ratings.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import {DentistProfileComponent} from "./main/patient-view/dentist-profile/denti
     AmbulatoryComponent,
     AppointmentsComponent,
     EventsComponent,
-    DentistProfileComponent
+    DentistProfileComponent,
+    RatingsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import {DentistProfileComponent} from "./main/patient-view/dentist-profile/denti
     RoleGuard,
     AuthGuard,
     UsersService,
-    AdminService
+    AdminService,
+    RatingsService
   ],
   bootstrap: [MainComponent]
 })

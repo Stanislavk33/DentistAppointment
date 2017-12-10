@@ -35,7 +35,7 @@ const appRoutes: Routes = [
           ]},
         { path: 'changepass', component: ChangePasswordComponent},
         { path: 'dentists', component: DentistResultsComponent},
-        { path: 'result/:email', component: DentistProfileComponent}
+        { path: 'result/:id', component: DentistProfileComponent}
       ],
       canActivate: [RoleGuard],
       data: { roles: ['PATIENT'] }

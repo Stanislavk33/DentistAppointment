@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./dentist-profile.component.css']
 })
 export class DentistProfileComponent implements OnInit {
-  email;
+  id;
   public isDataAvailable = false;
   constructor(private _Activatedroute:ActivatedRoute,
               private router: Router){
@@ -20,6 +20,7 @@ export class DentistProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.email = this._Activatedroute.snapshot.params['id'];
+    this.id = this._Activatedroute.snapshot.params['id'];
+    console.log(this._Activatedroute.snapshot.params['id']);
   }
 }
