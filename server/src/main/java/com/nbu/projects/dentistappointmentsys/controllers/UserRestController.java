@@ -6,7 +6,6 @@ import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.U
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.UsersResultModel;
 import com.nbu.projects.dentistappointmentsys.models.User;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
-import com.nbu.projects.dentistappointmentsys.repositories.DentistInfoRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
@@ -26,8 +25,6 @@ public class UserRestController {
 
   @Autowired
   UserRepository userRepository;
-  @Autowired
-  DentistInfoRepository dentistInfoRepository;
   @Autowired
   OpenHourRepository openHourRepository;
 

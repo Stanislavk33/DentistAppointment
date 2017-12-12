@@ -1,5 +1,6 @@
 package com.nbu.projects.dentistappointmentsys.controllers.request_models.register;
 
+import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
 
 public class UserRegisterModel {
@@ -9,6 +10,8 @@ public class UserRegisterModel {
   private String firstName;
   private String lastName;
   private Role role;
+  private String city;
+  private DentistType dentistType;
 
   public UserRegisterModel() {
   }
@@ -17,12 +20,16 @@ public class UserRegisterModel {
                            String password,
                            String firstName,
                            String lastName,
-                           Role role) {
+                           Role role,
+                           String city,
+                           DentistType dentistType) {
     this.email = email;
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
     this.role = role;
+    this.city = city;
+    this.dentistType = dentistType;
   }
 
   public String getEmail() {
@@ -63,5 +70,21 @@ public class UserRegisterModel {
 
   public void setRole(Role role) {
     this.role = role;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public DentistType getDentistType() {
+    return dentistType;
+  }
+
+  public void setDentistType(DentistType dentistType) {
+    this.dentistType = dentistType;
   }
 }

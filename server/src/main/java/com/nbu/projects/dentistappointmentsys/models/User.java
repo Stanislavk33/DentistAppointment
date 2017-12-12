@@ -1,6 +1,7 @@
 package com.nbu.projects.dentistappointmentsys.models;
 
 import com.nbu.projects.dentistappointmentsys.controllers.request_models.register.UserRegisterModel;
+import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -30,9 +32,6 @@ public class User {
   @Column(nullable = false)
   private Role role;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  private DentistInfo dentistInfo;
-
   @Column(nullable = false)
   private String password;
 
@@ -47,19 +46,32 @@ public class User {
   @ElementCollection(targetClass = Long.class)
   private Set<Long> blacklist = new HashSet<>();
 
+  @Enumerated(EnumType.STRING)
+  @Column
+  private DentistType dentistType;
+
+  @Column
+  private String city;
+
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "dentistId")
+  private Set<OpenHour> openHours;
+
   public User() {
   }
 
   public User(String email,
-              Role role,
-              DentistInfo dentistInfo,
               String password,
               String firstName,
               String lastName,
+              Role role,
+              String city,
+              DentistType dentistType,
               Set<Long> blacklist) {
     this.email = email;
     this.role = role;
-    this.dentistInfo = dentistInfo;
+    this.dentistType = dentistType;
+    this.city = city;
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -69,11 +81,12 @@ public class User {
 
   public User(UserRegisterModel registerModel) {
     this(registerModel.getEmail(),
-         registerModel.getRole(),
-         null,
          registerModel.getPassword(),
          registerModel.getFirstName(),
          registerModel.getLastName(),
+         registerModel.getRole(),
+         registerModel.getCity(),
+         registerModel.getDentistType(),
          new HashSet<>());
   }
 
@@ -99,14 +112,6 @@ public class User {
 
   public void setRole(Role role) {
     this.role = role;
-  }
-
-  public DentistInfo getDentistInfo() {
-    return dentistInfo;
-  }
-
-  public void setDentistInfo(DentistInfo dentistInfo) {
-    this.dentistInfo = dentistInfo;
   }
 
   public String getPassword() {
@@ -147,5 +152,30 @@ public class User {
 
   public void setBlacklist(Set<Long> blacklist) {
     this.blacklist = blacklist;
+  }
+
+  public DentistType getDentistType() {
+    return dentistType;
+  }
+
+  public void setDentistType(DentistType dentistType) {
+    this.dentistType = dentistType;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+
+  public Set<OpenHour> getOpenHours() {
+    return openHours;
+  }
+
+  public void setOpenHours(Set<OpenHour> openHours) {
+    this.openHours = openHours;
   }
 }

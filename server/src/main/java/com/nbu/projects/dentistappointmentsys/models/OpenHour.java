@@ -1,15 +1,11 @@
 package com.nbu.projects.dentistappointmentsys.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nbu.projects.dentistappointmentsys.models.types.WeekDay;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -33,20 +29,13 @@ public class OpenHour {
   @Column(name = "open_from", nullable = false)
   private Integer openFrom;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "dentist_info_id")
-  @JsonIgnoreProperties("id")
-  private DentistInfo dentistInfo;
-
   public OpenHour() {
   }
 
   public OpenHour(WeekDay weekDay,
-                  Integer openFrom,
-                  DentistInfo dentistInfo) {
+                  Integer openFrom) {
     this.weekDay = weekDay;
     this.openFrom = openFrom;
-    this.dentistInfo = dentistInfo;
   }
 
   public Long getId() {
@@ -73,12 +62,5 @@ public class OpenHour {
     this.openFrom = openFrom;
   }
 
-  public DentistInfo getDentistInfo() {
-    return dentistInfo;
-  }
-
-  public void setDentistInfo(DentistInfo dentistInfo) {
-    this.dentistInfo = dentistInfo;
-  }
 
 }

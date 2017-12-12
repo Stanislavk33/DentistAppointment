@@ -18,7 +18,7 @@ public class DentistRegisterModel extends UserRegisterModel {
                               Role role,
                               String city,
                               DentistType dentistType) {
-    super(email, password, firstName, lastName, role);
+    super(email, password, firstName, lastName, role, city, dentistType);
     this.city = city;
     this.dentistType = dentistType;
   }
