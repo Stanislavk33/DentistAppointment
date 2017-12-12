@@ -1,0 +1,124 @@
+<div class="container">
+   <div [hidden]="submitted">
+      <form (ngSubmit)="onSubmit()"
+            #registerForm="ngForm">
+         <label>Register</label>
+         <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email"
+                   id="email"
+                   required
+                   [(ngModel)]="model.email"
+                   name="email"
+                   #email="ngModel"
+                   placeholder="Email here"
+                   size="35">
+            <div [hidden]="email.valid || email.pristine"
+                 class="alert alert-danger">
+               Email is required
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+                   id="password"
+                   required
+                   [(ngModel)]="model.password"
+                   name="password"
+                   #password="ngModel"
+                   placeholder="Password here"
+                   size="35">
+            <div [hidden]="password.valid || password.pristine"
+                 class="alert alert-danger">
+               Password is required
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text"
+                   id="firstName"
+                   required
+                   [(ngModel)]="model.firstName"
+                   name="firstName"
+                   #firstName="ngModel"
+                   placeholder="First name here"
+                   size="35">
+            <div [hidden]="firstName.valid || firstName.pristine"
+                 class="alert alert-danger">
+               First name is required
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text"
+                   id="lastName"
+                   required
+                   [(ngModel)]="model.lastName"
+                   name="lastName"
+                   #lastName="ngModel"
+                   placeholder="Last name here"
+                   size="35">
+            <div [hidden]="lastName.valid || lastName.pristine"
+                 class="alert alert-danger">
+               Last name is required
+            </div>
+         </div>
+         <div class="form-group">
+            <label>Role</label>
+            <div class="radio-inline">
+               <input type="radio"
+                      name="role"
+                      value="{{Constants.ROLE_DENTIST}}"
+                      id="dentist"
+                      [(ngModel)]="model.role">
+               <label for="dentist">Dentist</label>
+            </div>
+            <div class="radio-inline">
+               <input type="radio"
+                      name="role"
+                      value="{{Constants.ROLE_PATIENT}}"
+                      id="patient"
+                      [(ngModel)]="model.role">
+               <label for="patient">Patient</label>
+            </div>
+         </div>
+
+         <div *ngIf="this.model.role == Constants.ROLE_DENTIST">
+            <div class="form-group">
+               <label for="city">City</label>
+               <input type="text"
+                      id="city"
+                      required
+                      [(ngModel)]="model.city"
+                      name="city"
+                      #city="ngModel"
+                      placeholder="City here"
+                      size="35">
+               <div [hidden]="city.valid || city.pristine"
+                    class="alert alert-danger">
+                  City is required
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="dentistType">Type</label>
+               <div class="select">
+                  <select id="dentistType"
+                          name="dentistType"
+                          #dentistType="ngModel"
+                          [(ngModel)]="model.type"
+                          required>
+                     <option value="{{Constants.TYPE_NORMAL}}">Normal</option>
+                     <option value="{{Constants.TYPE_ORTHODONT}}">Orthodont</option>
+                     <option value="{{Constants.TYPE_SURGEON}}">Surgeon</option>
+                  </select>
+               </div>
+            </div>
+         </div>
+
+         <button type="submit" class="btn btn-primary"
+                 [disabled]="!registerForm.form.valid || !model.role">Register
+         </button>
+      </form>
+   </div>
+</div>
+
