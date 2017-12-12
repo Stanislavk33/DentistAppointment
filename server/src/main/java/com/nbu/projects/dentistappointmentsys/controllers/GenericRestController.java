@@ -7,9 +7,7 @@ import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.U
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.LoginResultModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.RegisterDentistModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.RegisterPatientModel;
-import com.nbu.projects.dentistappointmentsys.models.DentistInfo;
 import com.nbu.projects.dentistappointmentsys.models.User;
-import com.nbu.projects.dentistappointmentsys.repositories.DentistInfoRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
@@ -27,8 +25,6 @@ public class GenericRestController {
 
   @Autowired
   UserRepository userRepository;
-  @Autowired
-  DentistInfoRepository dentistInfoRepository;
   @Autowired
   OpenHourRepository openHourRepository;
 
@@ -88,17 +84,6 @@ public class GenericRestController {
     }
 
     User toRegister = new User(dentistModel);
-    DentistInfo dentistInfoToSave = new DentistInfo(dentistModel);
-    DentistInfo dentistInfo = dentistInfoRepository.save(dentistInfoToSave);
-
-    if (dentistInfo == null) {
-      logger.warning("Unable to save dentistInfo.");
-      return new RegisterDentistModel(GenericConstants.RESULT_FAILED,
-                                      "Server problem.",
-                                      null);
-    }
-    toRegister.setDentistInfo(dentistInfo);
-
     User registered = userRepository.save(toRegister);
     if (registered == null) {
       logger.warning("Unable to save dentist.");

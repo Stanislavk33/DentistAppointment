@@ -5,6 +5,7 @@ import {CommonUtil} from "../../util/common.util";
 import {AdminService} from "../../services/admin.service";
 import {UsersService} from "../../services/users.service";
 import {Constants} from "../../models/constants";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -20,13 +21,16 @@ export class AdminComponent implements OnInit {
   private currentUser: UserModel;
   private dentists: DentistModel[] = [];
   private patients: UserModel[] = [];
+  private userEmail: string = '';
 
   constructor(private usersService: UsersService,
-              private adminService: AdminService) {
+              private adminService: AdminService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.currentUser = CommonUtil.getSessionUser();
+    this.userEmail = CommonUtil.getSessionUserEmail();
     if (this.currentUser && this.currentUser.role == Constants.ROLE_ADMIN) {
       this.loadData();
     }
@@ -36,6 +40,11 @@ export class AdminComponent implements OnInit {
     this.adminService.blockUser(this.currentUser.email, targetUser.email, block)
       .subscribe(result => this.loadData(),
         error => console.error(error));
+  }
+
+  private logout(){
+    CommonUtil.removeUser();
+    this.router.navigate(['']);
   }
 
   private loadData(): void {

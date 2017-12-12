@@ -1,59 +1,50 @@
 package com.nbu.projects.dentistappointmentsys.controllers.result_models.common;
 
-import com.nbu.projects.dentistappointmentsys.models.DentistInfo;
+
+import com.nbu.projects.dentistappointmentsys.models.OpenHour;
 import com.nbu.projects.dentistappointmentsys.models.User;
+import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
 import java.util.Set;
 
 public class UserResultModel {
 
-  private Long id;
   private String email;
   private Role role;
   private String firstName;
   private String lastName;
   private Integer timesBlacklisted;
-  private Set<Long> blacklist;
-  private DentistInfo dentistInfo;
+  private DentistType dentistType;
+  private String city;
+  private Set<OpenHour> openHours;
 
-  public UserResultModel() {
-  }
-
-  public UserResultModel(User user) {
-    this(user.getId(),
-         user.getEmail(),
-         user.getRole(),
-         user.getFirstName(),
-         user.getLastName(),
-         user.getTimesBlacklisted(),
-         user.getBlacklist(),
-         user.getDentistInfo());
-  }
-
-  private UserResultModel(Long id,
-                          String email,
-                          Role role,
-                          String firstName,
-                          String lastName,
-                          Integer timesBlacklisted,
-                          Set<Long> blacklist,
-                          DentistInfo dentistInfo) {
-    this.id = id;
+  public UserResultModel(String email,
+                         Role role,
+                         String firstName,
+                         String lastName,
+                         Integer timesBlacklisted,
+                         DentistType dentistType,
+                         String city,
+                         Set<OpenHour> openHours) {
     this.email = email;
     this.role = role;
     this.firstName = firstName;
     this.lastName = lastName;
     this.timesBlacklisted = timesBlacklisted;
-    this.blacklist = blacklist;
-    this.dentistInfo = dentistInfo;
+    this.dentistType = dentistType;
+    this.city = city;
+    this.openHours = openHours;
   }
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
+  public UserResultModel(User user) {
+    this(user.getEmail(),
+         user.getRole(),
+         user.getFirstName(),
+         user.getLastName(),
+         user.getTimesBlacklisted(),
+         user.getDentistType(),
+         user.getCity(),
+         user.getOpenHours());
   }
 
   public String getEmail() {
@@ -96,19 +87,27 @@ public class UserResultModel {
     this.timesBlacklisted = timesBlacklisted;
   }
 
-  public Set<Long> getBlacklist() {
-    return blacklist;
+  public DentistType getDentistType() {
+    return dentistType;
   }
 
-  public void setBlacklist(Set<Long> blacklist) {
-    this.blacklist = blacklist;
+  public void setDentistType(DentistType dentistType) {
+    this.dentistType = dentistType;
   }
 
-  public DentistInfo getDentistInfo() {
-    return dentistInfo;
+  public String getCity() {
+    return city;
   }
 
-  public void setDentistInfo(DentistInfo dentistInfo) {
-    this.dentistInfo = dentistInfo;
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public Set<OpenHour> getOpenHours() {
+    return openHours;
+  }
+
+  public void setOpenHours(Set<OpenHour> openHours) {
+    this.openHours = openHours;
   }
 }

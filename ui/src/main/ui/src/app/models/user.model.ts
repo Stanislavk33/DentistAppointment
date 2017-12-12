@@ -6,4 +6,7 @@ export class UserModel {
    lastName: string = "";
    timesBlacklisted: number = 0;
    blacklist: number[] = [];
+   dentistType: string = "";
+   city: string = "";
+   openHours: string[] = [];
 }
