@@ -9,4 +9,5 @@ export class UserModel {
    dentistType: string = "";
    city: string = "";
    openHours: string[] = [];
+   rating: number = 0;
 }

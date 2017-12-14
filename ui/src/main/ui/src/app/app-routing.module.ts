@@ -8,7 +8,6 @@ import {LoginComponent} from "./main/app/login/login.component";
 import {PatientComponent} from "./main/patient-view/patient.component";
 import {ChangePasswordComponent} from "./main/shared-components/change-password/change-password-component";
 import {PatientProfileComponent} from "./main/patient-view/patient-profile/patient-profile.component";
-import {DentistResultsComponent} from "./main/patient-view/dentist-results/dentist-results.component";
 import {RoleGuard} from "./guards/role.guard";
 import {AdminComponent} from "./main/admin-view/admin.component";
 import {DentistComponent} from "./main/dentist-view/dentist.component";
@@ -16,6 +15,7 @@ import {AppointmentsComponent} from "./main/patient-view/patient-profile/appoint
 import {AmbulatoryComponent} from "./main/patient-view/patient-profile/ambulatory/ambulatory.component";
 import {EditProfileComponent} from "./main/patient-view/patient-profile/edit-profile/edit-profile.component";
 import {DentistProfileComponent} from "./main/patient-view/dentist-profile/dentist-profile.component";
+import {DentistResultsComponent} from "./main/shared-components/dentist-results/dentist-results.component";
 
 const appRoutes: Routes = [
   {path: '', component: MainComponent, children:[
@@ -43,7 +43,9 @@ const appRoutes: Routes = [
 
     {path: 'admin', component: AdminComponent, canActivate: [RoleGuard], data: { roles: ['ADMIN'] }},
 
-    {path: 'dentist', component: DentistComponent, canActivate: [RoleGuard], data: { roles: ['DENTIST'] }},
+    {path: 'dentist', component: DentistComponent,
+      canActivate: [RoleGuard],
+      data: { roles: ['DENTIST'] }},
 
     {path: '**', component: HomeComponent}
   ]}
