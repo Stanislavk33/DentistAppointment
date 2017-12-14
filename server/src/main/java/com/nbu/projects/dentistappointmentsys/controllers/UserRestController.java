@@ -1,5 +1,6 @@
 package com.nbu.projects.dentistappointmentsys.controllers;
 
+import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.controllers.admin.ManageBlockModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.BaseResultModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.UserResultModel;
@@ -13,10 +14,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserRestController {
@@ -36,22 +34,22 @@ public class UserRestController {
     if (admin == null) {
       logger.warning("Not existing admin user with email : " + adminEmail);
       return new UsersResultModel(GenericConstants.RESULT_FAILED,
-                                  "Not existing email.",
-                                  null);
+              "Not existing email.",
+              null);
     }
     if (admin.getRole() != Role.ADMIN) {
       logger.warning("Non-admin user: " + adminEmail);
       return new UsersResultModel(GenericConstants.RESULT_FAILED,
-                                  "Non-admin user.",
-                                  null);
+              "Non-admin user.",
+              null);
     }
     List<User> allDentists = userRepository.findAllByRole(Role.DENTIST);
     List<UserResultModel> resultModels = allDentists.stream()
-                                                    .map(UserResultModel::new)
-                                                    .collect(Collectors.toList());
+            .map(UserResultModel::new)
+            .collect(Collectors.toList());
     return new UsersResultModel(GenericConstants.RESULT_SUCCESSFUL,
-                                "",
-                                resultModels);
+            "",
+            resultModels);
   }
 
   @PostMapping("/getAllPatients")
@@ -61,22 +59,22 @@ public class UserRestController {
     if (admin == null) {
       logger.warning("Not existing admin user with email : " + adminEmail);
       return new UsersResultModel(GenericConstants.RESULT_FAILED,
-                                  "Not existing email.",
-                                  null);
+              "Not existing email.",
+              null);
     }
     if (admin.getRole() != Role.ADMIN) {
       logger.warning("Non-admin user: " + adminEmail);
       return new UsersResultModel(GenericConstants.RESULT_FAILED,
-                                  "Non-admin user.",
-                                  null);
+              "Non-admin user.",
+              null);
     }
     List<User> allPatients = userRepository.findAllByRole(Role.PATIENT);
     List<UserResultModel> resultModels = allPatients.stream()
-                                                    .map(UserResultModel::new)
-                                                    .collect(Collectors.toList());
+            .map(UserResultModel::new)
+            .collect(Collectors.toList());
     return new UsersResultModel(GenericConstants.RESULT_SUCCESSFUL,
-                                "",
-                                resultModels);
+            "",
+            resultModels);
   }
 
   @PostMapping("/manageBlockedUsers")
@@ -86,19 +84,19 @@ public class UserRestController {
     if (admin == null) {
       logger.warning("Not existing admin user with email : " + blockModel.getAdminEmail());
       return new BaseResultModel(GenericConstants.RESULT_FAILED,
-                                 "Not existing email.");
+              "Not existing email.");
     }
     if (admin.getRole() != Role.ADMIN) {
       logger.warning("Non-admin user: " + blockModel.getAdminEmail());
       return new BaseResultModel(GenericConstants.RESULT_FAILED,
-                                 "Non-admin user.");
+              "Non-admin user.");
     }
 
     User targetUser = userRepository.findByEmail(blockModel.getTargetUserEmail());
     if (targetUser == null) {
       logger.warning("Not existing target user with email : " + blockModel.getTargetUserEmail());
       return new BaseResultModel(GenericConstants.RESULT_FAILED,
-                                 "Not existing email.");
+              "Not existing email.");
     }
 
     if (blockModel.getBlock()) {
@@ -116,13 +114,57 @@ public class UserRestController {
   }
 
   @GetMapping("/getDentists")
-  public UsersResultModel getDentists() {
-    List<User> allDentists = userRepository.findAllByRole(Role.DENTIST);
-    List<UserResultModel> resultModels = allDentists.stream()
-            .map(UserResultModel::new)
-            .collect(Collectors.toList());
-    return new UsersResultModel(GenericConstants.RESULT_SUCCESSFUL,
-            "",
-            resultModels);
+  public List<User> getDentists() {
+    return userRepository.findAllByRole(Role.DENTIST);
+  }
+
+  @GetMapping("/dentists")
+  public List<User> search(@RequestParam(value = "name", required = false) String name,
+                              @RequestParam(value = "city", required = false) String city,
+                              @RequestParam(value = "type", required = false) String type) {
+
+    List<User> result;
+    if (name != null && !name.isEmpty()) {
+      if (city != null && !city.isEmpty()) {
+        if (type != null && !type.isEmpty()) {
+          //NAME + CITY + TYPE
+          result = userRepository.findByCityTypeAndName(city, DentistType.valueOf(type), name+"%");
+          return result;
+        } else {
+          //NAME + CITY
+          result = userRepository.findByNameAndCity(name+"%", city);
+          return result;
+        }
+      } else if (type != null && !type.isEmpty()) {
+        //NAME + TYPE
+        result = userRepository.findByNameAndType(name+"%", DentistType.valueOf(type));
+        return result;
+      } else {
+        //NAME
+        result = userRepository.findUsersByFirstNameStartingWithOrLastNameStartingWith(name, name);
+        return result;
+      }
+    } else {
+      if (city != null && !city.isEmpty()) {
+        if (type != null && !type.isEmpty()) {
+          //CITY + TYPE
+          result = userRepository.findUsersByCityAndDentistType(city, DentistType.valueOf(type));
+          return result;
+        } else {
+          //CITY
+          result = userRepository.findUsersByCity(city);
+          return result;
+        }
+      } else {
+        //type
+        if (type != null && !type.isEmpty()){
+          result = userRepository.findUsersByDentistType(DentistType.valueOf(type));
+          return result;
+        } else {
+          result = userRepository.findAllByRole(Role.DENTIST);
+          return result;
+        }
+      }
+    }
   }
 }

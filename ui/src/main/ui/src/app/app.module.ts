@@ -16,7 +16,6 @@ import {AppRoutingModule} from "./app-routing.module";
 import {PatientProfileComponent} from "./main/patient-view/patient-profile/patient-profile.component";
 import {MainComponent} from "./main/main.component";
 import {AdminService} from "./services/admin.service";
-import {DentistResultsComponent} from "./main/patient-view/dentist-results/dentist-results.component";
 import {AdminComponent} from "./main/admin-view/admin.component";
 import {CommonService} from "./services/common.service";
 import {RoleGuard} from "./guards/role.guard";
@@ -25,10 +24,11 @@ import {AuthGuard} from "./guards/auth.guard";
 import {AmbulatoryComponent} from "./main/patient-view/patient-profile/ambulatory/ambulatory.component";
 import {EditProfileComponent} from "./main/patient-view/patient-profile/edit-profile/edit-profile.component";
 import {AppointmentsComponent} from "./main/patient-view/patient-profile/appointments/appointments.component";
-import {EventsComponent} from "./main/shared-components/dentist-search/events/events.component";
 import {DentistProfileComponent} from "./main/patient-view/dentist-profile/dentist-profile.component";
 import {RatingsService} from "./main/patient-view/dentist-profile/ratings/ratings.service";
 import {RatingsComponent} from "./main/patient-view/dentist-profile/ratings/ratings.component";
+import {DentistResultsComponent} from "./main/shared-components/dentist-results/dentist-results.component";
+import {EventsComponent} from "./main/shared-components/dentist-results/events/events.component";
 
 @NgModule({
   declarations: [

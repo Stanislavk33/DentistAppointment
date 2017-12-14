@@ -3,6 +3,8 @@ package com.nbu.projects.dentistappointmentsys.models;
 import com.nbu.projects.dentistappointmentsys.controllers.request_models.register.UserRegisterModel;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
+import org.hibernate.annotations.Formula;
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -57,6 +59,9 @@ public class User {
   @JoinColumn(name = "dentistId")
   private Set<OpenHour> openHours;
 
+  @Formula(value = "(select avg(r.rate) from ratings r where r.rated_id = user_id)")
+  private Double rating;
+
   public User() {
   }
 
@@ -77,6 +82,7 @@ public class User {
     this.lastName = lastName;
     this.timesBlacklisted = 0;
     this.blacklist = blacklist;
+    this.rating = 0.;
   }
 
   public User(UserRegisterModel registerModel) {
@@ -170,6 +176,9 @@ public class User {
     this.city = city;
   }
 
+  public Double getRating() { return rating; }
+
+  public void setRating(double rating) { this.rating = rating; }
 
   public Set<OpenHour> getOpenHours() {
     return openHours;

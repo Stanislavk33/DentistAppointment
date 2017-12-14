@@ -1,0 +1,79 @@
+<div class="search-container">
+  <div class="search-box">
+
+    <div class="type-dropdown">
+      <clr-dropdown>
+        <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+          {{currentType}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+          <button type="button" clrDropdownItem (click)="setType(null)"></button>
+          <button type="button" clrDropdownItem (click)="setType('ORTHODONT')">ORTHODONT</button>
+          <button type="button" clrDropdownItem (click)="setType('SURGEON')">SURGEON</button>
+          <button type="button" clrDropdownItem (click)="setType('NORMAL')">NORMAL</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+      <!--<span *ngIf="type">{{type}}</span>-->
+    </div>
+
+    <div class="city-dropdown">
+      <clr-dropdown>
+        <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+          {{currentCity}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+          <label class="dropdown-header">Select a City</label>
+          <button type="button" clrDropdownItem (click)="setCity(null)"></button>
+          <button type="button" clrDropdownItem (click)="setCity('Sofia')">Sofia</button>
+          <button type="button" clrDropdownItem (click)="setCity('Varna')">Varna</button>
+          <button type="button" clrDropdownItem (click)="setCity('Plovdiv')">Plovdiv</button>
+          <button type="button" clrDropdownItem (click)="setCity('Sliven')">Sliven</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+      <!--<span *ngIf="city">{{city}}</span>-->
+    </div>
+
+    <form class="search-name">
+      <section class="form-block">
+        <div class="form-group">
+          <label>Search by name:</label>
+          <input type="text" #titleInput>
+        </div>
+      </section>
+      <button class="btn btn-primary" (click) = "setNameAndSearch(titleInput.value)">Search</button>
+    </form>
+
+    <div class="search-results">
+      <clr-datagrid>
+        <clr-dg-column>First Name</clr-dg-column>
+        <clr-dg-column>Last Name</clr-dg-column>
+        <clr-dg-column>City</clr-dg-column>
+        <clr-dg-column>Type</clr-dg-column>
+        <clr-dg-column [clrDgSortBy]="dentistComparator">Rating</clr-dg-column>
+        <clr-dg-column>View</clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let dentist of dentists">
+          <clr-dg-cell>{{dentist.firstName}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.lastName}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.city}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.dentistType}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.rating}}</clr-dg-cell>
+          <clr-dg-cell>
+            <a [routerLink]="['/patient/result',dentist.id]">View Profile</a>
+          </clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>
+          {{dentists.length}} users
+          <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+  </div>
+  <div class="events">
+    <events></events>
+  </div>
+</div>
+

@@ -17,6 +17,7 @@ public class UserResultModel {
   private DentistType dentistType;
   private String city;
   private Set<OpenHour> openHours;
+  private Double rating;
 
   public UserResultModel(String email,
                          Role role,
@@ -25,7 +26,8 @@ public class UserResultModel {
                          Integer timesBlacklisted,
                          DentistType dentistType,
                          String city,
-                         Set<OpenHour> openHours) {
+                         Set<OpenHour> openHours,
+                         Double rating) {
     this.email = email;
     this.role = role;
     this.firstName = firstName;
@@ -34,6 +36,7 @@ public class UserResultModel {
     this.dentistType = dentistType;
     this.city = city;
     this.openHours = openHours;
+    this.rating = rating;
   }
 
   public UserResultModel(User user) {
@@ -44,7 +47,8 @@ public class UserResultModel {
          user.getTimesBlacklisted(),
          user.getDentistType(),
          user.getCity(),
-         user.getOpenHours());
+         user.getOpenHours(),
+         user.getRating());
   }
 
   public String getEmail() {
