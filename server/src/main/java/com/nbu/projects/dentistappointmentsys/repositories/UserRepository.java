@@ -14,9 +14,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
   User findByEmail(String email);
   List<User> findAllByRole(Role role);
   // CITY
-  List<User> findUsersByCity(String city);
+  List<User> findUsersByRoleAndAndCity(Role role, String city);
   // NAME
-  List<User>  findUsersByFirstNameStartingWithOrLastNameStartingWith(String fname, String lname);
+  @Query(value = "select u from User u\n" +
+          "where u.role = :role\n" +
+          "and (u.firstName like :name or u.lastName like :name)")
+  List<User>  findByName(@Param("role") Role role, @Param("name") String name);
   // TYPE
   List<User> findUsersByDentistType(DentistType type);
 
@@ -33,9 +36,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
   List<User> findByNameAndType(@Param("name") String name, @Param("type") DentistType type);
   //Filter by: NAME + CITY
   @Query(value = "select u from User u\n" +
-          "where u.city = :city\n" +
+          "where u.city = :city and u.role = :role\n" +
           "and (u.firstName like :name or u.lastName like :name)")
-  List<User> findByNameAndCity(@Param("name") String name,@Param("city") String city);
+  List<User> findByNameAndCity(@Param("name") String name,@Param("city") String city, @Param("role") Role role);
   //Filter by: TYPE + CITY
   List<User> findUsersByCityAndDentistType(String city, DentistType type);
 }

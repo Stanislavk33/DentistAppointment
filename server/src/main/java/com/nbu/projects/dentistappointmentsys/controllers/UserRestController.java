@@ -132,7 +132,7 @@ public class UserRestController {
           return result;
         } else {
           //NAME + CITY
-          result = userRepository.findByNameAndCity(name+"%", city);
+          result = userRepository.findByNameAndCity(name+"%", city, Role.DENTIST);
           return result;
         }
       } else if (type != null && !type.isEmpty()) {
@@ -141,7 +141,7 @@ public class UserRestController {
         return result;
       } else {
         //NAME
-        result = userRepository.findUsersByFirstNameStartingWithOrLastNameStartingWith(name, name);
+        result = userRepository.findByName(Role.DENTIST,name+"%");
         return result;
       }
     } else {
@@ -152,7 +152,7 @@ public class UserRestController {
           return result;
         } else {
           //CITY
-          result = userRepository.findUsersByCity(city);
+          result = userRepository.findUsersByRoleAndAndCity(Role.DENTIST,city);
           return result;
         }
       } else {
