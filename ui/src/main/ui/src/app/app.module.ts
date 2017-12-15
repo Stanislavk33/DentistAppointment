@@ -29,6 +29,7 @@ import {RatingsService} from "./main/patient-view/dentist-profile/ratings/rating
 import {RatingsComponent} from "./main/patient-view/dentist-profile/ratings/ratings.component";
 import {DentistResultsComponent} from "./main/shared-components/dentist-results/dentist-results.component";
 import {EventsComponent} from "./main/shared-components/dentist-results/events/events.component";
+import {EditService} from "./main/shared-components/services/edit.service";
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import {EventsComponent} from "./main/shared-components/dentist-results/events/e
     AuthGuard,
     UsersService,
     AdminService,
-    RatingsService
+    RatingsService,
+    EditService
   ],
   bootstrap: [MainComponent]
 })

@@ -44,6 +44,9 @@ const appRoutes: Routes = [
     {path: 'admin', component: AdminComponent, canActivate: [RoleGuard], data: { roles: ['ADMIN'] }},
 
     {path: 'dentist', component: DentistComponent,
+      children: [
+        { path: 'changepass', component: ChangePasswordComponent}
+      ],
       canActivate: [RoleGuard],
       data: { roles: ['DENTIST'] }},
 
