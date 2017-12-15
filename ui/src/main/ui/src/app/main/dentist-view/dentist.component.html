@@ -3,18 +3,18 @@
   </header>
   <nav class="header-navi">
     <a class="nav" id="logo" routerLink="/home"></a>
-    <a class="nav" routerLink="/home" routerLinkActive="active">HOME</a>
-    <a class="nav" (click) = "editProfile()">MY PROFILE</a>
-    <a class="nav" (click) = "editProfile()">MY SCHEDULE</a>
-    <a class="nav" (click) = "dentistSearch()">DENTISTS</a>
+    <a class="nav" (click)= "openProfile()">MY PROFILE</a>
+    <a class="nav" (click) = "openSchedule()">MY SCHEDULE</a>
+    <a class="nav" (click) = "editProfile()">APPOINTMENTS</a>
+    <a class="nav" (click) = "dentistSearch()">PATIENTS</a>
     <clr-dropdown class="nav">
       <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
         {{userEmail}}
         <clr-icon shape="caret down"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-        <a clrDropdownItem (click)="editProfile()">My Profile</a>
-        <a clrDropdownItem (click)="editProfile()">Schedule</a>
+        <a clrDropdownItem (click)="openProfile()">My Profile</a>
+        <a clrDropdownItem (click)="openSchedule()">Schedule</a>
         <a clrDropdownItem (click)="editProfile()">Patients</a>
         <a clrDropdownItem routerLink="/dentist/changepass" routerLinkActive="active">Change Password</a>
         <div class="dropdown-divider"></div>

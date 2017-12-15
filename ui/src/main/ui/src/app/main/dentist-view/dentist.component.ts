@@ -10,13 +10,13 @@ import {Router} from "@angular/router";
               providers: []
            })
 export class DentistComponent implements OnInit {
-  public userEmail;
+  public userEmail: string = '';
    constructor(private router: Router) {
    }
-  logout(){
-    CommonUtil.removeUser();
-    this.router.navigate(['']);
-  }
+   logout(){
+     CommonUtil.removeUser();
+     this.router.navigate(['']);
+   }
    ngOnInit() {
      this.userEmail = CommonUtil.getSessionUserEmail();
    }

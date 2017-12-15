@@ -1,5 +1,6 @@
 package com.nbu.projects.dentistappointmentsys.controllers;
 
+import com.nbu.projects.dentistappointmentsys.controllers.models.ChangePassModel;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.controllers.admin.ManageBlockModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.BaseResultModel;
@@ -165,6 +166,18 @@ public class UserRestController {
           return result;
         }
       }
+    }
+  }
+
+  @PostMapping("/changePassword")
+  public Boolean changePass(@RequestBody ChangePassModel passModel) {
+    User user = userRepository.findByEmail(passModel.getUserEmail());
+    if(user.getPassword().equals(passModel.getOldPass())){
+      userRepository.updatePassword(passModel.getNewPass(), passModel.getUserEmail());
+      return true;
+    }else{
+      //passwords don't match
+      return false;
     }
   }
 }

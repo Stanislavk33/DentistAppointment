@@ -32,10 +32,8 @@ export class DentistResultsComponent implements OnInit {
 
   public performSearch(){
     this.usersService.getFilteredDentists(this.name, this.city, this.type)
-            .subscribe(data => {this.dentists = data;
-                console.log(this.dentists + 'rtr');
-                },
-      error => console.error(error));
+            .subscribe(data => this.dentists = data,
+            error => console.error(error));
   }
 
   setCity(city:string){

@@ -19,8 +19,9 @@ export class CommonUtil {
       let user: UserModel = this.getSessionUser();
       return user ? user.role : "";
    }
-  public static getSessionUserEmail(): string {
-    let user: UserModel = this.getSessionUser();
-    return user ? user.email : "";
-  }
+
+   public static getSessionUserEmail(): string {
+     let user: UserModel = this.getSessionUser();
+     return user ? user.email : "";
+   }
 }

@@ -4,8 +4,10 @@ import com.nbu.projects.dentistappointmentsys.models.User;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -41,4 +43,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
   List<User> findByNameAndCity(@Param("name") String name,@Param("city") String city, @Param("role") Role role);
   //Filter by: TYPE + CITY
   List<User> findUsersByCityAndDentistType(String city, DentistType type);
+
+  @Transactional
+  @Modifying
+  @Query("update User u set u.password = :password where u.email = :email")
+  void updatePassword(@Param("password") String password, @Param("email") String email);
 }
