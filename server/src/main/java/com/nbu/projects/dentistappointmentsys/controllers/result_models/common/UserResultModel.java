@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class UserResultModel {
 
+  private Long id;
   private String email;
   private Role role;
   private String firstName;
@@ -19,7 +20,8 @@ public class UserResultModel {
   private Set<OpenHour> openHours;
   private Double rating;
 
-  public UserResultModel(String email,
+  public UserResultModel(Long id,
+                         String email,
                          Role role,
                          String firstName,
                          String lastName,
@@ -28,6 +30,7 @@ public class UserResultModel {
                          String city,
                          Set<OpenHour> openHours,
                          Double rating) {
+    this.id = id;
     this.email = email;
     this.role = role;
     this.firstName = firstName;
@@ -40,7 +43,8 @@ public class UserResultModel {
   }
 
   public UserResultModel(User user) {
-    this(user.getEmail(),
+    this(user.getId(),
+         user.getEmail(),
          user.getRole(),
          user.getFirstName(),
          user.getLastName(),
@@ -50,6 +54,14 @@ public class UserResultModel {
          user.getOpenHours(),
          user.getRating());
   }
+
+  public Long getId() { return id; }
+
+  public void setId(Long id) { this.id = id; }
+
+  public Double getRating() { return rating; }
+
+  public void setRating(Double rating) { this.rating = rating; }
 
   public String getEmail() {
     return email;

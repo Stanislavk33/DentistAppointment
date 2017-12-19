@@ -3,7 +3,7 @@ package com.nbu.projects.dentistappointmentsys.models;
 import javax.persistence.*;
 
 @Entity
-public class Ratings {
+public class Rating {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         @Column(name = "rating_id")
@@ -21,9 +21,9 @@ public class Ratings {
         @Column(nullable = false)
         private String comment;
 
-        public Ratings() { }
+        public Rating() { }
 
-        public Ratings(Long rater_id, Long rated_id, Double rate, String comment) {
+        public Rating(Long rater_id, Long rated_id, Double rate, String comment) {
                 this.raterId = rater_id;
                 this.ratedId = rated_id;
                 this.rate = rate;

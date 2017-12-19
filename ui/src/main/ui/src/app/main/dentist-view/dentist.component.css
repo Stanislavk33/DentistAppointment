@@ -1,3 +1,7 @@
+.dentist-container{
+  background-color: white;
+}
+
 .header {
   max-height: 10px;
 }
@@ -16,13 +20,4 @@
   margin-top: 30px;
   margin-left: 60px;
   margin-right:60px;
-}
-
-/*#logo {
-  background-image:  url('../img/logo.jpg');
-  background-size: 100%;
-}*/
-
-.dentist-container{
-  background-color: white;
 }

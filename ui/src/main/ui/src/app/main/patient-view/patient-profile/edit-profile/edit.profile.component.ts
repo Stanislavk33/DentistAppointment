@@ -4,8 +4,8 @@ import {CommonUtil} from "../../../../util/common.util";
 @Component({
               moduleId: module.id,
               selector: 'edit-component',
-              templateUrl: 'edit-profile.component.html',
-              styleUrls: ["edit-profile.component.css"],
+              templateUrl: 'edit.profile.component.html',
+              styleUrls: ["edit.profile.component.css"],
               providers: []
            })
 export class EditProfileComponent implements OnInit {

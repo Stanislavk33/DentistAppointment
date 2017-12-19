@@ -119,6 +119,11 @@ public class UserRestController {
     return userRepository.findAllByRole(Role.DENTIST);
   }
 
+  @GetMapping("/user/{id}")
+  public User getDentistsByCity(@PathVariable(value="id") Long id) {
+    return userRepository.findUserById(id);
+  }
+
   @GetMapping("/dentists")
   public List<User> search(@RequestParam(value = "name", required = false) String name,
                               @RequestParam(value = "city", required = false) String city,

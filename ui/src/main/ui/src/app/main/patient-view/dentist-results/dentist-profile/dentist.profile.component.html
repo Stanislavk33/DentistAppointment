@@ -1,14 +1,14 @@
 <div class="profile-container">
-  <div *ngIf="isAvailable()" class="profile-card">
+  <div *ngIf="isDataAvailable" class="profile-card">
     <div class="row">
       <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
         <div class="card">
           <div class="card-header">
-            {{id}}
+            {{dentist.firstName}} {{dentist.lastName}}
           </div>
           <div class="card-block">
             <div class="card-title">
-              Some more info.
+
             </div>
             <div class="card-text">
               Something about the dentist.
@@ -22,9 +22,7 @@
     </div>
   </div>
   <div class="calendar">
-    <div class="calendar">
-      CALENDAR
-    </div>
+      <calendar-component></calendar-component>
   </div>
   <div class="ratings">
     <ratings-component [dentistId]="id"></ratings-component>

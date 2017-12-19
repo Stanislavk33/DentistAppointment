@@ -3,12 +3,12 @@ import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
 import 'clarity-icons/shapes/technology-shapes';
 import {CommonUtil} from "../../../util/common.util";
-import {EditService} from "../services/edit.service";
+import {EditService} from "../services/change.password.service";
 
 @Component({
   selector: 'change-password',
-  templateUrl: './change-password-component.html',
-  styleUrls: ['./change-password-component.css']
+  templateUrl: './change.password.component.html',
+  styleUrls: ['./change.password.component.css']
 })
 export class ChangePasswordComponent implements OnChanges, OnInit {
 

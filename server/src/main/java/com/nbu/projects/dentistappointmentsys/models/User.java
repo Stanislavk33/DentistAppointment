@@ -59,7 +59,7 @@ public class User {
   @JoinColumn(name = "dentistId")
   private Set<OpenHour> openHours;
 
-  @Formula(value = "(select avg(r.rate) from ratings r where r.rated_id = user_id)")
+  @Formula(value = "(select avg(r.rate) from rating r where r.rated_id = user_id)")
   private Double rating;
 
   public User() {
