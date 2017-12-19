@@ -1,0 +1,62 @@
+<div class="ratings-container">
+  <div class="all-ratings" *ngIf="isRatingAvailable()">
+    <clr-datagrid>
+      <clr-dg-column>Rate</clr-dg-column>
+      <clr-dg-column>Comment</clr-dg-column>
+
+      <clr-dg-row *ngFor="let rate of ratings">
+        <clr-dg-cell>{{rate.rate}}</clr-dg-cell>
+        <clr-dg-cell>{{rate.comment}}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <!--ngif user is patient show this component-->
+  <p>RATE THE DENTIST</p>
+  <div class="rate-dentist">
+    <div>
+      <fieldset class="rating">
+        <input type="radio"
+               value="5"
+               [name]="inputName"
+               [checked]="rating===5" />
+        <label title="Perfect!" (click)='onClick(5)'>5 stars</label>
+
+        <input type="radio"
+               value="4"
+               [name]="inputName"
+               [checked]="rating===4" />
+        <label title="Pretty good." (click)='onClick(4)'>4 stars</label>
+
+        <input type="radio"
+               value="3"
+               [name]="inputName"
+               [checked]="rating===3" />
+        <label title="Meh.." (click)='onClick(3)'>3 stars</label>
+
+        <input type="radio"
+               value="2"
+               [name]="inputName"
+               [checked]="rating===2" />
+        <label title="Seen better." (click)='onClick(2)'>2 stars</label>
+
+        <input type="radio"
+               value="1"
+               [name]="inputName"
+               [checked]="rating===1" />
+        <label title="Sucks big time!" (click)='onClick(1)'>1 star</label>
+      </fieldset>
+    </div>
+    <div class="rate">
+      <form (ngSubmit)="onSubmit()"
+            #registerForm="ngForm">
+        <textarea id="formFields_8" rows="3"
+                  type="text"
+                  required
+                  [(ngModel)]="comment"
+                  name="comment"
+                  placeholder="Comment.."></textarea>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -13,8 +13,8 @@ class DentistComparator implements Comparator<UserModel> {
 @Component({
               moduleId: module.id,
               selector: 'dentist-results',
-              templateUrl: 'dentist-results.component.html',
-              styleUrls: ["dentist-results.component.css"],
+              templateUrl: 'dentist.results.component.html',
+              styleUrls: ["dentist.results.component.css"],
               providers: []
            })
 export class DentistResultsComponent implements OnInit {

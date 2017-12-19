@@ -85,19 +85,19 @@
 
          <div *ngIf="this.model.role == Constants.ROLE_DENTIST">
             <div class="form-group">
-               <label for="city">City</label>
-               <input type="text"
-                      id="city"
-                      required
-                      [(ngModel)]="model.city"
-                      name="city"
-                      #city="ngModel"
-                      placeholder="City here"
-                      size="35">
-               <div [hidden]="city.valid || city.pristine"
-                    class="alert alert-danger">
-                  City is required
-               </div>
+              <label for="dentistCity">City</label>
+              <div class="select">
+                <select id="dentistCity"
+                        name="city"
+                        #city="ngModel"
+                        [(ngModel)]="model.city"
+                        required>
+                  <option value="{{Constants.CITY_SOFIA}}">Sofia</option>
+                  <option value="{{Constants.CITY_VARNA}}">Varna</option>
+                  <option value="{{Constants.CITY_PLOVDIV}}">Plovdiv</option>
+                  <option value="{{Constants.CITY_BURGAS}}">Burgas</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
                <label for="dentistType">Type</label>
