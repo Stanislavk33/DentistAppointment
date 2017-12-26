@@ -1,0 +1,15 @@
+.schedule-container {
+  width: 1800px;
+  padding-left: 200px;
+  padding-top: 50px;
+}
+
+h4 {
+  margin-bottom: 30px;
+}
+
+.edit-schedule {
+  display: inline-block;
+  width: 750px;
+  vertical-align: top;
+}

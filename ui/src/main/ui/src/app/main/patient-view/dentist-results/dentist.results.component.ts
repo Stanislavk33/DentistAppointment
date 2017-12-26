@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from "../../../services/users.service";
 import {HttpClient} from "@angular/common/http";
 import {UserModel} from "../../../models/user.model";
 import {Comparator} from "clarity-angular";
+import {DentistCommonService} from "./services/dentist.common.service";
+import {Router} from "@angular/router";
+import {CommonUtil} from "../../../util/common.util";
 
 class DentistComparator implements Comparator<UserModel> {
   compare(a: UserModel, b: UserModel) {
@@ -25,15 +27,26 @@ export class DentistResultsComponent implements OnInit {
   private currentCity = 'Select City';
   private currentType = 'Select Type';
   private dentistComparator = new DentistComparator();
+  private notAuth: boolean = false;
+  private hideWarning: boolean = false;
 
-   constructor(private usersService: UsersService,
-               private http : HttpClient) {
+   constructor(private detistService: DentistCommonService,
+               private http : HttpClient,
+               private router: Router) {
    }
 
   public performSearch(){
-    this.usersService.getFilteredDentists(this.name, this.city, this.type)
+    this.detistService.getFilteredDentists(this.name, this.city, this.type)
             .subscribe(data => this.dentists = data,
             error => console.error(error));
+  }
+
+  openProfile(id: number){
+    if(CommonUtil.getSessionUserId()===0){
+      this.router.navigate(["home/result/", id]);
+    }else{
+      this.router.navigate(["patient/result/", id]);
+    }
   }
 
   setCity(city:string){
@@ -65,8 +78,12 @@ export class DentistResultsComponent implements OnInit {
     }
   }
 
+  closeWarning() {
+    this.hideWarning= !this.hideWarning;
+  }
+
    ngOnInit() {
-     this.usersService.getDentists()
+     this.detistService.getDentists()
        .subscribe(data => this.dentists = data,
          error => console.error(error));
    }

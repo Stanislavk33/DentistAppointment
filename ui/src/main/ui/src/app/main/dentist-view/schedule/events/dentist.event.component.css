@@ -1,0 +1,52 @@
+form-block {
+  margin-bottom: 10px;
+}
+
+clr-datagrid {
+  width: 800px;
+}
+
+clr-modal {
+  height: 750px !important;
+}
+
+.add-event, .labels, .select {
+  display: inline-block;
+}
+
+label{
+  margin-right: 18px;
+}
+
+h4 {
+  display: inline-block;
+}
+
+h3 {
+  text-align: center;
+}
+
+.date-time {
+  display: inline-block;
+  width: 350px;
+}
+
+.info {
+  margin-top: 13px;
+}
+
+.time,.description{
+  margin-top: 17px;
+}
+
+.description {
+  padding-bottom: 13px;
+}
+
+.select {
+  width: 230px;
+}
+
+#title, #date {
+  width: 230px;
+}

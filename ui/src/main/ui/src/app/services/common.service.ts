@@ -42,8 +42,4 @@ export class CommonService {
    private registerDentist(dentistRegisterModel: DentistRegisterModel) {
       return this.httpClient.post(CommonService.REGISTER_DENTIST_URL, dentistRegisterModel);
    }
-
-   public getUserInfo(id: number): Observable<UserModel> {
-     return this.httpClient.get('user/' + id);
-   }
 }

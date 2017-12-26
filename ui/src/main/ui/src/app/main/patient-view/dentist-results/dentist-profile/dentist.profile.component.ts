@@ -5,6 +5,7 @@ import 'clarity-icons/shapes/technology-shapes';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserModel} from "../../../../models/user.model";
 import {CommonService} from "../../../../services/common.service";
+import {DentistCommonService} from "../services/dentist.common.service";
 
 @Component({
   selector: 'dentist-profile',
@@ -15,17 +16,23 @@ export class DentistProfileComponent implements OnInit {
   private id: number = 0;
   private dentist: UserModel;
   private  isDataAvailable = false;
+  private avgRating: number = 0.;
+
   constructor(private _Activatedroute:ActivatedRoute,
-              private router: Router,
-              private commonService: CommonService){
+              private dentistService: DentistCommonService){
   }
 
   ngOnInit() {
     this.id = this._Activatedroute.snapshot.params['id'];
-    this.commonService.getUserInfo(this.id)
+    this.dentistService.getUserInfo(this.id)
       .subscribe(data => {
         this.dentist = data;
         this.isDataAvailable = true;},
       err => console.log(err));
+    this.dentistService.getAvgRating(this.id)
+      .subscribe(rating => {
+        this.avgRating = rating;
+      },
+        err => console.log(err));
   }
 }

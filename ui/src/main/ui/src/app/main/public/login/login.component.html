@@ -1,4 +1,14 @@
 <div class="container">
+  <div class="alert alert-danger" *ngIf="wrongPass">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+        </div>
+        <span class="alert-text">Wrong password</span>
+      </div>
+    </div>
+  </div>
    <div [hidden]="submitted">
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
          <section class="form-block">

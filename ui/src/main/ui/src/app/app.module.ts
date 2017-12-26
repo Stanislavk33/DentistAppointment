@@ -31,6 +31,15 @@ import {RatingsComponent} from "./main/patient-view/dentist-results/dentist-prof
 import {DentistProfileComponent} from "./main/patient-view/dentist-results/dentist-profile/dentist.profile.component";
 import {RatingsService} from "./main/patient-view/dentist-results/dentist-profile/ratings/ratings.service";
 import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-profile/calendar/calendar.component";
+import {DentistCommonService} from "./main/patient-view/dentist-results/services/dentist.common.service";
+import {EditDentistProfileComponent} from "./main/dentist-view/dentist-profile/edit.profile.component";
+import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
+import {PatientsComponent} from "./main/dentist-view/patients/patients.component";
+import {DentistAppointmentsComponent} from "./main/dentist-view/appointments/appointments.component";
+import {EventsService} from "./main/patient-view/dentist-results/events/events.service";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ScheduleService} from "./main/dentist-view/schedule/schedule.service";
+import {DentistEventComponent} from "./main/dentist-view/schedule/events/dentist.event.component";
 
 @NgModule({
   declarations: [
@@ -51,10 +60,16 @@ import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-pro
     EventsComponent,
     DentistProfileComponent,
     RatingsComponent,
-    CalendarComponent
+    CalendarComponent,
+    EditDentistProfileComponent,
+    ScheduleComponent,
+    PatientsComponent,
+    DentistAppointmentsComponent,
+    DentistEventComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
     FormsModule,
@@ -69,8 +84,11 @@ import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-pro
     AuthGuard,
     UsersService,
     AdminService,
+    EditService,
+    DentistCommonService,
     RatingsService,
-    EditService
+    EventsService,
+    ScheduleService
   ],
   bootstrap: [MainComponent]
 })

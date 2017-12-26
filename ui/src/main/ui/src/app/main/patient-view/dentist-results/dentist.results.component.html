@@ -1,6 +1,6 @@
 <div class="search-container">
   <div class="search-box">
-
+    <h4>FIND DENTISTS NEAR YOU</h4>
     <div class="type-dropdown">
       <clr-dropdown>
         <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
@@ -59,12 +59,11 @@
           <clr-dg-cell>{{dentist.lastName}}</clr-dg-cell>
           <clr-dg-cell>{{dentist.city}}</clr-dg-cell>
           <clr-dg-cell>{{dentist.dentistType}}</clr-dg-cell>
-          <clr-dg-cell>{{dentist.rating}}</clr-dg-cell>
+          <clr-dg-cell>{{+(dentist.rating).toFixed(1)}}</clr-dg-cell>
           <clr-dg-cell>
-            <a [routerLink]="['/patient/result',dentist.id]">View Profile</a>
+            <a (click) = "openProfile(this.dentist.id)">View Profile</a>
           </clr-dg-cell>
         </clr-dg-row>
-
         <clr-dg-footer>
           {{dentists.length}} users
           <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>

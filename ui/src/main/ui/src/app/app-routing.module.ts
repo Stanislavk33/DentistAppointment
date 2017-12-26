@@ -16,19 +16,28 @@ import {RegisterComponent} from "./main/public/register/register.component";
 import {LoginComponent} from "./main/public/login/login.component";
 import {DentistResultsComponent} from "./main/patient-view/dentist-results/dentist.results.component";
 import {DentistProfileComponent} from "./main/patient-view/dentist-results/dentist-profile/dentist.profile.component";
+import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
+import {EditDentistProfileComponent} from "./main/dentist-view/dentist-profile/edit.profile.component";
+import {DentistAppointmentsComponent} from "./main/dentist-view/appointments/appointments.component";
+import {PatientsComponent} from "./main/dentist-view/patients/patients.component";
 
 const appRoutes: Routes = [
   {path: '', component: MainComponent, children:[
 
     {path: '', component: AppComponent, children:[
-      {path: 'home', component: HomeComponent},
+      {path: '', redirectTo: 'home', pathMatch: 'full'},
+      {path: 'home', component: HomeComponent, children: [
+        {path: '', pathMatch: 'full', component: DentistResultsComponent},
+        {path: 'dentists', pathMatch: 'full', component: DentistResultsComponent},
+        {path: 'result/:id', pathMatch: 'full', component: DentistProfileComponent}
+      ]},
       {path: 'register', component: RegisterComponent},
       {path: 'login', component: LoginComponent},
-    ]}, /*, canActivate: [AuthGuard]},*/
-
+    ]},
     {path: 'patient', component: PatientComponent,
       children: [
         { path: 'profile', component: PatientProfileComponent, children: [
+              { path: '', redirectTo: 'edit', pathMatch: 'full'},
               { path: 'edit', pathMatch: 'full', component: EditProfileComponent},
               { path: 'appointments', pathMatch: 'full', component: AppointmentsComponent},
               { path: 'ambulatory', pathMatch: 'full', component: AmbulatoryComponent}
@@ -45,7 +54,11 @@ const appRoutes: Routes = [
 
     {path: 'dentist', component: DentistComponent,
       children: [
-        { path: 'changepass', component: ChangePasswordComponent}
+        { path: 'changepass', component: ChangePasswordComponent},
+        { path: 'appointments', component: DentistAppointmentsComponent},
+        { path: 'schedule', component: ScheduleComponent},
+        { path: 'myprofile', component: EditDentistProfileComponent},
+        { path: 'patients', component: PatientsComponent}
       ],
       canActivate: [RoleGuard],
       data: { roles: ['DENTIST'] }},

@@ -1,15 +1,26 @@
 .search-container {
   display: inline-block;
   width: 100%;
+  padding-left: 30px;
 }
 clr-datagrid {
-  max-width: 1000px;
+  max-width: 900px;
+}
+
+h4 {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.hidden-warning {
+  display: none;
 }
 
 .search-box {
-  margin-top: 50px;
   display: inline-block;
-  width: 1200px;
+  width: 900px;
+  vertical-align: top;
+  margin-top: 20px;
 }
 
 .criteria {
@@ -44,6 +55,7 @@ clr-datagrid {
 
 .events {
   display: inline-block;
+  vertical-align: top;
 }
 
 .select {
