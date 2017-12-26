@@ -1,0 +1,28 @@
+<div class="profile-container">
+  <div *ngIf="isDataAvailable" class="profile-card">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="card-header">
+            {{dentist.firstName}} {{dentist.lastName}}
+          </div>
+          <div class="card-block">
+            <div class="card-title">
+
+            </div>
+            <div class="card-text">
+              Something about the dentist.
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-link">Read more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ratings">
+    <ratings-component [dentistId]="id"></ratings-component>
+  </div>
+</div>
+

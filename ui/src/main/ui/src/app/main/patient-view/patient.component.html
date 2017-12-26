@@ -1,0 +1,25 @@
+<div class="patient-container">
+  <header class="header header-6">
+  </header>
+  <nav class="header-navi">
+    <a class="nav" id="logo" routerLink="/home"></a>
+    <a class="nav" routerLink="/home" routerLinkActive="active">HOME</a>
+    <a class="nav" (click) = "editProfile()">MY PROFILE</a>
+    <a class="nav" (click) = "dentistSearch()">DENTISTS</a>
+    <clr-dropdown class="nav">
+      <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+        {{userEmail}}
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+        <a clrDropdownItem (click)="editProfile()">Profile</a>
+        <a clrDropdownItem routerLink="/patient/changepass" routerLinkActive="active">Change Password</a>
+        <div class="dropdown-divider"></div>
+        <button type="button" clrDropdownItem (click)="logout()">Log Out</button>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </nav>
+  <div class="wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</div>

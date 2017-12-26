@@ -5,18 +5,35 @@ import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {ClarityModule} from "clarity-angular";
 import {HttpClientModule} from "@angular/common/http";
-import {AppRoutingModule, RoleGuard} from "./shared/app-routing.module";
-import {CommonService} from "./shared/services/common.service";
-import {MainComponent} from "./shared/main/main.component";
-import {AppComponent} from "./shared/main/app/app.component";
-import {DentistComponent} from "./shared/main/dentist-view/dentist.component";
-import {RegisterComponent} from "./shared/main/app/register/register.component";
-import {HomeComponent} from "./shared/main/app/home/home.component";
-import {AdminComponent} from "./shared/main/admin-view/admin.component";
-import {PatientComponent} from "./shared/main/patient-view/patient.component";
-import {LoginComponent} from "./shared/main/app/login/login.component";
-import {ChangePasswordComponent} from "./shared/main/patient-view/change-password/change-password-component";
-import {PatientProfileComponent} from "./shared/main/patient-view/patient-profile/patient-profile.component";
+import {HomeComponent} from "./main/public/home/home.component";
+import {DentistComponent} from "./main/dentist-view/dentist.component";
+import {PatientComponent} from "./main/patient-view/patient.component";
+import {AppRoutingModule} from "./app-routing.module";
+import {MainComponent} from "./main/main.component";
+import {AdminService} from "./services/admin.service";
+import {AdminComponent} from "./main/admin-view/admin.component";
+import {CommonService} from "./services/common.service";
+import {RoleGuard} from "./guards/role.guard";
+import {UsersService} from "./services/users.service";
+import {AuthGuard} from "./guards/auth.guard";
+import {AmbulatoryComponent} from "./main/patient-view/patient-profile/ambulatory/ambulatory.component";
+import {AppointmentsComponent} from "./main/patient-view/patient-profile/appointments/appointments.component";
+import {EditPasswordService} from "./main/shared-components/services/edit.password.service";
+import {AppComponent} from "./main/public/app.component";
+import {DentistResultsComponent} from "./main/patient-view/dentist-results/dentist.results.component";
+import {EditPatientProfileComponent} from "./main/patient-view/patient-profile/edit-profile/edit.profile.component";
+import {EventsComponent} from "./main/patient-view/dentist-results/events/events.component";
+import {RatingsComponent} from "./main/patient-view/dentist-results/dentist-profile/ratings/ratings.component";
+import {DentistProfileComponent} from "./main/patient-view/dentist-results/dentist-profile/dentist.profile.component";
+import {RatingsService} from "./main/patient-view/dentist-results/dentist-profile/ratings/ratings.service";
+import {EditPatientProfileService} from "./main/shared-components/services/edit.patient.service";
+import {RegisterComponent} from "./main/public/register/register.component";
+import {LoginComponent} from "./main/public/login/login.component";
+import {PatientProfileComponent} from "./main/patient-view/patient-profile/patient.profile.component";
+import {ChangePasswordComponent} from "./main/shared-components/change-password/change.password.component";
+import {EditDentistProfileComponent} from "./main/dentist-view/dentist-profile/edit-profile/edit-dentist-profile.component";
+import {EditDentistProfileService} from "./main/shared-components/services/edit.dentist.service";
+
 
 @NgModule({
   declarations: [
@@ -29,7 +46,16 @@ import {PatientProfileComponent} from "./shared/main/patient-view/patient-profil
     AdminComponent,
     MainComponent,
     ChangePasswordComponent,
-    PatientProfileComponent
+    PatientProfileComponent,
+    DentistResultsComponent,
+    EditPatientProfileComponent,
+    AmbulatoryComponent,
+    AppointmentsComponent,
+    EventsComponent,
+    DentistProfileComponent,
+    RatingsComponent,
+    EditDentistProfileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -43,7 +69,15 @@ import {PatientProfileComponent} from "./shared/main/patient-view/patient-profil
   ],
   providers: [
     CommonService,
-    RoleGuard
+    RoleGuard,
+    AuthGuard,
+    UsersService,
+    AdminService,
+    RatingsService,
+    EditPasswordService,
+    EditPatientProfileService,
+    EditDentistProfileService
+
   ],
   bootstrap: [MainComponent]
 })

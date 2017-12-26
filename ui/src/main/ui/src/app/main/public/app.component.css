@@ -1,0 +1,16 @@
+.header-navi {
+  height: 60px;
+  text-align: center;
+}
+
+.nav {
+  margin-top: 15px;
+  display: inline-block;
+  width:16%;
+  text-align: center;
+}
+
+.navbar {
+  margin-top: 10px;
+  text-align: center;
+}

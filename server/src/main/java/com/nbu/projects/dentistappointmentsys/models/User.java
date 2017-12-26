@@ -3,10 +3,21 @@ package com.nbu.projects.dentistappointmentsys.models;
 import com.nbu.projects.dentistappointmentsys.controllers.request_models.register.UserRegisterModel;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
+import org.hibernate.annotations.Formula;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -34,6 +45,9 @@ public class User {
 
   private Integer timesBlacklisted;
 
+  @ElementCollection(targetClass = Long.class)
+  private Set<Long> blacklist = new HashSet<>();
+
   @Enumerated(EnumType.STRING)
   @Column
   private DentistType dentistType;
@@ -41,29 +55,18 @@ public class User {
   @Column
   private String city;
 
-  @ElementCollection(targetClass = Long.class)
-  private Set<Long> blacklist = new HashSet<>();
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "dentistId")
+  private Set<OpenHour> openHours;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="dentistId")
-    private Set<OpenHour> OpenHours;
+  @Formula(value = "(select avg(r.rate) from rating r where r.rated_id = user_id)")
+  private Double rating;
 
-  /*  public <E> User(String email, Role role, String password, Object o, String firstName, String lastName, HashSet<E> es) {
-    }*/
+  public User() {
+  }
 
-    public Set<OpenHour> getOpenHours() {
-        return OpenHours;
-    }
-
-    public void setOpenHours(Set<OpenHour> OpenHours) {
-        this.OpenHours = OpenHours;
-    }
-
- /* public User(UserRegisterModel patientModel) {
-  }*/
- public User() {}
-
-  public User(String email,
+  public User(Long id,
+              String email,
               String password,
               String firstName,
               String lastName,
@@ -71,29 +74,30 @@ public class User {
               String city,
               DentistType dentistType,
               Set<Long> blacklist) {
+    this.id=id;
     this.email = email;
     this.role = role;
-    this.dentistType =dentistType;
-    this.city=city;
+    this.dentistType = dentistType;
+    this.city = city;
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
     this.timesBlacklisted = 0;
     this.blacklist = blacklist;
+    this.rating = 0.;
   }
-
 
   public User(UserRegisterModel registerModel) {
-    this(   registerModel.getEmail(),
-            registerModel.getPassword(),
-            registerModel.getFirstName(),
-            registerModel.getLastName(),
-            registerModel.getRole(),
-            registerModel.getCity(),
-            registerModel.getDentistType(),
-            new HashSet<>());
+    this(registerModel.getId(),
+            registerModel.getEmail(),
+         registerModel.getPassword(),
+         registerModel.getFirstName(),
+         registerModel.getLastName(),
+         registerModel.getRole(),
+         registerModel.getCity(),
+         registerModel.getDentistType(),
+         new HashSet<>());
   }
-
 
   public Long getId() {
     return id;
@@ -118,14 +122,6 @@ public class User {
   public void setRole(Role role) {
     this.role = role;
   }
-
-  /*public DentistInfo getDentistInfo() {
-    return dentistInfo;
-  }
-
-  public void setDentistInfo(DentistInfo dentistInfo) {
-    this.dentistInfo = dentistInfo;
-  }*/
 
   public String getPassword() {
     return password;
@@ -167,14 +163,31 @@ public class User {
     this.blacklist = blacklist;
   }
 
-  public String getCity(){return city;}
+  public DentistType getDentistType() {
+    return dentistType;
+  }
 
-  public void setCity(String city){this.city=city;}
+  public void setDentistType(DentistType dentistType) {
+    this.dentistType = dentistType;
+  }
 
-  public DentistType getdentistType(){return dentistType;}
+  public String getCity() {
+    return city;
+  }
 
-  public void setDentistType(DentistType dentistType){this.dentistType=dentistType;}
+  public void setCity(String city) {
+    this.city = city;
+  }
 
+  public Double getRating() { return rating; }
 
+  public void setRating(double rating) { this.rating = rating; }
 
+  public Set<OpenHour> getOpenHours() {
+    return openHours;
+  }
+
+  public void setOpenHours(Set<OpenHour> openHours) {
+    this.openHours = openHours;
+  }
 }

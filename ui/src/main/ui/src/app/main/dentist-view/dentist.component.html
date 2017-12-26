@@ -1,0 +1,89 @@
+
+<div class="patient-profile-container">
+  <form>
+    <div>
+      <section class="form-block">
+        <div class="form-group">
+          <label class="required">Email</label>
+          <input type="email" #email class="formFields_7" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label class="required">FirstName</label>
+          <input type="FirstName" #firstName class="formFields_7" placeholder="FirstName">
+        </div>
+        <div class="form-group">
+          <label class="required">LastName</label>
+          <input type="LastName" #lastName class="formFields_7" placeholder="LastName">
+        </div>
+        <div class="select">
+          <select id="dentistCity"
+                  name="city"
+                  #city="ngModel"
+                  [(ngModel)]="model.city"
+                  required>
+            <option value="{{Constants.CITY_SOFIA}}">Sofia</option>
+            <option value="{{Constants.CITY_VARNA}}">Varna</option>
+            <option value="{{Constants.CITY_PLOVDIV}}">Plovdiv</option>
+            <option value="{{Constants.CITY_BURGAS}}">Burgas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dentistType">Type</label>
+          <div class="select">
+            <select id="dentistType"
+                    name="dentistType"
+                    #dentistType="ngModel"
+                    [(ngModel)]="model.type"
+                    required>
+              <option value="{{Constants.TYPE_NORMAL}}">Normal</option>
+              <option value="{{Constants.TYPE_ORTHODONT}}">Orthodont</option>
+              <option value="{{Constants.TYPE_SURGEON}}">Surgeon</option>
+            </select>
+          </div></div>
+
+      </section>
+    </div>
+    <button type="submit" class="btn btn-primary"(click)="submit(email.value,firstName.value,lastName.value,dentistType.value,city.value)">Ok</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<div class="dentist-container">
+  <header class="header header-6">
+  </header>
+  <nav class="header-nav">
+    <a class="nav" id="logo" routerLink="/home"></a>
+    <a class="nav" routerLink="/dentist/profile" routerLinkActive="active">My Profile</a>
+    &lt;!&ndash;<a class="nav" (click) = "openSchedule()">MY SCHEDULE</a>
+    <a class="nav" (click) = "editProfile()">APPOINTMENTS</a>
+    <a class="nav" (click) = "dentistSearch()">PATIENTS</a>&ndash;&gt;
+    <clr-dropdown class="nav">
+      <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+        {{userEmail}}
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+        <a clrDropdownItem (click)="editProfileNav()">My Profile</a>
+        <a clrDropdownItem (click)="openSchedule()">Schedule</a>
+        <a clrDropdownItem routerLink="/dentist/changepass" routerLinkActive="active">Change Password</a>
+        <div class="dropdown-divider"></div>
+        <button type="button" clrDropdownItem (click)="logout()">Log Out</button>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </nav>
+  <div class="wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+-->
