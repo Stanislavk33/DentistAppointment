@@ -13,10 +13,6 @@ export class DentistComponent implements OnInit {
   public userEmail: string = '';
    constructor(private router: Router) {
    }
-
-  editProfileNav(){
-    this.router.navigate(['/dentist/profile']);
-  }
    logout(){
      CommonUtil.removeUser();
      this.router.navigate(['']);
