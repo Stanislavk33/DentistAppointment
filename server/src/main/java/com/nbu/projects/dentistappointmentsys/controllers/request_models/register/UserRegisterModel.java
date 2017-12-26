@@ -1,7 +1,12 @@
 package com.nbu.projects.dentistappointmentsys.controllers.request_models.register;
 
+import com.nbu.projects.dentistappointmentsys.models.User;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
+import com.nbu.projects.dentistappointmentsys.service.NotificationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 public class UserRegisterModel {
 
