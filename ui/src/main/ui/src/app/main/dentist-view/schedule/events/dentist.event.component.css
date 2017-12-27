@@ -1,9 +1,21 @@
+.edit-events{
+  width: 950px;
+}
+
 form-block {
   margin-bottom: 10px;
 }
 
-clr-datagrid {
-  width: 800px;
+.card-header {
+  text-align: center;
+}
+
+.add-new {
+  margin-left: 115px;
+}
+
+events {
+  width: 750px;
 }
 
 clr-modal {
@@ -12,6 +24,10 @@ clr-modal {
 
 .add-event, .labels, .select {
   display: inline-block;
+}
+
+.new-event {
+  margin-bottom: 30px;
 }
 
 label{

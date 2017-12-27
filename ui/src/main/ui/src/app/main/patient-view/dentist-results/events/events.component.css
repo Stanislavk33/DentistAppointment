@@ -5,6 +5,10 @@
   width: 800px;
 }
 
+p {
+  display: inline-block;
+}
+
 h4 {
   text-align: center;
   margin-bottom: 30px;

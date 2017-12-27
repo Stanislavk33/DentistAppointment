@@ -1,9 +1,21 @@
 <div class="edit-events">
   <div class="new-event">
-    <h4>ADD EVENTS</h4>
-    <button class="btn btn-primary" (click)="addEvent = true">ADD EVENT</button>
+    <div class="row">
+        <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="card-header">
+              CREATE A NEW EVENT
+            </div>
+            <div class="card-block">
+              <div class="card-title">
+                <button class="btn btn-primary add-new" (click)="addEvent = true">ADD EVENT</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <clr-datagrid>
+  <clr-datagrid class="events">
     <clr-dg-column>Title</clr-dg-column>
     <clr-dg-column>Date</clr-dg-column>
     <clr-dg-column>Time</clr-dg-column>
@@ -17,7 +29,7 @@
       </clr-dg-cell>
       <clr-dg-cell>{{event.info}}</clr-dg-cell>
       <clr-dg-cell>
-        <button class="btn btn-warning-outline" *ngIf="isActive(event.startTime | date: 'HH:mm')" (click)="deleteEvent(event.id)">CANCEL</button>
+        <button class="btn btn-warning-outline" *ngIf="isActive((event.startTime | date: 'dd-MM-yyyy'))" (click)="deleteEvent(event.id)">CANCEL</button>
       </clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>

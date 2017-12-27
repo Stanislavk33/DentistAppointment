@@ -57,6 +57,17 @@ export class DentistEventComponent implements OnInit {
     this.hideWarning= !this.hideWarning;
   }
 
+  isActive(date) {
+    let today = new Date().toJSON().slice(0,10);
+    console.log(date);
+    console.log(today);
+    if(date>today)
+    {
+      return true;
+    }
+    return false;
+  }
+
   ngOnInit() {
     this.event.dentistId = CommonUtil.getSessionUserId();
     this.refreshEvents();
