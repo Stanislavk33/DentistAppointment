@@ -9,11 +9,11 @@ import {EditPatientProfileService} from "../../../shared-components/services/edi
 @Component({
               moduleId: module.id,
               selector: 'edit-component',
-              templateUrl: 'edit.profile.component.html',
-              styleUrls: ["edit.profile.component.css"],
+              templateUrl: 'edit-profile.component.html',
+              styleUrls: ["edit-profile.component.css"],
               providers: []
            })
-export class EditPatientProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
 
 
   public UserId: number= 0;

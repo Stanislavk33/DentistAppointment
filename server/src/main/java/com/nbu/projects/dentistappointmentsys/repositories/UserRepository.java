@@ -67,8 +67,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
                       @Param("firstName") String firstName,
                       @Param("lastName")String lastName,
                       @Param("dentistType")DentistType dentistType,
-                      @Param("city") String city,
-                         @Param("Id") Long Id);
+                      @Param("city") String city,@Param("Id") Long Id);
 
 
   }

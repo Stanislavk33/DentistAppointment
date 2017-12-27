@@ -7,8 +7,8 @@ import {EditPasswordService} from "../services/edit.password.service";
 
 @Component({
   selector: 'change-password',
-  templateUrl: './change.password.component.html',
-  styleUrls: ['./change.password.component.css']
+  templateUrl: './change-password-component.html',
+  styleUrls: ['./change-password-component.css']
 })
 export class ChangePasswordComponent implements OnChanges, OnInit {
 
