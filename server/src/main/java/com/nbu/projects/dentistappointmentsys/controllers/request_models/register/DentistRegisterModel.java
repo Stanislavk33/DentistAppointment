@@ -11,14 +11,15 @@ public class DentistRegisterModel extends UserRegisterModel {
   public DentistRegisterModel() {
   }
 
-  public DentistRegisterModel(String email,
+  public DentistRegisterModel(Long Id,
+                              String email,
                               String password,
                               String firstName,
                               String lastName,
                               Role role,
                               String city,
                               DentistType dentistType) {
-    super(email, password, firstName, lastName, role, city, dentistType);
+    super(Id,email, password, firstName, lastName, role, city, dentistType);
     this.city = city;
     this.dentistType = dentistType;
   }

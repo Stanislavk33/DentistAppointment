@@ -3,12 +3,12 @@ import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
 import 'clarity-icons/shapes/technology-shapes';
 import {CommonUtil} from "../../../util/common.util";
-import {EditService} from "../services/change.password.service";
+import {EditPasswordService} from "../services/edit.password.service";
 
 @Component({
   selector: 'change-password',
-  templateUrl: './change.password.component.html',
-  styleUrls: ['./change.password.component.css']
+  templateUrl: './change-password-component.html',
+  styleUrls: ['./change-password-component.css']
 })
 export class ChangePasswordComponent implements OnChanges, OnInit {
 
@@ -16,7 +16,7 @@ export class ChangePasswordComponent implements OnChanges, OnInit {
   private openFail: boolean = false;
   private failMessage: string = '';
   private openSuccess: boolean = false;
-  constructor(private service: EditService) {
+  constructor(private service: EditPasswordService) {
   }
 
   submit(old: string, newPass: string, newRepeat: string){

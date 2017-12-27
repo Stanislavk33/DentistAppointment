@@ -65,7 +65,8 @@ public class User {
   public User() {
   }
 
-  public User(String email,
+  public User(Long id,
+              String email,
               String password,
               String firstName,
               String lastName,
@@ -73,6 +74,7 @@ public class User {
               String city,
               DentistType dentistType,
               Set<Long> blacklist) {
+    this.id=id;
     this.email = email;
     this.role = role;
     this.dentistType = dentistType;
@@ -86,7 +88,8 @@ public class User {
   }
 
   public User(UserRegisterModel registerModel) {
-    this(registerModel.getEmail(),
+    this(registerModel.getId(),
+            registerModel.getEmail(),
          registerModel.getPassword(),
          registerModel.getFirstName(),
          registerModel.getLastName(),

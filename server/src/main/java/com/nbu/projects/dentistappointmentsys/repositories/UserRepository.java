@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-
+  User findById(Long Id);
   User findByEmail(String email);
   List<User> findAllByRole(Role role);
   // CITY
@@ -49,5 +49,60 @@ public interface UserRepository extends JpaRepository<User, Long> {
   @Query("update User u set u.password = :password where u.email = :email")
   void updatePassword(@Param("password") String password, @Param("email") String email);
 
-  User findUserById(Long id);
+
+  @Transactional
+  @Modifying
+  @Query("update User u set u.email=:email,u.firstName=:firstName,u.lastName=:lastName where u.id=:Id")
+  void updateUserInfo(@Param("email") String email,
+                      @Param("firstName") String firstName,
+                      @Param("lastName")String lastName,
+                      @Param("Id") Long Id);
+
+
+
+  @Transactional
+  @Modifying
+  @Query("update User u set u.email=:email,u.firstName=:firstName,u.lastName=:lastName,u.dentistType=:dentistType,u.city=:city where u.id=:Id")
+  void updateDentistInfo(@Param("email") String email,
+                      @Param("firstName") String firstName,
+                      @Param("lastName")String lastName,
+                      @Param("dentistType")DentistType dentistType,
+                      @Param("city") String city,@Param("Id") Long Id);
+
+
+  }
+
+
+ /* @Transactional
+  @Modifying
+  @Query("update User u set u.email=:email,u.firstName=:firstName where u.id=:Id")
+  void updateEmailAndFirstName(@Param("email") String email,
+                     @Param("firstName") String firstName,
+                     @Param("Id") Long Id);
+
+  @Transactional
+  @Modifying
+  @Query("update User u set u.email=:email,u.lastName=:lastName where u.id=:Id")
+  void updateEmailAndLastName(@Param("email") String email,
+                               @Param("lastName") String lastName,
+                               @Param("Id") Long Id);
+
+  @Transactional
+  @Modifying
+  @Query("update User u set u.firstName=:firstName,u.lastName=:lastName where u.id=:Id")
+  void updateFirstNameAndLastName(@Param("firstName") String firstName,
+                              @Param("lastName") String lastName,
+                              @Param("Id") Long Id);
+  @Transactional
+  @Modifying
+  @Query("update User u set u.firstName=:firstName where u.id=:Id")
+  void updateFirstName(@Param("firstName") String firstName,
+                       @Param("Id") Long Id);
+
+  @Transactional
+  @Modifying
+  @Query("update User u set u.lastName=:lastName where u.id=:Id")
+  void updateLastName(@Param("lastName") String lastName,
+                       @Param("Id") Long Id);
 }
+*/

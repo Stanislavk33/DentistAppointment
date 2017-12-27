@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {ChangePassModel} from "../../../services/model/change.pass.model";
 
 @Injectable()
-export class EditService {
+export class EditPasswordService {
 
   constructor(private http: HttpClient) {
   }
@@ -15,5 +15,9 @@ export class EditService {
 
     let requestModel: ChangePassModel = new ChangePassModel(userEmail, oldPass, newPass);
     return this.http.post<Boolean>('/changePassword', requestModel);
+
   }
+
+
+
 }

@@ -5,8 +5,8 @@ import {Router} from "@angular/router";
 @Component({
               moduleId: module.id,
               selector: 'patient-profile-component',
-              templateUrl: 'patient.profile.component.html',
-              styleUrls: ["patient.profile.component.css"],
+              templateUrl: 'patient-profile.component.html',
+              styleUrls: ["patient-profile.component.css"],
               providers: []
            })
 export class PatientProfileComponent implements OnInit {

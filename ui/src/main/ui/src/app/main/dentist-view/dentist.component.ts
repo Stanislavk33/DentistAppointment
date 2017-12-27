@@ -13,10 +13,19 @@ export class DentistComponent implements OnInit {
   public userEmail: string = '';
    constructor(private router: Router) {
    }
-   logout(){
+   logout() {
      CommonUtil.removeUser();
      this.router.navigate(['']);
    }
+
+
+
+   openProfile() {
+
+   }
+
+
+
    ngOnInit() {
      this.userEmail = CommonUtil.getSessionUserEmail();
    }

@@ -1,0 +1,49 @@
+<div class="patient-profie-container">
+  <form>
+    <div>
+      <section class="form-block">
+        <div class="form-group">
+          <label class="required">Email</label>
+          <input type="email" #email class="formFields_7" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label class="required">FirstName</label>
+          <input type="FirstName" #firstName class="formFields_7" placeholder="FirstName">
+        </div>
+        <div class="form-group">
+          <label class="required">LastName</label>
+          <input type="LastName" #lastName class="formFields_7" placeholder="LastName">
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <div class="select">
+            <select id="city"
+                    name="city"
+                    #city
+                >
+              <option value={{constants.CITY_SOFIA}}>Sofia</option>
+              <option value={{constants.CITY_VARNA}}>Varna</option>
+              <option value={{constants.CITY_PLOVDIV}}>Plovdiv</option>
+              <option value={{constants.CITY_BURGAS}}>Burgas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dentistType">Type</label>
+          <div class="select">
+            <select id="dentistType"
+                    name="dentistType"
+                    #dentistType>
+              <option value={{constants.TYPE_NORMAL}}>Normal</option>
+              <option value={{constants.TYPE_ORTHODONT}}>Orthodont</option>
+              <option value="{{constants.TYPE_SURGEON}}">Surgeon</option>
+            </select>
+          </div>
+        </div>
+
+      </section>
+    </div>
+    <button type="submit" class="btn btn-primary"(click)="submit(email.value,firstName.value,lastName.value,dentistType.value,city.value)">Ok</button>
+  </form>
+</div>

@@ -8,7 +8,7 @@ export class CommonUtil {
    }
 
    public static removeUser(): void {
-     sessionStorage.removeItem(Constants.SESSION_USER);
+     sessionStorage.removeItem('currentUser');
    }
 
    public static getSessionUser(): UserModel {
@@ -24,9 +24,9 @@ export class CommonUtil {
      let user: UserModel = this.getSessionUser();
      return user ? user.email : "";
    }
-
    public static getSessionUserId(): number {
      let user: UserModel = this.getSessionUser();
-     return user ? user.id : 0;
+     return user ? user.id: 0;
    }
 }
+
