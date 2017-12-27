@@ -29,7 +29,7 @@
       </clr-dg-cell>
       <clr-dg-cell>{{event.info}}</clr-dg-cell>
       <clr-dg-cell>
-        <button class="btn btn-warning-outline" *ngIf="isActive((event.startTime | date: 'dd-MM-yyyy'))" (click)="deleteEvent(event.id)">CANCEL</button>
+        <button class="btn btn-warning-outline" *ngIf="isActive((event.startTime | date: 'yyyy-MM-dd'))" (click)="deleteEvent(event.id)">CANCEL</button>
       </clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>
@@ -99,11 +99,7 @@
                         #startTime="ngModel"
                         [(ngModel)]="event.startTime"
                         required>
-                  <option>8:00</option>
-                  <option>8:30</option>
-                  <option>9:00</option>
-                  <option>9:30</option>
-                  <option>10:00</option>
+                  <option *ngFor="let hour of hours">{{hour}}</option>
                 </select>
                 <div [hidden]="startTime.valid || startTime.pristine"
                      class="alert alert-danger">
@@ -120,11 +116,7 @@
                         #endTime="ngModel"
                         [(ngModel)]="event.endTime"
                         required>
-                  <option>13:00</option>
-                  <option>13:30</option>
-                  <option>14:00</option>
-                  <option>14:30</option>
-                  <option>15:00</option>
+                  <option *ngFor="let hour of hours">{{hour}}</option>
                 </select>
                 <div [hidden]="endTime.valid || endTime.pristine"
                      class="alert alert-danger">

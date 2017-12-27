@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit} from "@angular/core";
 import {CommonUtil} from "../../../../util/common.util";
 import {EventModel} from "../../../../models/event.model";
 import {ScheduleService} from "../schedule.service";
+import {Constants} from "../../../../models/constants";
 
 @Component({
   moduleId: module.id,
@@ -16,6 +17,7 @@ export class DentistEventComponent implements OnInit {
   public events: EventModel[] = [];
   public eventDate: any;
   public hideWarning: Boolean = false;
+  public hours: string[] = [];
 
   constructor(private service: ScheduleService) {
   }
@@ -71,5 +73,6 @@ export class DentistEventComponent implements OnInit {
   ngOnInit() {
     this.event.dentistId = CommonUtil.getSessionUserId();
     this.refreshEvents();
+    this.hours = Constants.HOURS;
   }
 }
