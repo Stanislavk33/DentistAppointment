@@ -26,17 +26,14 @@ export class DentistResultsComponent implements OnInit {
   private type: string = '';
   private currentCity = 'Select City';
   private currentType = 'Select Type';
-  private dentistComparator = new DentistComparator();
-  private notAuth: boolean = false;
   private hideWarning: boolean = false;
 
-   constructor(private detistService: DentistCommonService,
-               private http : HttpClient,
+   constructor(private dentistService: DentistCommonService,
                private router: Router) {
    }
 
   public performSearch(){
-    this.detistService.getFilteredDentists(this.name, this.city, this.type)
+    this.dentistService.getFilteredDentists(this.name, this.city, this.type)
             .subscribe(data => this.dentists = data,
             error => console.error(error));
   }
@@ -83,7 +80,7 @@ export class DentistResultsComponent implements OnInit {
   }
 
    ngOnInit() {
-     this.detistService.getDentists()
+     this.dentistService.getDentists()
        .subscribe(data => this.dentists = data,
          error => console.error(error));
    }

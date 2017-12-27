@@ -15,6 +15,7 @@ export class DentistEventComponent implements OnInit {
   public event: EventModel = new EventModel();
   public events: EventModel[] = [];
   public eventDate: any;
+  public hideWarning: Boolean = false;
 
   constructor(private service: ScheduleService) {
   }
@@ -28,6 +29,13 @@ export class DentistEventComponent implements OnInit {
   onSubmit(){
     this.event.startTime = this.eventDate + ' ' + this.event.startTime;
     this.event.endTime = this.eventDate + ' ' + this.event.endTime;
+/*    this.service.existsEvent(this.event.dentistId, this.eventDate).subscribe( exists => {
+      if(exists){
+        this.hideWarning = !this.hideWarning;
+      }else{
+
+      }
+    });*/
     this.service.addEvent(this.event).subscribe( success => {
       if(success){
         this.addEvent = false;
@@ -35,6 +43,18 @@ export class DentistEventComponent implements OnInit {
         this.refreshEvents();
       }
     }, err => console.log(err));
+  }
+
+  deleteEvent(eventId: number){
+    this.service.cancelEvent(eventId).subscribe(success => {
+      if(success){
+        this.refreshEvents();
+      }``
+    }, err => console.log(err));
+  }
+
+  closeWarning() {
+    this.hideWarning= !this.hideWarning;
   }
 
   ngOnInit() {

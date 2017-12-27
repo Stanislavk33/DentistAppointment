@@ -10,7 +10,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "event_id")
-    private Long id;
+    private Long eventId;
 
     @Column(nullable = false)
     private Long dentistId;
@@ -39,11 +39,11 @@ public class Event {
     }
 
     public Long getId() {
-        return id;
+        return eventId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.eventId = id;
     }
 
     public Long getDentistId() {

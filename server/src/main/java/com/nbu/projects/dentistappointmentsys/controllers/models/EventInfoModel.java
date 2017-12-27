@@ -13,8 +13,10 @@ public class EventInfoModel {
     private String lastName;
     private String city;
     private String info;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp startTime;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp endTime;
 

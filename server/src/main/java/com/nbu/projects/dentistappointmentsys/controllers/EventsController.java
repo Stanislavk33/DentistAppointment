@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,7 @@ public class EventsController {
             Date endParsed = dateFormat.parse(eventModel.getEndTime());
             endTime = new Timestamp(endParsed.getTime());
         } catch(Exception e) {
-            System.err.println(e);
+            //System.err.println(e);
         }
 
         Event event = new Event(eventModel.getDentistId(), eventModel.getTitle(), startTime , endTime, eventModel.getInfo());
@@ -45,10 +46,28 @@ public class EventsController {
     }
 
     @GetMapping("/exists")
-    public Boolean canRate(@RequestParam(value = "dentistId") Long dentistId,
+    public Boolean existsEvent(@RequestParam(value = "dentistId") Long dentistId,
                            @RequestParam(value = "date") String date) {
-        Boolean res = eventsRepository.exists(dentistId, date);
-        return eventsRepository.exists(dentistId, date);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Timestamp formattedDate = new Timestamp(0);
+        try {
+            Date dateParsed = format.parse(date);
+            formattedDate = new Timestamp(dateParsed.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        /*Integer res = eventsRepository.countAllByDentistIdAndStartTimeStartsWith(dentistId, formattedDate);
+        return eventsRepository.countAllByDentistIdAndStartTimeStartsWith(dentistId, formattedDate) > 0;*/
+        return true;
+    }
+
+    @DeleteMapping("/cancelEvent/{id}")
+    public Boolean cancelEvent(@PathVariable(value="id") Long id) {
+        if(eventsRepository.exists(id)){
+            eventsRepository.delete(id);
+            return true;
+        }
+        return false;
     }
 
 }
