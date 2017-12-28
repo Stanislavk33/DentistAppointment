@@ -1,6 +1,9 @@
 package com.nbu.projects.dentistappointmentsys.controllers;
 
 import com.nbu.projects.dentistappointmentsys.controllers.models.ChangePassModel;
+import com.nbu.projects.dentistappointmentsys.controllers.models.EditDentistProfileModel;
+import com.nbu.projects.dentistappointmentsys.controllers.models.EditUserProfileModel;
+import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.EditUserResultModel;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.controllers.admin.ManageBlockModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.BaseResultModel;
@@ -11,9 +14,11 @@ import com.nbu.projects.dentistappointmentsys.models.types.Role;
 import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
+
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -119,11 +124,6 @@ public class UserRestController {
     return userRepository.findAllByRole(Role.DENTIST);
   }
 
-  @GetMapping("/user/{id}")
-  public User getDentistsByCity(@PathVariable(value="id") Long id) {
-    return userRepository.findUserById(id);
-  }
-
   @GetMapping("/dentists")
   public List<User> search(@RequestParam(value = "name", required = false) String name,
                               @RequestParam(value = "city", required = false) String city,
@@ -185,4 +185,133 @@ public class UserRestController {
       return false;
     }
   }
+
+  @PostMapping("/editDentistProfile")
+  public Boolean ChangeDentistProfile(@RequestBody EditDentistProfileModel EditDentistModel){
+    userRepository.updateDentistInfo(EditDentistModel.getEmail(),
+            EditDentistModel.getFirstName(),
+            EditDentistModel.getLastName(),
+            EditDentistModel.getDentistType(),
+            EditDentistModel.getCity(),
+            EditDentistModel.getId());
+        return true;
+  }
+
+  @PostMapping("/editPatientProfile")
+  public EditUserResultModel ChangePatientProfile (@RequestBody EditUserProfileModel EditProfileModel){
+    try{userRepository.updateUserInfo(EditProfileModel.getEmail(),
+            EditProfileModel.getFirstName(),
+            EditProfileModel.getLastName(),
+            EditProfileModel.getId());
+      return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+        }
+    catch(org.springframework.dao.DataIntegrityViolationException sqlException)
+      {
+      logger.warning("This email is already in use " );
+      return new EditUserResultModel(GenericConstants.RESULT_FAILED,
+              "This email is already in use ",
+              EditProfileModel);
+
+      }
+
+    }
+
+
+
+
+
+
 }
+
+
+
+
+    /*  if(EditProfileModel.getEmail()!="")
+    {
+      if(EditProfileModel.getFirstName()!="")
+      {
+        if(EditProfileModel.getLastName()!="")
+        {
+          //Change Email+FirstName+LastName
+          userRepository.updateUserInfo(EditProfileModel.getEmail(),
+                  EditProfileModel.getFirstName(),
+                  EditProfileModel.getLastName(),
+                  EditProfileModel.getId());
+          return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+        } else
+          {
+          //Change Email+FirstName
+          userRepository.updateEmailAndFirstName(EditProfileModel.getEmail(),
+                  EditProfileModel.getFirstName(),
+                  EditProfileModel.getId());
+            return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+          }
+      }else if(EditProfileModel.getEmail()!="" &&EditProfileModel.getLastName()!="" )
+      {
+        //Change Email+LastName
+        userRepository.updateEmailAndLastName(EditProfileModel.getEmail(),
+                EditProfileModel.getLastName(),
+                EditProfileModel.getId());
+        return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+      }else
+        {
+        //ChangeEmail
+        userRepository.updateEmail(EditProfileModel.getEmail(),EditProfileModel.getId());
+        return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+        }
+    }else
+      {
+        if(EditProfileModel.getFirstName()!="")
+        {
+          if(EditProfileModel.getLastName()!="")
+          {//Change FirstName and LastName
+            userRepository.updateFirstNameAndLastName(
+                    EditProfileModel.getFirstName(),
+                    EditProfileModel.getLastName(),
+                    EditProfileModel.getId());
+            new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+          }else
+            {//Change FirstName
+              userRepository.updateFirstName(
+                      EditProfileModel.getFirstName()
+                      ,EditProfileModel.getId());
+              return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+            }
+        }else if(EditProfileModel.getLastName()!="") //Change LastName
+          {
+            userRepository.updateLastName(EditProfileModel.getLastName(),
+                    EditProfileModel.getId());
+             return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
+              "",
+              null);
+          }
+
+      }
+
+    }catch(org.springframework.dao.DataIntegrityViolationException sqlException){
+      logger.warning("This email is already in use " );
+      return new EditUserResultModel(GenericConstants.RESULT_FAILED,
+              "This email is already in use ",
+              EditProfileModel);
+
+    }
+
+      return new EditUserResultModel(GenericConstants.RESULT_FAILED,
+              "",
+              null);
+
+  }*/

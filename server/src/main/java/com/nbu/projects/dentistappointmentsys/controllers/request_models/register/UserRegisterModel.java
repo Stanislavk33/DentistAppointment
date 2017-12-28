@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 public class UserRegisterModel {
-
+  private Long Id;
   private String email;
   private String password;
   private String firstName;
@@ -21,13 +21,15 @@ public class UserRegisterModel {
   public UserRegisterModel() {
   }
 
-  public UserRegisterModel(String email,
+  public UserRegisterModel(Long Id,
+                          String email,
                            String password,
                            String firstName,
                            String lastName,
                            Role role,
                            String city,
                            DentistType dentistType) {
+    this.Id=Id;
     this.email = email;
     this.password = password;
     this.firstName = firstName;
@@ -37,6 +39,8 @@ public class UserRegisterModel {
     this.dentistType = dentistType;
   }
 
+
+  public Long getId(){return Id;}
   public String getEmail() {
     return email;
   }
