@@ -16,6 +16,7 @@ import {RegisterComponent} from "./main/public/register/register.component";
 import {LoginComponent} from "./main/public/login/login.component";
 import {DentistResultsComponent} from "./main/patient-view/dentist-results/dentist.results.component";
 import {DentistProfileComponent} from "./main/patient-view/dentist-results/dentist-profile/dentist.profile.component";
+import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
 
 const appRoutes: Routes = [
   {path: '', component: MainComponent, children:[
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
 
     {path: 'dentist', component: DentistComponent,
       children: [
-        { path: 'changepass', component: ChangePasswordComponent}
+        { path: 'changepass', component: ChangePasswordComponent},
+        { path: 'schedule', component: ScheduleComponent}
       ],
       canActivate: [RoleGuard],
       data: { roles: ['DENTIST'] }},

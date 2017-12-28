@@ -1,0 +1,21 @@
+:host {
+  .input-fields {
+    div {
+      display: inline-block;
+      padding: 0;
+
+      label {
+        width: 40px;
+      }
+      div & .to {
+        padding-left: 25px;
+      }
+      div & .day {
+        padding-left: 31px;
+      }
+      div & .from {
+        padding-left: 40px;
+      }
+    }
+  }
+}

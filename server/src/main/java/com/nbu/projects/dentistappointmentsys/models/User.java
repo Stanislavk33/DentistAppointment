@@ -3,28 +3,27 @@ package com.nbu.projects.dentistappointmentsys.models;
 import com.nbu.projects.dentistappointmentsys.controllers.request_models.register.UserRegisterModel;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
-import org.hibernate.annotations.Formula;
-
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Formula;
 
 @Entity
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "user_id")
+  @Column(name = "userId")
   private Long id;
 
   @Column(unique = true, nullable = false)
@@ -55,9 +54,17 @@ public class User {
   @Column
   private String city;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "dentistId")
-  private Set<OpenHour> openHours;
+  @OneToMany(fetch = FetchType.EAGER)
+  @JoinColumn(name = "userId", nullable = true)
+  private Set<Appointment> appointments;
+
+  @OneToMany(fetch = FetchType.EAGER)
+  @JoinColumn(name = "userId", nullable = true)
+  private Set<WorkingDay> workingDays;
+
+/*  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "userId", nullable = true)
+  private Set<Event> events;*/
 
   @Formula(value = "(select avg(r.rate) from rating r where r.rated_id = user_id)")
   private Double rating;
@@ -72,7 +79,8 @@ public class User {
               Role role,
               String city,
               DentistType dentistType,
-              Set<Long> blacklist) {
+              Set<Long> blacklist,
+              Set<WorkingDay> workingDays) {
     this.email = email;
     this.role = role;
     this.dentistType = dentistType;
@@ -80,6 +88,7 @@ public class User {
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.workingDays = workingDays;
     this.timesBlacklisted = 0;
     this.blacklist = blacklist;
     this.rating = 0.;
@@ -93,6 +102,7 @@ public class User {
          registerModel.getRole(),
          registerModel.getCity(),
          registerModel.getDentistType(),
+         new HashSet<>(),
          new HashSet<>());
   }
 
@@ -176,15 +186,35 @@ public class User {
     this.city = city;
   }
 
-  public Double getRating() { return rating; }
-
-  public void setRating(double rating) { this.rating = rating; }
-
-  public Set<OpenHour> getOpenHours() {
-    return openHours;
+  public Set<Appointment> getAppointments() {
+    return appointments;
   }
 
-  public void setOpenHours(Set<OpenHour> openHours) {
-    this.openHours = openHours;
+  public void setAppointments(Set<Appointment> appointments) {
+    this.appointments = appointments;
+  }
+
+  public Set<WorkingDay> getWorkingDays() {
+    return workingDays;
+  }
+
+  public void setWorkingDays(Set<WorkingDay> workingDays) {
+    this.workingDays = workingDays;
+  }
+
+  /*  public Set<Event> getEvents() {
+    return events;
+  }
+
+  public void setEvents(Set<Event> events) {
+    this.events = events;
+  }*/
+
+  public Double getRating() {
+    return rating;
+  }
+
+  public void setRating(Double rating) {
+    this.rating = rating;
   }
 }

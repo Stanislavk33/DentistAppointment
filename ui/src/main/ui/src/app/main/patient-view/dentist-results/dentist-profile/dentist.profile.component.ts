@@ -14,7 +14,7 @@ import {CommonService} from "../../../../services/common.service";
 export class DentistProfileComponent implements OnInit {
   private id: number = 0;
   private dentist: UserModel;
-  private  isDataAvailable = false;
+  private isDataAvailable = false;
   constructor(private _Activatedroute:ActivatedRoute,
               private router: Router,
               private commonService: CommonService){

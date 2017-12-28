@@ -20,4 +20,20 @@ export class DentistComponent implements OnInit {
    ngOnInit() {
      this.userEmail = CommonUtil.getSessionUserEmail();
    }
+
+   openProfile() {
+      //TODO: Implement
+   }
+
+   openSchedule() {
+      this.router.navigate(['/dentist/schedule']);
+   }
+
+   editProfile() {
+      //TODO: Implement
+   }
+
+   dentistSearch() {
+      //TODO: Implement
+   }
 }

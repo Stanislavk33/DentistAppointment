@@ -8,7 +8,7 @@ import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.Lo
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.RegisterDentistModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.RegisterPatientModel;
 import com.nbu.projects.dentistappointmentsys.models.User;
-import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
+import com.nbu.projects.dentistappointmentsys.repositories.AppointmentRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
 import java.util.logging.Logger;
@@ -26,7 +26,7 @@ public class GenericRestController {
   @Autowired
   UserRepository userRepository;
   @Autowired
-  OpenHourRepository openHourRepository;
+  AppointmentRepository appointmentRepository;
 
   @PostMapping("/authenticate")
   public LoginResultModel login(@RequestBody LoginModel loginModel) {

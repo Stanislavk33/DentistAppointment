@@ -30,7 +30,10 @@ import {EventsComponent} from "./main/patient-view/dentist-results/events/events
 import {RatingsComponent} from "./main/patient-view/dentist-results/dentist-profile/ratings/ratings.component";
 import {DentistProfileComponent} from "./main/patient-view/dentist-results/dentist-profile/dentist.profile.component";
 import {RatingsService} from "./main/patient-view/dentist-results/dentist-profile/ratings/ratings.service";
-import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-profile/calendar/calendar.component";
+import {CalendarComponent} from "./main/calendar/calendar.component";
+import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
+import {AppointmentService} from "./services/appointment.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -51,7 +54,8 @@ import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-pro
     EventsComponent,
     DentistProfileComponent,
     RatingsComponent,
-    CalendarComponent
+    CalendarComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,8 @@ import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-pro
     JsonpModule,
     RouterModule,
     ClarityModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     CommonService,
@@ -70,7 +75,8 @@ import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-pro
     UsersService,
     AdminService,
     RatingsService,
-    EditService
+    EditService,
+    AppointmentService
   ],
   bootstrap: [MainComponent]
 })

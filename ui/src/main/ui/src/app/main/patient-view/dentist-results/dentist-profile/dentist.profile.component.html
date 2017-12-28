@@ -21,8 +21,8 @@
       </div>
     </div>
   </div>
-  <div class="calendar">
-      <calendar-component></calendar-component>
+  <div class="calendar" *ngIf="dentist">
+      <calendar-component [dentist]="dentist"></calendar-component>
   </div>
   <div class="ratings">
     <ratings-component [dentistId]="id"></ratings-component>
