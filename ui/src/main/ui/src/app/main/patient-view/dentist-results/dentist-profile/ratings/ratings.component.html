@@ -10,53 +10,69 @@
       </clr-dg-row>
     </clr-datagrid>
   </div>
-  <!--ngif user is patient show this component-->
-  <p>RATE THE DENTIST</p>
-  <div class="rate-dentist">
-    <div>
-      <fieldset class="rating">
-        <input type="radio"
-               value="5"
-               [name]="inputName"
-               [checked]="rating===5" />
-        <label title="Perfect!" (click)='onClick(5)'>5 stars</label>
+  <div class="rate-container" *ngIf="userId != 0">
+    <h4>RATE AND COMMENT</h4>
 
-        <input type="radio"
-               value="4"
-               [name]="inputName"
-               [checked]="rating===4" />
-        <label title="Pretty good." (click)='onClick(4)'>4 stars</label>
-
-        <input type="radio"
-               value="3"
-               [name]="inputName"
-               [checked]="rating===3" />
-        <label title="Meh.." (click)='onClick(3)'>3 stars</label>
-
-        <input type="radio"
-               value="2"
-               [name]="inputName"
-               [checked]="rating===2" />
-        <label title="Seen better." (click)='onClick(2)'>2 stars</label>
-
-        <input type="radio"
-               value="1"
-               [name]="inputName"
-               [checked]="rating===1" />
-        <label title="Sucks big time!" (click)='onClick(1)'>1 star</label>
-      </fieldset>
+    <div class="alert alert-danger" *ngIf="!hideWarning" [class.hidden-warning]="hideWarning">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">{{message}}</span>
+        </div>
+      </div>
+      <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
+        <clr-icon aria-hidden="true" shape="close"></clr-icon>
+      </button>
     </div>
-    <div class="rate">
-      <form (ngSubmit)="onSubmit()"
-            #registerForm="ngForm">
+
+    <div class="rate-dentist">
+      <div class="rating">
+        <fieldset class="rating">
+          <input type="radio"
+                 value="5"
+                 [name]="inputName"
+                 [checked]="rating===5" />
+          <label title="Perfect!" (click)='onClick(5)'>5 stars</label>
+
+          <input type="radio"
+                 value="4"
+                 [name]="inputName"
+                 [checked]="rating===4" />
+          <label title="Pretty good." (click)='onClick(4)'>4 stars</label>
+
+          <input type="radio"
+                 value="3"
+                 [name]="inputName"
+                 [checked]="rating===3" />
+          <label title="Meh.." (click)='onClick(3)'>3 stars</label>
+
+          <input type="radio"
+                 value="2"
+                 [name]="inputName"
+                 [checked]="rating===2" />
+          <label title="Seen better." (click)='onClick(2)'>2 stars</label>
+
+          <input type="radio"
+                 value="1"
+                 [name]="inputName"
+                 [checked]="rating===1" />
+          <label title="Sucks big time!" (click)='onClick(1)'>1 star</label>
+        </fieldset>
+      </div>
+      <div class="rate">
+        <form (ngSubmit)="onSubmit()"
+              #registerForm="ngForm">
         <textarea id="formFields_8" rows="3"
                   type="text"
                   required
                   [(ngModel)]="comment"
                   name="comment"
                   placeholder="Comment.."></textarea>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

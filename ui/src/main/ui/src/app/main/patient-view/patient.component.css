@@ -4,6 +4,7 @@
 
 .header-navi {
   height: 60px;
+  display: block;
 }
 
 .nav{

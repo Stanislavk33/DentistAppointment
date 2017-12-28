@@ -12,7 +12,7 @@ import {Constants} from "../../../models/constants";
               providers: []
            })
 export class LoginComponent implements OnInit {
-
+   private wrongPass = false;
    private model: LoginModel = new LoginModel();
    private userRole;
 
@@ -25,19 +25,18 @@ export class LoginComponent implements OnInit {
    onSubmit() {
       this.commonService.logIn(this.model)
           .subscribe(result => {
-                        console.log(result);
-                        CommonUtil.putSessionUser(result.user);
-                        this.userRole = CommonUtil.getSessionUserRole();
-                        if(this.userRole == Constants.ROLE_ADMIN){
-                          this.router.navigate(['/admin']);
-                        }else if(this.userRole == Constants.ROLE_DENTIST){
-                          this.router.navigate(['/dentist']);
-                        }else if(this.userRole == Constants.ROLE_PATIENT){
-                          this.router.navigate(['/patient']);
-                        }
-                     },
-                     error => console.error(error));
-
-
+                if(result.user == null){
+                  this.wrongPass = true;
+                }else{
+                  CommonUtil.putSessionUser(result.user);
+                  this.userRole = CommonUtil.getSessionUserRole();
+                  switch(this.userRole){
+                    case Constants.ROLE_ADMIN: this.router.navigate(['/admin']); break;
+                    case Constants.ROLE_DENTIST: this.router.navigate(['/dentist']); break;
+                    case Constants.ROLE_PATIENT: this.router.navigate(['/patient']);
+                  }
+                }
+             },
+             error => console.error(error));
    }
 }

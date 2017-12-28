@@ -3,9 +3,9 @@
   </header>
   <nav class="header-navi">
     <a class="nav" id="logo" routerLink="/home"></a>
-    <a class="nav" routerLink="/home" routerLinkActive="active">HOME</a>
     <a class="nav" (click) = "editProfile()">MY PROFILE</a>
     <a class="nav" (click) = "dentistSearch()">DENTISTS</a>
+    <a class="nav" routerLink="/patient/profile/appointments" routerLinkActive="active">MY APPOINTMENTS</a>
     <clr-dropdown class="nav">
       <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
         {{userEmail}}

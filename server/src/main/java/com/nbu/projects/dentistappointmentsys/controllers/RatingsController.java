@@ -3,10 +3,12 @@ package com.nbu.projects.dentistappointmentsys.controllers;
 import com.nbu.projects.dentistappointmentsys.models.Rating;
 import com.nbu.projects.dentistappointmentsys.repositories.RatingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
+
+import static org.springframework.orm.hibernate3.SessionFactoryUtils.getSession;
 
 @RestController
 public class RatingsController {
@@ -14,21 +16,26 @@ public class RatingsController {
     @Autowired
     RatingsRepository ratingsRepository;
 
-    private static final Logger logger =
-            Logger.getLogger(RatingsController.class.toString());
-
     @GetMapping("/rating/{id}")
-    public List<Rating> getRatings(@PathVariable(value="id") Long id) {
-        return ratingsRepository.getAllByRatedId(id);
-    }
+    public List<Rating> getRatings(@PathVariable(value="id") Long id) { return ratingsRepository.getAllByRatedId(id);}
 
     @PostMapping("/addRating")
     public Boolean addRating(@RequestBody Rating ratingsModel) {
-        Rating rating = new Rating(ratingsModel.getRater_id(),
+        Rating rating = new Rating(ratingsModel.getRated_id(),
                                    ratingsModel.getRater_id(),
                                    ratingsModel.getRate(),
                                    ratingsModel.getComment());
-        ratingsRepository.save(rating);
-        return true;
+        return ratingsRepository.save(rating) != null;
     }
+
+    @GetMapping("dentistRating/{id}")
+    public Double getAvgRating(@PathVariable(value="id") Long id){ return ratingsRepository.getAvgRating(id);}
+
+    @GetMapping("/canRate")
+    public Boolean canRate(@RequestParam(value = "patientId", required = false) Long patientId,
+                           @RequestParam(value = "dentistId", required = false) Long dentistId) {
+        Boolean res = ratingsRepository.exists(patientId, dentistId);
+        return ratingsRepository.exists(patientId, dentistId);
+    }
+
 }

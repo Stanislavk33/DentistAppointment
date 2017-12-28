@@ -15,11 +15,13 @@ export class RatingsComponent implements OnChanges {
   ratings: DentistRating[];
   isDataAvailable = false;
   userId: number;
-  @Input() rating: number;
+  @Input() rating: number = 0;
   @Input() itemId: number;
   @Output() ratingClick:EventEmitter<any> = new EventEmitter<any>();
   inputName:string;
   comment: string = "";
+  hideWarning: boolean = true;
+  message = "";
 
   constructor(private service: RatingsService) {
   }
@@ -49,13 +51,30 @@ export class RatingsComponent implements OnChanges {
 
   onSubmit() {
     console.log('RATING: ' + this.rating + '  COMMENT: ' + this.comment + ' USER ID ' + this.userId);
-    this.service.rateDentist(this.userId, this.dentistId, this.rating, this.comment).subscribe(success => {
-      if(success){
-       this.getRatings();
-      }else{
-        console.log('better luck next time');
-      }
-    });
+    if(this.comment === "" || this.rating == 0){
+      this.message = 'Please add both a COMMENT and RATE before submitting.';
+      this.hideWarning = false;
+    }else{
+      this.service.canRate(this.userId, this.dentistId).subscribe( success => {
+        if(!success){
+          this.service.rateDentist(this.userId, this.dentistId, this.rating, this.comment).subscribe(success => {
+            if(success){
+              this.getRatings();
+              this.comment = "";
+              this.hideWarning = true;
+            }
+          });
+        }else{
+          this.comment = '';
+          this.message = 'You can rate only once.';
+          this.hideWarning = false;
+        }
+      });
+    }
+  }
+
+  closeWarning() {
+    this.hideWarning= !this.hideWarning;
   }
 
   isRatingAvailable(){

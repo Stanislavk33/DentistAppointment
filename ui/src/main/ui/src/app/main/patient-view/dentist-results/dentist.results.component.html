@@ -1,4 +1,19 @@
 <div class="search-container">
+
+  <div class="alert alert-danger" *ngIf="notAuth" [class.hidden-warning]="hideWarning">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+        </div>
+        <span class="alert-text">Log in or Register to view profile!</span>
+      </div>
+    </div>
+    <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div>
+
   <div class="search-box">
 
     <div class="type-dropdown">
@@ -61,10 +76,9 @@
           <clr-dg-cell>{{dentist.dentistType}}</clr-dg-cell>
           <clr-dg-cell>{{dentist.rating}}</clr-dg-cell>
           <clr-dg-cell>
-            <a [routerLink]="['/patient/result',dentist.id]">View Profile</a>
+            <a (click) = "openProfile(this.dentist.id)">View Profile</a>
           </clr-dg-cell>
         </clr-dg-row>
-
         <clr-dg-footer>
           {{dentists.length}} users
           <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>

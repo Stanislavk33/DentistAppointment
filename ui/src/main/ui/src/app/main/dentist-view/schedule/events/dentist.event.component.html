@@ -1,0 +1,152 @@
+<div class="edit-events">
+  <div class="new-event">
+    <div class="row">
+        <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="card-header">
+              CREATE A NEW EVENT
+            </div>
+            <div class="card-block">
+              <div class="card-title">
+                <button class="btn btn-primary add-new" (click)="addEvent = true">ADD EVENT</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <clr-datagrid class="events">
+    <clr-dg-column>Title</clr-dg-column>
+    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column>Time</clr-dg-column>
+    <clr-dg-column>Info</clr-dg-column>
+    <clr-dg-column>Remove</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let event of events">
+      <clr-dg-cell>{{event.title}}</clr-dg-cell>
+      <clr-dg-cell>{{event.startTime | date}} </clr-dg-cell>
+      <clr-dg-cell>{{event.startTime | date: 'HH:mm'}} - {{event.endTime | date: 'HH:mm'}}
+      </clr-dg-cell>
+      <clr-dg-cell>{{event.info}}</clr-dg-cell>
+      <clr-dg-cell>
+        <button class="btn btn-warning-outline" *ngIf="isActive((event.startTime | date: 'yyyy-MM-dd'))" (click)="deleteEvent(event.id)">CANCEL</button>
+      </clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer>
+      {{events.length}} events
+      <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+
+  <clr-modal [(clrModalOpen)]="addEvent" [clrModalSize]="'lg'">
+    <h3 class="modal-title">Create Event</h3>
+    <div class="alert alert-danger" *ngIf="!hideWarning" [class.hidden-warning]="hideWarning">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">You already have a booked event for this day.</span>
+        </div>
+      </div>
+      <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
+        <clr-icon aria-hidden="true" shape="close"></clr-icon>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div [hidden]="submitted">
+        <div (ngSubmit)="onSubmit()"
+             ngForm #eventsForm="ngForm">
+          <section class="form-block info">
+            <div class="form-group">
+              <label for="startTime">Title</label>
+              <input type="title" type="text"
+                     id="title"
+                     required
+                     [(ngModel)]="event.title"
+                     name="title"
+                     #title="ngModel"
+                     placeholder="Title">
+              <div [hidden]="title.valid || title.pristine"
+                   class="alert alert-danger">
+                Title is required!
+              </div>
+            </div>
+          </section>
+          <section class="form-block info">
+            <div class="form-group">
+              <label class="required">Date</label>
+              <input type="date"
+                     id="date"
+                     required
+                     name="date"
+                     #date="ngModel"
+                     [(ngModel)]="eventDate"
+                     placeholder="Date">
+              <div [hidden]="date.valid || date.pristine"
+                   class="alert alert-danger">
+                Date is required!
+              </div>
+            </div>
+          </section>
+          <div class="time">
+            <div class="form-group date-time">
+              <label for="startTime" class="labels">Start</label>
+              <div class="select">
+                <select type="text"
+                        id="startTime"
+                        name="startTime"
+                        #startTime="ngModel"
+                        [(ngModel)]="event.startTime"
+                        required>
+                  <option *ngFor="let hour of hours">{{hour}}</option>
+                </select>
+                <div [hidden]="startTime.valid || startTime.pristine"
+                     class="alert alert-danger">
+                  End time is required!
+                </div>
+              </div>
+            </div>
+            <div class="form-group date-time">
+              <label for="endTime" class="labels">End</label>
+              <div class="select">
+                <select type="text"
+                        id="endTime"
+                        name="endTime"
+                        #endTime="ngModel"
+                        [(ngModel)]="event.endTime"
+                        required>
+                  <option *ngFor="let hour of hours">{{hour}}</option>
+                </select>
+                <div [hidden]="endTime.valid || endTime.pristine"
+                     class="alert alert-danger">
+                  End time is required!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group description">
+            <label for="info">Description</label>
+            <textarea id="info" rows="4"
+                      type="text"
+                      required
+                      [(ngModel)]="event.info"
+                      name="info"
+                      #info="ngModel"
+                      placeholder="Add a description..">
+                </textarea>
+            <div [hidden]="info.valid || info.pristine"
+                 class="alert alert-danger">
+              Information about the event is required!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="addEvent = false">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!eventsForm.form.valid" (click)="onSubmit()">Ok</button>
+    </div>
+  </clr-modal>
+
+</div>

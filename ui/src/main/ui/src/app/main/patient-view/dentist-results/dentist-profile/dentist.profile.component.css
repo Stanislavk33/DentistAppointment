@@ -3,18 +3,25 @@ clr-datagrid {
 }
 
 .profile-card {
-  width: 750px;
+  width: 800px;
   display: inline-block;
-  margin: 0;
-  padding: 0;
+}
 
+.dentist-info {
+  display: inline-block;
+  width: 800px;
+  vertical-align: top;
 }
 
 .card {
-  width: 500px;
+  width: 750px;
 }
 
-.calendar {
+h4 {
+  text-align: center;
+}
+
+.ratings {
   display: inline-block;
-  width: 500px;
+  width: 750px;
 }

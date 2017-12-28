@@ -3,21 +3,35 @@
 }
 
 .rate {
-  width: 500px;
+  width: 750px;
   display: inline-block;
 }
 .rate-dentist {
-  width: 1000px;
+  width: 750px;
+}
+
+.alert {
+  width: 750px;
+}
+
+h4 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.hidden-warning {
+  display: none;
 }
 
 /***************************
 Pulls the stars container to the left
 ***************************/
 .rating {
-  float:left;
   display: inline-block;
-  margin-top: 50px;
-  margin-right: 35px;
+  position: relative;
+  top:50%;
+  left:35%;
+  margin-bottom: 10px;
 }
 /***************************
 Hides the radio buttons

@@ -1,0 +1,68 @@
+.edit-events{
+  width: 950px;
+}
+
+form-block {
+  margin-bottom: 10px;
+}
+
+.card-header {
+  text-align: center;
+}
+
+.add-new {
+  margin-left: 115px;
+}
+
+events {
+  width: 750px;
+}
+
+clr-modal {
+  height: 750px !important;
+}
+
+.add-event, .labels, .select {
+  display: inline-block;
+}
+
+.new-event {
+  margin-bottom: 30px;
+}
+
+label{
+  margin-right: 18px;
+}
+
+h4 {
+  display: inline-block;
+}
+
+h3 {
+  text-align: center;
+}
+
+.date-time {
+  display: inline-block;
+  width: 350px;
+}
+
+.info {
+  margin-top: 13px;
+}
+
+.time,.description{
+  margin-top: 17px;
+}
+
+.description {
+  padding-bottom: 13px;
+}
+
+.select {
+  width: 230px;
+}
+
+#title, #date {
+  width: 230px;
+}

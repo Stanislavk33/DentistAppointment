@@ -1,3 +1,46 @@
 <div class="events-container">
-   EVENTS TESTTEST
+  <h4>SPECIAL EVENTS</h4>
+  <clr-datagrid>
+    <clr-dg-column>Event</clr-dg-column>
+    <clr-dg-column>Doctor</clr-dg-column>
+    <clr-dg-column>City</clr-dg-column>
+    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column>Time</clr-dg-column>
+    <clr-dg-column>View</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let event of events">
+      <clr-dg-cell>{{event.title}}</clr-dg-cell>
+      <clr-dg-cell>{{event.firstName}} {{event.lastName}}</clr-dg-cell>
+      <clr-dg-cell>{{event.city}}</clr-dg-cell>
+      <clr-dg-cell>{{event.startTime | date}} </clr-dg-cell>
+      <clr-dg-cell>{{event.startTime | date: 'HH:mm'}} - {{event.endTime | date: 'HH:mm'}}
+      </clr-dg-cell>
+      <clr-dg-cell>
+        <a (click) = "seeEventInfo(event)">See More</a>
+      </clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer>
+      {{events.length}} events
+      <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+  <clr-modal [(clrModalOpen)]="openInfo" [clrModalSize]="'md'">
+    <h3 class="modal-title">{{currentEvent.title}}</h3>
+    <div class="modal-body">
+      <p>Description: {{currentEvent.info}}</p>
+    </div>
+    <div class="modal-body">
+      <div class="when">
+        <clr-icon shape="clock" class="has-badge"></clr-icon>
+        <p>When: {{currentEvent.startTime | date}}</p>
+      </div>
+      <div class="location">
+        <clr-icon shape="map-marker" class="has-badge"></clr-icon>
+        <p>City: {{currentEvent.city}}</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="openInfo = false">Ok</button>
+    </div>
+  </clr-modal>
 </div>
