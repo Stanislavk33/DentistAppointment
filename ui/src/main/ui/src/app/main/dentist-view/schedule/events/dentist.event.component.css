@@ -26,6 +26,11 @@ clr-modal {
   display: inline-block;
 }
 
+.error-msg {
+  margin-left:auto;
+  margin-right:0;
+}
+
 .new-event {
   margin-bottom: 30px;
 }

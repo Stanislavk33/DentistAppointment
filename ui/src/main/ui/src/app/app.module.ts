@@ -42,6 +42,7 @@ import {DentistEventComponent} from "./main/dentist-view/schedule/events/dentist
 import {EventsService} from "./main/patient-view/dentist-results/events/events.service";
 import {ScheduleService} from "./main/dentist-view/schedule/schedule.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {DatePipe} from "@angular/common";
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     EditDentistProfileService,
     DentistCommonService,
     EventsService,
-    ScheduleService
+    ScheduleService,
+    DatePipe
   ],
   bootstrap: [MainComponent]
 })

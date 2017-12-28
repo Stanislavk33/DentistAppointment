@@ -4,6 +4,8 @@ package com.nbu.projects.dentistappointmentsys.controllers;
 import com.nbu.projects.dentistappointmentsys.controllers.models.EventInfoModel;
 import com.nbu.projects.dentistappointmentsys.controllers.request_models.EventRequestModel;
 import com.nbu.projects.dentistappointmentsys.models.Event;
+import com.nbu.projects.dentistappointmentsys.models.EventComment;
+import com.nbu.projects.dentistappointmentsys.repositories.EventCommentRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.EventsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,14 @@ public class EventsController {
     @Autowired
     EventsRepository eventsRepository;
 
+    @Autowired
+    EventCommentRepository eventCommentRepository;
+
     @GetMapping("/events")
     public List<EventInfoModel> getEvents() {
-        return eventsRepository.getEvents();
+        long time = System.currentTimeMillis();
+        Timestamp now = new Timestamp(time);
+        return eventsRepository.getActiveEvents(now);
     }
 
     @GetMapping("/events/{id}")
@@ -68,6 +75,17 @@ public class EventsController {
             return true;
         }
         return false;
+    }
+
+    @PostMapping("/comment")
+    public Boolean addComment(@RequestBody EventComment comment) {
+        EventComment eventComment = new EventComment(comment.getComment(), comment.getCommenterName(), comment.getEventId());
+        return eventCommentRepository.save(eventComment) != null;
+    }
+
+    @GetMapping("/getComments/{eventId}")
+    public List<EventComment> getComments(@PathVariable(value = "eventId") Long eventId){
+        return eventCommentRepository.getAllByEventId(eventId);
     }
 
 }

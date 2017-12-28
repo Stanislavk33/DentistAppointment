@@ -40,19 +40,6 @@
 
   <clr-modal [(clrModalOpen)]="addEvent" [clrModalSize]="'lg'">
     <h3 class="modal-title">Create Event</h3>
-    <div class="alert alert-danger" *ngIf="!hideWarning" [class.hidden-warning]="hideWarning">
-      <div class="alert-items">
-        <div class="alert-item static">
-          <div class="alert-icon-wrapper">
-            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
-          </div>
-          <span class="alert-text">You already have a booked event for this day.</span>
-        </div>
-      </div>
-      <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
-        <clr-icon aria-hidden="true" shape="close"></clr-icon>
-      </button>
-    </div>
     <div class="modal-body">
       <div [hidden]="submitted">
         <div (ngSubmit)="onSubmit()"
@@ -144,6 +131,19 @@
       </div>
     </div>
     <div class="modal-footer">
+      <div class="alert alert-danger error-msg" *ngIf="showWarning">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+            <span class="alert-text">{{errorMessage}}</span>
+          </div>
+        </div>
+        <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
+          <clr-icon aria-hidden="true" shape="close"></clr-icon>
+        </button>
+      </div>
       <button type="button" class="btn btn-outline" (click)="addEvent = false">Cancel</button>
       <button type="submit" class="btn btn-primary" [disabled]="!eventsForm.form.valid" (click)="onSubmit()">Ok</button>
     </div>

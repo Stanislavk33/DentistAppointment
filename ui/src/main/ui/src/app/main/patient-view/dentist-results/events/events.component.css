@@ -13,3 +13,32 @@ h4 {
   text-align: center;
   margin-bottom: 30px;
 }
+
+.event-info {
+  display: inline-block;
+  margin-left: 30px;
+  margin-right: 60px;
+}
+
+.card-header {
+  height: 20px;
+  text-align: center;
+}
+
+.event-comments {
+  display: inline-block;
+  vertical-align:top;
+  width: 350px;
+}
+
+.card {
+  width: 350px;
+}
+
+.card-header {
+  padding: 0 !important;
+}
+
+.com-table {
+  margin: 0 !important;
+}

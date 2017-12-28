@@ -1,4 +1,5 @@
 export class EventInfoModel {
+  id: number = 0;
   title: String;
   firstName: String;
   lastName: String;

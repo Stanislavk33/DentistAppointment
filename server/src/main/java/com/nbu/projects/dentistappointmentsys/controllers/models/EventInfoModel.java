@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class EventInfoModel {
+    private Long id;
     private String title;
     private String firstName;
     private String lastName;
@@ -22,7 +23,8 @@ public class EventInfoModel {
 
     public EventInfoModel() { }
 
-    public EventInfoModel(String title, String firstName, String lastName, String city, String info, Date startTime, Date endTime) {
+    public EventInfoModel(Long id, String title, String firstName, String lastName, String city, String info, Date startTime, Date endTime) {
+        this.id = id;
         this.title = title;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,6 +32,14 @@ public class EventInfoModel {
         this.info = info;
         this.startTime = new Timestamp(startTime.getTime());
         this.endTime = new Timestamp(endTime.getTime());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

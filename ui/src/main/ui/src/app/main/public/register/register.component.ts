@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 @Component({
               selector: 'register-component',
               templateUrl: 'register.component.html',
-              styleUrls: ["register.component.scss"],
+              styleUrls: ["register.component.css"],
               providers: []
            })
 export class RegisterComponent implements OnInit {

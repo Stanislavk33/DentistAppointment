@@ -28,5 +28,10 @@ export class CommonUtil {
      let user: UserModel = this.getSessionUser();
      return user ? user.id: 0;
    }
+
+   public static getSessionUserFullName(): string {
+     let user: UserModel = this.getSessionUser();
+     return user ? (user.firstName + ' ' + user.lastName) : "";
+  }
 }
 
