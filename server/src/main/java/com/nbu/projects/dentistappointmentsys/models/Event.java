@@ -24,7 +24,7 @@ public class Event {
     @Column(nullable = false)
     private Timestamp endTime;
 
-    @Column(nullable = false)
+    @Column(length = 10000)
     @Type(type="text")
     private String info;
 

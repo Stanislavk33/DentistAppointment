@@ -3,6 +3,7 @@ import {CommonUtil} from "../../../../util/common.util";
 import {EventModel} from "../../../../models/event.model";
 import {ScheduleService} from "../schedule.service";
 import {Constants} from "../../../../models/constants";
+import {DatePipe} from "@angular/common";
 
 @Component({
   moduleId: module.id,
@@ -16,10 +17,11 @@ export class DentistEventComponent implements OnInit {
   public event: EventModel = new EventModel();
   public events: EventModel[] = [];
   public eventDate: any;
-  public hideWarning: Boolean = false;
+  public showWarning: Boolean = false;
   public hours: string[] = [];
+  public errorMessage: string = '';
 
-  constructor(private service: ScheduleService) {
+  constructor(private service: ScheduleService, private datePipe: DatePipe) {
   }
 
   private refreshEvents(){
@@ -31,19 +33,22 @@ export class DentistEventComponent implements OnInit {
   onSubmit(){
     this.event.startTime = this.eventDate + ' ' + this.event.startTime;
     this.event.endTime = this.eventDate + ' ' + this.event.endTime;
-/*    this.service.existsEvent(this.event.dentistId, this.eventDate).subscribe( exists => {
-      if(exists){
-        this.hideWarning = !this.hideWarning;
-      }else{
-
-      }
-    });*/
-    this.service.addEvent(this.event).subscribe( success => {
-      if(success){
-        this.addEvent = false;
-        this.refreshEvents();
-      }
-    }, err => console.log(err));
+    let now = new Date().toJSON().slice(0,10);
+    if (this.events.filter(e => (this.datePipe.transform(e.startTime, 'yyyy-MM-dd')) === this.eventDate).length > 0) {
+      this.errorMessage = 'You already have an event for this date.';
+      this.showWarning = true;
+    }else if(this.event.startTime<now){
+      this.errorMessage = 'Cannot create an event for a past date.';
+      this.showWarning = true;
+    }else{
+      this.service.addEvent(this.event).subscribe( success => {
+        if(success){
+          this.addEvent = false;
+          this.showWarning = false;
+          this.refreshEvents();
+        }
+      }, err => console.log(err));
+    }
   }
 
   deleteEvent(eventId: number){
@@ -55,17 +60,12 @@ export class DentistEventComponent implements OnInit {
   }
 
   closeWarning() {
-    this.hideWarning= !this.hideWarning;
+    this.showWarning= !this.showWarning;
   }
 
   isActive(date) {
     let today = new Date().toJSON().slice(0,10);
-
-    if(date>today)
-    {
-      return true;
-    }
-    return false;
+      return date>today;
   }
 
   ngOnInit() {

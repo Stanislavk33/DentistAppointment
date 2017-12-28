@@ -24,19 +24,59 @@
       <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
     </clr-dg-footer>
   </clr-datagrid>
-  <clr-modal [(clrModalOpen)]="openInfo" [clrModalSize]="'md'">
+  <clr-modal [(clrModalOpen)]="openInfo" [clrModalSize]="'lg'">
     <h3 class="modal-title">{{currentEvent.title}}</h3>
     <div class="modal-body">
-      <p>Description: {{currentEvent.info}}</p>
-    </div>
-    <div class="modal-body">
-      <div class="when">
-        <clr-icon shape="clock" class="has-badge"></clr-icon>
-        <p>When: {{currentEvent.startTime | date}}</p>
+        <div class="event-info">
+          <div class="when">
+            <clr-icon shape="clock" class="has-badge"></clr-icon>
+            <p>When: {{currentEvent.startTime | date}}</p>
+          </div>
+          <div class="location">
+            <clr-icon shape="map-marker" class="has-badge"></clr-icon>
+            <p>City: {{currentEvent.city}}</p>
+          </div>
+          <p>Description: {{currentEvent.info}}</p>
+        </div>
+        <div class="event-comments">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-header">
+                  Comments for this event
+                </div>
+                <div class="card-block">
+                  <clr-datagrid>
+                    <clr-dg-column>Name</clr-dg-column>
+                    <clr-dg-column>Comment</clr-dg-column>
+
+                    <clr-dg-row *ngFor="let comment of comments">
+                      <clr-dg-cell>{{comment.commenterName}}</clr-dg-cell>
+                      <clr-dg-cell>{{comment.comment}}</clr-dg-cell>
+                    </clr-dg-row>
+                    <clr-dg-footer>
+                      {{comments.length}} comments
+                      <clr-dg-pagination #pagination [clrDgPageSize]="4"></clr-dg-pagination>
+                    </clr-dg-footer>
+                  </clr-datagrid>
+                </div>
+              </div>
+            </div>
+        </div>
       </div>
-      <div class="location">
-        <clr-icon shape="map-marker" class="has-badge"></clr-icon>
-        <p>City: {{currentEvent.city}}</p>
+    </div>
+    <div class="modal-body" *ngIf="fullName != ''">
+      <div class="comment">
+        <form (ngSubmit)="onSubmit()"
+              #registerForm="ngForm">
+        <textarea id="formFields_8" rows="3"
+                  type="text"
+                  required
+                  [(ngModel)]="comment"
+                  name="comment"
+                  placeholder="Comment.."></textarea>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
     <div class="modal-footer">
