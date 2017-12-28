@@ -10,12 +10,15 @@ import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.Re
 import com.nbu.projects.dentistappointmentsys.models.User;
 import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
+import com.nbu.projects.dentistappointmentsys.service.NotificationService;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.nbu.projects.dentistappointmentsys.service.NotificationService;
 
 @RestController
 public class GenericRestController {
@@ -23,10 +26,15 @@ public class GenericRestController {
   private static final Logger logger =
       Logger.getLogger(GenericRestController.class.toString());
 
-  @Autowired
-  UserRepository userRepository;
-  @Autowired
-  OpenHourRepository openHourRepository;
+    @Autowired
+    private NotificationService notificationService;
+
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    OpenHourRepository openHourRepository;
 
   @PostMapping("/authenticate")
   public LoginResultModel login(@RequestBody LoginModel loginModel) {
@@ -59,6 +67,11 @@ public class GenericRestController {
     }
     User toRegister = new User(patientModel);
     User registered = userRepository.save(toRegister);
+      try{
+          notificationService.sendNotification(toRegister);
+      }catch(MailException e){
+          logger.info("Error Sending Email: " + e.getMessage());
+      }
     if (registered == null) {
       logger.warning("Unable to save Patient.");
       return new RegisterPatientModel(GenericConstants.RESULT_FAILED,
@@ -69,6 +82,8 @@ public class GenericRestController {
     return new RegisterPatientModel(GenericConstants.RESULT_SUCCESSFUL,
                                     "",
                                     new UserResultModel(registered));
+
+
   }
 
   @PostMapping("/registerDentist")
@@ -85,6 +100,11 @@ public class GenericRestController {
 
     User toRegister = new User(dentistModel);
     User registered = userRepository.save(toRegister);
+    try{
+      notificationService.sendNotification(toRegister);
+    }catch(MailException e){
+      logger.info("Error Sending Email: " + e.getMessage());
+    }
     if (registered == null) {
       logger.warning("Unable to save dentist.");
       return new RegisterDentistModel(GenericConstants.RESULT_FAILED,
