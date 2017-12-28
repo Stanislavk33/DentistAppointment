@@ -34,6 +34,7 @@ export class EditProfileComponent implements OnInit {
             }else{
               this.openFail = true;
               this.openSuccess = false;
+              this.failMessage='This email is already used.';
 
             }
           },

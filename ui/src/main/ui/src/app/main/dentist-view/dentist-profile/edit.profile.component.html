@@ -1,5 +1,38 @@
-<div class="patient-profie-container">
-<<<<<<< HEAD
+
+<div class="dentist-profie-container">
+
+  <div class="edit-profile-container">
+    <div class="email-alert">
+      <div class="alert alert-danger" *ngIf="openFail">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+            <span class="alert-text">
+                    {{failMessage}}
+                </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <div class="alert alert-success" *ngIf="openSuccess">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+        </div>
+        <span class="alert-text">
+                    Successfully updated profile.
+                </span>
+      </div>
+    </div>
+  </div>
+
+
+
   <form>
     <div>
       <section class="form-block">
@@ -47,7 +80,4 @@
     </div>
     <button type="submit" class="btn btn-primary"(click)="submit(email.value,firstName.value,lastName.value,dentistType.value,city.value)">Ok</button>
   </form>
-=======
-EDIT PROFILE
->>>>>>> kali-brach-new
 </div>

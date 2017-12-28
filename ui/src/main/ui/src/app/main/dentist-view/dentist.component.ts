@@ -18,25 +18,19 @@ export class DentistComponent implements OnInit {
      this.router.navigate(['']);
    }
 
-<<<<<<< HEAD
 
-=======
    openSchedule() {
 
    }
->>>>>>> kali-brach-new
 
    openProfile() {
 
    }
 
-<<<<<<< HEAD
-
-=======
    viewPatients() {
 
    }
->>>>>>> kali-brach-new
+
 
    ngOnInit() {
      this.userEmail = CommonUtil.getSessionUserEmail();

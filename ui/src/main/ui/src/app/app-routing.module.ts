@@ -1,10 +1,6 @@
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterModule, Routes, RouterStateSnapshot} from "@angular/router";
 import {Injectable, NgModule} from "@angular/core";
 import {MainComponent} from "./main/main.component";
-import {AppComponent} from "./main/app/app.component";
-import {HomeComponent} from "./main/app/home/home.component";
-import {RegisterComponent} from "./main/app/register/register.component";
-import {LoginComponent} from "./main/app/login/login.component";
 import {PatientComponent} from "./main/patient-view/patient.component";
 import {ChangePasswordComponent} from "./main/shared-components/change-password/change-password-component";
 import {PatientProfileComponent} from "./main/patient-view/patient-profile/patient-profile.component";
@@ -13,46 +9,35 @@ import {AdminComponent} from "./main/admin-view/admin.component";
 import {DentistComponent} from "./main/dentist-view/dentist.component";
 import {AppointmentsComponent} from "./main/patient-view/patient-profile/appointments/appointments.component";
 import {AmbulatoryComponent} from "./main/patient-view/patient-profile/ambulatory/ambulatory.component";
-<<<<<<< HEAD
 import {EditProfileComponent} from "./main/patient-view/patient-profile/edit-profile/edit-profile.component";
-import {DentistProfileComponent} from "./main/patient-view/dentist-profile/dentist-profile.component";
-import {DentistResultsComponent} from "./main/shared-components/dentist-results/dentist-results.component";
 import {EditDentistProfileComponent} from "./main/dentist-view/dentist-profile/edit.profile.component";
-=======
-import {EditProfileComponent} from "./main/patient-view/patient-profile/edit-profile/edit.profile.component";
+import {DentistResultsComponent} from "./main/patient-view/dentist-results/dentist.results.component";
 import {AppComponent} from "./main/public/app.component";
 import {HomeComponent} from "./main/public/home/home.component";
 import {RegisterComponent} from "./main/public/register/register.component";
 import {LoginComponent} from "./main/public/login/login.component";
-import {DentistResultsComponent} from "./main/patient-view/dentist-results/dentist.results.component";
 import {DentistProfileComponent} from "./main/patient-view/dentist-results/dentist-profile/dentist.profile.component";
-import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
-import {EditDentistProfileComponent} from "./main/dentist-view/dentist-profile/edit.profile.component";
-import {DentistAppointmentsComponent} from "./main/dentist-view/appointments/appointments.component";
 import {PatientsComponent} from "./main/dentist-view/patients/patients.component";
->>>>>>> kali-brach-new
+import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
+import {DentistAppointmentsComponent} from "./main/dentist-view/appointments/appointments.component";
 
 const appRoutes: Routes = [
   {path: '', component: MainComponent, children:[
 
     {path: '', component: AppComponent, children:[
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
-      {path: 'home', component: HomeComponent, children: [
-        {path: '', pathMatch: 'full', component: DentistResultsComponent},
-        {path: 'dentists', pathMatch: 'full', component: DentistResultsComponent},
-        {path: 'result/:id', pathMatch: 'full', component: DentistProfileComponent}
-      ]},
+      {path: 'home', component: HomeComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'login', component: LoginComponent},
-    ]},
+    ]}, /*, canActivate: [AuthGuard]},*/
+
     {path: 'patient', component: PatientComponent,
       children: [
         { path: 'profile', component: PatientProfileComponent, children: [
-              { path: '', redirectTo: 'edit', pathMatch: 'full'},
-              { path: 'edit', pathMatch: 'full', component: EditProfileComponent},
-              { path: 'appointments', pathMatch: 'full', component: AppointmentsComponent},
-              { path: 'ambulatory', pathMatch: 'full', component: AmbulatoryComponent}
-          ]},
+          { path: '', redirectTo: 'edit', pathMatch: 'full'},
+          { path: 'edit', pathMatch: 'full', component: EditProfileComponent},
+          { path: 'appointments', pathMatch: 'full', component: AppointmentsComponent},
+          { path: 'ambulatory', pathMatch: 'full', component: AmbulatoryComponent}
+        ]},
         { path: 'changepass', component: ChangePasswordComponent},
         { path: 'dentists', component: DentistResultsComponent},
         { path: 'result/:id', component: DentistProfileComponent}
@@ -66,17 +51,10 @@ const appRoutes: Routes = [
     {path: 'dentist', component: DentistComponent,
       children: [
         { path: 'changepass', component: ChangePasswordComponent},
-<<<<<<< HEAD
-       // { path: 'appointments', component: DentistAppointmentsComponent},
-       // { path: 'schedule', component: ScheduleComponent},
-        { path: 'myprofile', component: EditDentistProfileComponent},
-       // { path: 'patients', component: PatientsComponent}
-=======
         { path: 'appointments', component: DentistAppointmentsComponent},
         { path: 'schedule', component: ScheduleComponent},
         { path: 'myprofile', component: EditDentistProfileComponent},
         { path: 'patients', component: PatientsComponent}
->>>>>>> kali-brach-new
       ],
       canActivate: [RoleGuard],
       data: { roles: ['DENTIST'] }},

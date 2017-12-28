@@ -3,10 +3,12 @@ import {LoginResultModel} from "../models/login.result.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {Constants} from "../models/constants";
-import {LoginModel} from "../main/app/login/model/login.model";
-import {PatientRegisterModel} from "../main/app/register/model/request/patient.register.model";
-import {RegisterModel} from "../main/app/register/model/register.model";
-import {DentistRegisterModel} from "../main/app/register/model/request/dentist.register.model";
+import {LoginModel} from "../main/public/login/model/login.model";
+import {RegisterModel} from "../main/public/register/model/register.model";
+import {PatientRegisterModel} from "../main/public/register/model/request/patient.register.model";
+import {DentistRegisterModel} from "../main/public/register/model/request/dentist.register.model";
+import {UserModel} from "../models/user.model";
+
 
 @Injectable()
 export class CommonService {
@@ -39,6 +41,10 @@ export class CommonService {
    }
 
    private registerDentist(dentistRegisterModel: DentistRegisterModel) {
-      return this.httpClient.post(CommonService.REGISTER_DENTIST_URL, dentistRegisterModel);
+      return this.httpClient.post(CommonService.REGISTER_DENTIST_URL, dentistRegisterModel)
+   }
+
+   public getUserInfo(id:number): Observable<UserModel>{
+     return this.httpClient.get('user/'+ id);
    }
 }

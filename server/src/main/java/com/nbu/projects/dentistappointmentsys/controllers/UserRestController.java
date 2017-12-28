@@ -1,5 +1,4 @@
 package com.nbu.projects.dentistappointmentsys.controllers;
-
 import com.nbu.projects.dentistappointmentsys.controllers.models.ChangePassModel;
 import com.nbu.projects.dentistappointmentsys.controllers.models.EditDentistProfileModel;
 import com.nbu.projects.dentistappointmentsys.controllers.models.EditUserProfileModel;
@@ -14,12 +13,12 @@ import com.nbu.projects.dentistappointmentsys.models.types.Role;
 import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
-
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -118,7 +117,11 @@ public class UserRestController {
     }
     return new BaseResultModel(GenericConstants.RESULT_SUCCESSFUL, "");
   }
+  @GetMapping("/user/{id}")
+  public User getDentistsByCity(@PathVariable(value="id") Long id) {
+    return userRepository.findById(id);
 
+  }
   @GetMapping("/getDentists")
   public List<User> getDentists() {
     return userRepository.findAllByRole(Role.DENTIST);

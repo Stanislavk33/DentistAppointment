@@ -41,7 +41,6 @@ export class DentistEventComponent implements OnInit {
     this.service.addEvent(this.event).subscribe( success => {
       if(success){
         this.addEvent = false;
-        console.log('added');
         this.refreshEvents();
       }
     }, err => console.log(err));
@@ -61,8 +60,7 @@ export class DentistEventComponent implements OnInit {
 
   isActive(date) {
     let today = new Date().toJSON().slice(0,10);
-    console.log(date);
-    console.log(today);
+
     if(date>today)
     {
       return true;
