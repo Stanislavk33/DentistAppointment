@@ -221,100 +221,10 @@ public class UserRestController {
 
     }
 
-
-
-
-
-
-}
-
-
-
-
-    /*  if(EditProfileModel.getEmail()!="")
-    {
-      if(EditProfileModel.getFirstName()!="")
-      {
-        if(EditProfileModel.getLastName()!="")
-        {
-          //Change Email+FirstName+LastName
-          userRepository.updateUserInfo(EditProfileModel.getEmail(),
-                  EditProfileModel.getFirstName(),
-                  EditProfileModel.getLastName(),
-                  EditProfileModel.getId());
-          return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
-              "",
-              null);
-        } else
-          {
-          //Change Email+FirstName
-          userRepository.updateEmailAndFirstName(EditProfileModel.getEmail(),
-                  EditProfileModel.getFirstName(),
-                  EditProfileModel.getId());
-            return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
-              "",
-              null);
-          }
-      }else if(EditProfileModel.getEmail()!="" &&EditProfileModel.getLastName()!="" )
-      {
-        //Change Email+LastName
-        userRepository.updateEmailAndLastName(EditProfileModel.getEmail(),
-                EditProfileModel.getLastName(),
-                EditProfileModel.getId());
-        return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
-              "",
-              null);
-      }else
-        {
-        //ChangeEmail
-        userRepository.updateEmail(EditProfileModel.getEmail(),EditProfileModel.getId());
-        return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
-              "",
-              null);
-        }
-    }else
-      {
-        if(EditProfileModel.getFirstName()!="")
-        {
-          if(EditProfileModel.getLastName()!="")
-          {//Change FirstName and LastName
-            userRepository.updateFirstNameAndLastName(
-                    EditProfileModel.getFirstName(),
-                    EditProfileModel.getLastName(),
-                    EditProfileModel.getId());
-            new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
-              "",
-              null);
-          }else
-            {//Change FirstName
-              userRepository.updateFirstName(
-                      EditProfileModel.getFirstName()
-                      ,EditProfileModel.getId());
-              return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
-              "",
-              null);
-            }
-        }else if(EditProfileModel.getLastName()!="") //Change LastName
-          {
-            userRepository.updateLastName(EditProfileModel.getLastName(),
-                    EditProfileModel.getId());
-             return new EditUserResultModel(GenericConstants.RESULT_SUCCESSFUL,
-              "",
-              null);
-          }
-
-      }
-
-    }catch(org.springframework.dao.DataIntegrityViolationException sqlException){
-      logger.warning("This email is already in use " );
-      return new EditUserResultModel(GenericConstants.RESULT_FAILED,
-              "This email is already in use ",
-              EditProfileModel);
-
+    @PostMapping("/addToBlacklist/{id}")
+    public Boolean addToBlacklist(@PathVariable(value="id") Long id) {
+      //userRepository.addToBlacklist(id);
+      return true;
     }
 
-      return new EditUserResultModel(GenericConstants.RESULT_FAILED,
-              "",
-              null);
-
-  }*/
+}

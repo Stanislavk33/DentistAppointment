@@ -1,3 +1,68 @@
 <div class="patient-profie-container">
-APPOINTMENTS
+  <div>
+    ACTIVE APPOINTMENTS
+  </div>
+  <div>
+    <h4>PAST APPOINTMENTS</h4>
+    <clr-datagrid>
+      <clr-dg-column>Date</clr-dg-column>
+      <clr-dg-column>Patient</clr-dg-column>
+      <clr-dg-column>Comment</clr-dg-column>
+      <clr-dg-column>Add comment</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let ap of pastAppointments">
+        <clr-dg-cell>{{ap.date | date}}</clr-dg-cell>
+        <clr-dg-cell>{{ap.patientFirstName}} {{ap.patientLastName}}</clr-dg-cell>
+        <clr-dg-cell>{{ap.comment}}</clr-dg-cell>
+        <clr-dg-cell> <button class="btn btn-primary" (click)="addComment(ap.id)">EDIT COMMENT</button> </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        {{pastAppointments.length}} appointments
+        <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+
+    <clr-modal [(clrModalOpen)]="openComment" [clrModalSize]="'lg'">
+      <h3 class="modal-title">Add a comment</h3>
+      <div class="modal-body">
+        <div [hidden]="submitted">
+          <div (ngSubmit)="onSubmit()"
+               ngForm #commentForm="ngForm">
+            <div class="form-group description">
+              <label for="info">Comment</label>
+              <textarea id="info" rows="4"
+                        type="text"
+                        required
+                        [(ngModel)]="comment"
+                        name="info"
+                        #info="ngModel"
+                        placeholder="Add a comment for this appointment..">
+                </textarea>
+              <div [hidden]="info.valid || info.pristine"
+                   class="alert alert-danger">
+                Information about the event is required!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="alert alert-danger error-msg" *ngIf="showWarning">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+              </div>
+              <span class="alert-text">Cannot add empty comment</span>
+            </div>
+          </div>
+          <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
+            <clr-icon aria-hidden="true" shape="close"></clr-icon>
+          </button>
+        </div>
+        <button type="button" class="btn btn-outline" (click)="openComment = false">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!commentForm.form.valid" (click)="onSubmit()">Ok</button>
+      </div>
+    </clr-modal>
+  </div>
 </div>

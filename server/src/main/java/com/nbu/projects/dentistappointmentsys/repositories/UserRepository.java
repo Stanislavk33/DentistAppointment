@@ -70,39 +70,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
                       @Param("city") String city,@Param("Id") Long Id);
 
 
+/*  @Query("update User u set u.blacklist = u.blacklist + 1 where u.id = :id")
+  void addToBlacklist(@Param("id") Long id);*/
+
   }
 
 
- /* @Transactional
-  @Modifying
-  @Query("update User u set u.email=:email,u.firstName=:firstName where u.id=:Id")
-  void updateEmailAndFirstName(@Param("email") String email,
-                     @Param("firstName") String firstName,
-                     @Param("Id") Long Id);
 
-  @Transactional
-  @Modifying
-  @Query("update User u set u.email=:email,u.lastName=:lastName where u.id=:Id")
-  void updateEmailAndLastName(@Param("email") String email,
-                               @Param("lastName") String lastName,
-                               @Param("Id") Long Id);
-
-  @Transactional
-  @Modifying
-  @Query("update User u set u.firstName=:firstName,u.lastName=:lastName where u.id=:Id")
-  void updateFirstNameAndLastName(@Param("firstName") String firstName,
-                              @Param("lastName") String lastName,
-                              @Param("Id") Long Id);
-  @Transactional
-  @Modifying
-  @Query("update User u set u.firstName=:firstName where u.id=:Id")
-  void updateFirstName(@Param("firstName") String firstName,
-                       @Param("Id") Long Id);
-
-  @Transactional
-  @Modifying
-  @Query("update User u set u.lastName=:lastName where u.id=:Id")
-  void updateLastName(@Param("lastName") String lastName,
-                       @Param("Id") Long Id);
-}
-*/

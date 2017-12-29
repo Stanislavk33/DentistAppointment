@@ -13,7 +13,7 @@ export class RatingsService{
     return this.http.get('rating/' + id);
   }
 
-  public rateDentist(raterId: number,
+  public rateUser(raterId: number,
                      ratedId: number,
                      rate: number,
                      comment: string): Observable<Boolean>{

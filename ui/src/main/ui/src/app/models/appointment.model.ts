@@ -1,7 +1,12 @@
-export class AppointmentModel {
+export class PastAppointmentModel {
   id: number;
-  startTime: number;
   userId: number;
-  dentistId : number;
+  patientId: number;
+  patientFirstName: string = '';
+  patientLastName: string = '';
+  date: string;
   comment: string;
+
+  constructor() {
+  }
 }
