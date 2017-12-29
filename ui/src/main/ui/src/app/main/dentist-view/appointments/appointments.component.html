@@ -14,7 +14,7 @@
         <clr-dg-cell>{{ap.date | date}}</clr-dg-cell>
         <clr-dg-cell>{{ap.patientFirstName}} {{ap.patientLastName}}</clr-dg-cell>
         <clr-dg-cell>{{ap.comment}}</clr-dg-cell>
-        <clr-dg-cell> <button class="btn btn-warning-outline" (click)="addComment(ap.id)">EDIT COMMENT</button> </clr-dg-cell>
+        <clr-dg-cell> <button class="btn btn-primary" (click)="addComment(ap.id)">EDIT COMMENT</button> </clr-dg-cell>
       </clr-dg-row>
       <clr-dg-footer>
         {{pastAppointments.length}} appointments
