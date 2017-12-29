@@ -1,6 +1,103 @@
-<div class="schedule-container">
-  <events-component></events-component>
-  <div class="edit-schedule">
-    <h4>ADD SCHEDULE</h4>
-  </div>
+<div class="container">
+   <div class="form-container">
+      <h3>Edit schedule</h3>
+      <form (ngSubmit)="onEditSchedule()"
+            #scheduleForm="ngForm">
+         <div class="input-fields">
+            <div class="form-group">
+               <label for="day">Day</label>
+               <div class="select day">
+                  <select id="day"
+                          name="day"
+                          #day="ngModel"
+                          [(ngModel)]="editModel.day"
+                          required>
+                     <option *ngFor="let day of WEEK_DAYS"
+                             value="{{day.toUpperCase()}}">{{day}}</option>
+                  </select>
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="from1">From</label>
+               <div class="select from">
+                  <select id="from1"
+                          name="from1"
+                          #from1="ngModel"
+                          [(ngModel)]="editModel.from1">
+                     <option value="{{null}}"></option>
+                     <option *ngFor="let hour of WORKING_HOURS" value="{{hour}}">{{hour}}</option>
+                  </select>
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="to1">To</label>
+               <div class="select to">
+                  <select id="to1"
+                          name="to1"
+                          #to1="ngModel"
+                          [(ngModel)]="editModel.to1"
+                          (invalid)="WORKING_HOURS.indexOf(to1) < WORKING_HOURS.indexOf(from1)">
+                     <option value="{{null}}"></option>
+                     <option *ngFor="let hour of WORKING_HOURS.slice(WORKING_HOURS.indexOf(editModel.from1) + 1)"
+                             value="{{hour}}">{{hour}}</option>
+                  </select>
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="from2">From</label>
+               <div class="select from">
+                  <select id="from2"
+                          name="from2"
+                          #from2="ngModel"
+                          (invalid)="WORKING_HOURS.indexOf(from2) < WORKING_HOURS.indexOf(to1)"
+                          [(ngModel)]="editModel.from2">
+                     <option value="{{null}}"></option>
+                     <option *ngFor="let hour of WORKING_HOURS.slice(WORKING_HOURS.indexOf(editModel.to1) + 1)"
+                             value="{{hour}}">{{hour}}</option>
+                  </select>
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="to2">To</label>
+               <div class="select to">
+                  <select id="to2"
+                          name="to2"
+                          #to2="ngModel"
+                          (invalid)="WORKING_HOURS.indexOf(to2) < WORKING_HOURS.indexOf(from2)"
+                          [(ngModel)]="editModel.to2">
+                     <option value="{{null}}"></option>
+                     <option *ngFor="let hour of WORKING_HOURS.slice(WORKING_HOURS.indexOf(editModel.from2) + 1)"
+                             value="{{hour}}">{{hour}}</option>
+                  </select>
+               </div>
+            </div>
+            <button type="submit" class="btn btn-primary"
+                    [disabled]="!scheduleForm.form.valid || !isModelValid()">
+               Add/Edit
+            </button>
+         </div>
+      </form>
+   </div>
+   <div class="schedule-container">
+      <h3>Schedule</h3>
+      <clr-datagrid #scheduleDatagrid id="scheduleDatagrid">
+
+         <clr-dg-column [clrDgField]="'weekDay'"
+                        [clrDgSortBy]="weekdaysComparator">Day</clr-dg-column>
+         <clr-dg-column>From</clr-dg-column>
+         <clr-dg-column>To</clr-dg-column>
+         <clr-dg-column>From</clr-dg-column>
+         <clr-dg-column>To</clr-dg-column>
+
+         <clr-dg-row *clrDgItems="let workingDay of workingDays"
+                     [clrDgItem]="workingDay">
+            <clr-dg-cell>{{getReadableDay(workingDay.weekDay)}}</clr-dg-cell>
+            <clr-dg-cell>{{getReadableTime(workingDay.from1)}}</clr-dg-cell>
+            <clr-dg-cell>{{getReadableTime(workingDay.to1)}}</clr-dg-cell>
+            <clr-dg-cell>{{getReadableTime(workingDay.from2)}}</clr-dg-cell>
+            <clr-dg-cell>{{getReadableTime(workingDay.to2)}}</clr-dg-cell>
+         </clr-dg-row>
+         <clr-dg-footer></clr-dg-footer>
+      </clr-datagrid>
+   </div>
 </div>

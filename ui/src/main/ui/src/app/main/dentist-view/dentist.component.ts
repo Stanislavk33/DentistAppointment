@@ -18,13 +18,21 @@ export class DentistComponent implements OnInit {
      this.router.navigate(['']);
    }
 
-
    openSchedule() {
-
+      this.router.navigate(['/dentist/schedule']);
    }
 
    openProfile() {
+      //TODO: Implement
+   }
 
+
+   editProfile() {
+      //TODO: Implement
+   }
+
+   dentistSearch() {
+      //TODO: Implement
    }
 
    viewPatients() {

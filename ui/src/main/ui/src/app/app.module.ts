@@ -33,18 +33,19 @@ import {EventsComponent} from "./main/patient-view/dentist-results/events/events
 import {DentistProfileComponent} from "./main/patient-view/dentist-results/dentist-profile/dentist.profile.component";
 import {RatingsComponent} from "./main/patient-view/dentist-results/dentist-profile/ratings/ratings.component";
 import {RatingsService} from "./main/patient-view/dentist-results/dentist-profile/ratings/ratings.service";
-import {CalendarComponent} from "./main/patient-view/dentist-results/dentist-profile/calendar/calendar.component";
 import {DentistCommonService} from "./main/patient-view/dentist-results/services/dentist.common.service";
 import {DentistAppointmentsComponent} from "./main/dentist-view/appointments/appointments.component";
-import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
 import {PatientsComponent} from "./main/dentist-view/patients/patients.component";
-import {DentistEventComponent} from "./main/dentist-view/schedule/events/dentist.event.component";
+import {DentistEventComponent} from "./main/dentist-view/events/dentist.event.component";
 import {EventsService} from "./main/patient-view/dentist-results/events/events.service";
 import {ScheduleService} from "./main/dentist-view/schedule/schedule.service";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DatePipe} from "@angular/common";
 import {AmbulatoryService} from "./main/patient-view/patient-profile/ambulatory/ambulatory.service";
 
+import {CalendarComponent} from "./main/calendar/calendar.component";
+import {ScheduleComponent} from "./main/dentist-view/schedule/schedule.component";
+import {AppointmentService} from "./services/appointment.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -81,8 +82,7 @@ import {AmbulatoryService} from "./main/patient-view/patient-profile/ambulatory/
     RouterModule,
     ClarityModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-
+    BrowserAnimationsModule
   ],
   providers: [
     CommonService,
@@ -98,7 +98,8 @@ import {AmbulatoryService} from "./main/patient-view/patient-profile/ambulatory/
     EventsService,
     ScheduleService,
     DatePipe,
-    AmbulatoryService
+    AmbulatoryService,
+    AppointmentService
   ],
   bootstrap: [MainComponent]
 })

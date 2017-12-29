@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonUtil} from "../../../util/common.util";
 import {UsersService} from "../../../services/users.service";
-import {PastAppointmentModel} from "../../../models/appointment.model";
+import {PastAppointmentModel} from "../../../models/past.appointment.model";
 
 @Component({
               moduleId: module.id,

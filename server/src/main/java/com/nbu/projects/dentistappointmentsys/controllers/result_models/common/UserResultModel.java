@@ -1,7 +1,9 @@
 package com.nbu.projects.dentistappointmentsys.controllers.result_models.common;
 
 
-import com.nbu.projects.dentistappointmentsys.models.OpenHour;
+import com.nbu.projects.dentistappointmentsys.controllers.MixedUtil;
+import com.nbu.projects.dentistappointmentsys.controllers.models.AppointmentModel;
+import com.nbu.projects.dentistappointmentsys.controllers.models.WorkingDayModel;
 import com.nbu.projects.dentistappointmentsys.models.User;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
@@ -17,8 +19,9 @@ public class UserResultModel {
   private Integer timesBlacklisted;
   private DentistType dentistType;
   private String city;
-  private Set<OpenHour> openHours;
   private Double rating;
+  private Set<AppointmentModel> appointments;
+  private Set<WorkingDayModel> workingDays;
 
   public UserResultModel(Long id,
                          String email,
@@ -28,8 +31,9 @@ public class UserResultModel {
                          Integer timesBlacklisted,
                          DentistType dentistType,
                          String city,
-                         Set<OpenHour> openHours,
-                         Double rating) {
+                         Double rating,
+                         Set<AppointmentModel> appointments,
+                         Set<WorkingDayModel> workingDays) {
     this.id = id;
     this.email = email;
     this.role = role;
@@ -38,8 +42,9 @@ public class UserResultModel {
     this.timesBlacklisted = timesBlacklisted;
     this.dentistType = dentistType;
     this.city = city;
-    this.openHours = openHours;
     this.rating = rating;
+    this.appointments = appointments;
+    this.workingDays = workingDays;
   }
 
   public UserResultModel(User user) {
@@ -51,8 +56,9 @@ public class UserResultModel {
          user.getTimesBlacklisted(),
          user.getDentistType(),
          user.getCity(),
-         user.getOpenHours(),
-         user.getRating());
+         user.getRating(),
+         MixedUtil.buildAppointmentModels(user.getAppointments()),
+         MixedUtil.buildWorkingDayModels(user.getWorkingDays()));
   }
 
   public Long getId() { return id; }
@@ -119,11 +125,19 @@ public class UserResultModel {
     this.city = city;
   }
 
-  public Set<OpenHour> getOpenHours() {
-    return openHours;
+  public Set<AppointmentModel> getAppointments() {
+    return appointments;
   }
 
-  public void setOpenHours(Set<OpenHour> openHours) {
-    this.openHours = openHours;
+  public void setAppointments(Set<AppointmentModel> appointments) {
+    this.appointments = appointments;
+  }
+
+  public Set<WorkingDayModel> getWorkingDays() {
+    return workingDays;
+  }
+
+  public void setWorkingDays(Set<WorkingDayModel> workingDays) {
+    this.workingDays = workingDays;
   }
 }

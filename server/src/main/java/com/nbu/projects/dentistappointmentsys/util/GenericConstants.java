@@ -7,4 +7,6 @@ public class GenericConstants {
 
   public static final Integer BLOCK_TRESHHOLD = 4;
   public static final Integer BLOCK_RESET = 0;
+
+  public static final Long HOUR = 3600000L;
 }

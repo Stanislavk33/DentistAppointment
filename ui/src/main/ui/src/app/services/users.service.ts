@@ -1,12 +1,10 @@
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {UsersResultModel} from "../models/users.result.model";
 import {Injectable} from "@angular/core";
-import {DentistModel} from "../models/dentist.model";
-import {UserModel} from "../models/user.model";
 import {PatientResultModel} from "../main/dentist-view/patients/patient.result.model";
-import {PastAppointmentModel} from "../models/appointment.model";
 import {CommentModel} from "../models/comment.model";
+import {PastAppointmentModel} from "../models/past.appointment.model";
 
 @Injectable()
 export class UsersService {

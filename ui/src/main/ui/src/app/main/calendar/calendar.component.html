@@ -1,0 +1,54 @@
+<div class="calendar-container">
+   <h1>Calendar</h1>
+   <clr-button-group>
+      <clr-button (click)="loadEarlier()">< Earlier</clr-button>
+      <clr-button (click)="loadLater()">Later ></clr-button>
+   </clr-button-group>
+
+   <table class="table" *ngIf="calendarHours">
+      <thead>
+      <tr>
+         <th *ngFor="let weekDay of WEEK_DAYS">
+            {{weekDay +
+              "\n" +
+            datesToShow[WEEK_DAYS.indexOf(weekDay)].toDateString().slice(4, 10)
+            }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let hour of calendarHours.Monday">
+         <td *ngFor="let weekDay of WEEK_DAYS">
+            <div *ngIf="!calendarHours[weekDay][calendarHours.Monday.indexOf(hour)].working">
+               <button class="btn ingrid" disabled>
+               </button>
+            </div>
+            <div *ngIf="calendarHours[weekDay][calendarHours.Monday.indexOf(hour)].working">
+               <div *ngIf="calendarHours[weekDay][calendarHours.Monday.indexOf(hour)].booked">
+                  <button class="btn ingrid" disabled>
+                     Оccupiеd
+                  </button>
+               </div>
+               <div *ngIf="!calendarHours[weekDay][calendarHours.Monday.indexOf(hour)].booked">
+                  <button class="btn btn-success ingrid"
+                          (click)="askForAppointment(calendarHours[weekDay][calendarHours.Monday.indexOf(hour)])">
+                     {{calendarHours[weekDay][calendarHours.Monday.indexOf(hour)].hour}}
+                  </button>
+               </div>
+            </div>
+         </td>
+      </tr>
+      </tbody>
+   </table>
+
+   <clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'md'">
+      <h3 class="modal-title">Make an appointment</h3>
+      <div class="modal-body">
+         <p>Are you sure you want to make an appointment for
+            {{appointmentSelected?.date?.toString().substr(0, 21)}}?</p>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-outline" (click)="makeAppointment(false)">Cancel</button>
+         <button type="button" class="btn btn-primary" (click)="makeAppointment(true)">Ok</button>
+      </div>
+   </clr-modal>
+</div>

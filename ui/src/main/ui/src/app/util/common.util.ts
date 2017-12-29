@@ -8,7 +8,7 @@ export class CommonUtil {
    }
 
    public static removeUser(): void {
-     sessionStorage.removeItem('currentUser');
+     sessionStorage.removeItem(Constants.SESSION_USER);
    }
 
    public static getSessionUser(): UserModel {
@@ -33,5 +33,20 @@ export class CommonUtil {
      let user: UserModel = this.getSessionUser();
      return user ? (user.firstName + ' ' + user.lastName) : "";
   }
-}
 
+   public static toDate(str: string): Date {
+      return new Date("2000-01-01T" + str + ":00");
+   }
+
+   public static getTime(millis: number): string {
+      if (millis == null) {
+         return "";
+      }
+      let date: Date = new Date(millis);
+      return date.toTimeString().substr(3, 5);
+   }
+
+   public static getReadableDay(weekDay: string): string {
+      return weekDay.substr(0, 1) + weekDay.substr(1).toLowerCase();
+   }
+}

@@ -1,22 +1,22 @@
 package com.nbu.projects.dentistappointmentsys.controllers;
+
+import com.nbu.projects.dentistappointmentsys.controllers.admin.ManageBlockModel;
 import com.nbu.projects.dentistappointmentsys.controllers.models.ChangePassModel;
 import com.nbu.projects.dentistappointmentsys.controllers.models.EditDentistProfileModel;
 import com.nbu.projects.dentistappointmentsys.controllers.models.EditUserProfileModel;
-import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.EditUserResultModel;
-import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
-import com.nbu.projects.dentistappointmentsys.controllers.admin.ManageBlockModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.BaseResultModel;
+import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.EditUserResultModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.UserResultModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.UsersResultModel;
 import com.nbu.projects.dentistappointmentsys.models.User;
+import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
-import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
+import com.nbu.projects.dentistappointmentsys.repositories.AppointmentRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +29,7 @@ public class UserRestController {
   @Autowired
   UserRepository userRepository;
   @Autowired
-  OpenHourRepository openHourRepository;
-
+  AppointmentRepository appointmentRepository;
 
   @PostMapping("/getAllDentists")
   public UsersResultModel getAllDentists(@RequestBody String adminEmail) {

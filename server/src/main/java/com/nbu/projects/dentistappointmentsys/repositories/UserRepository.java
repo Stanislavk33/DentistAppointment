@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-  User findById(Long Id);
+  User findById(Long id);
   User findByEmail(String email);
   List<User> findAllByRole(Role role);
   // CITY

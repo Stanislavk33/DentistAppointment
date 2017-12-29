@@ -20,6 +20,7 @@ import {PatientsComponent} from "./main/dentist-view/patients/patients.component
 import {EditProfileComponent} from "./main/patient-view/patient-profile/edit-profile/edit-profile.component";
 import {PatientProfileComponent} from "./main/patient-view/patient-profile/patient-profile.component";
 import {ChangePasswordComponent} from "./main/shared-components/change-password/change-password-component";
+import {DentistEventComponent} from "./main/dentist-view/events/dentist.event.component";
 
 const appRoutes: Routes = [
   {path: '', component: MainComponent, children:[
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
         { path: 'changepass', component: ChangePasswordComponent},
         { path: 'appointments', component: DentistAppointmentsComponent},
         { path: 'schedule', component: ScheduleComponent},
+        { path: 'events', component: DentistEventComponent},
         { path: 'myprofile', component: EditDentistProfileComponent},
         { path: 'patients', component: PatientsComponent}
       ],

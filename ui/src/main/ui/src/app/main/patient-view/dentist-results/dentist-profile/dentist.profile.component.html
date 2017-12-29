@@ -27,8 +27,8 @@
     <h4>PATIENTS RATINGS</h4>
     <ratings-component [dentistId]="id"></ratings-component>
   </div>
-  <div class="calendar">
-      <calendar-component></calendar-component>
+  <div class="calendar" *ngIf="dentist">
+      <calendar-component [dentist]="dentist"></calendar-component>
   </div>
 </div>
 

@@ -10,7 +10,6 @@ package com.nbu.projects.dentistappointmentsys.repositories;
         import java.util.List;
         import java.util.Set;
 
-        import com.nbu.projects.dentistappointmentsys.models.User;
         import org.springframework.data.jpa.repository.JpaRepository;
         import org.springframework.data.jpa.repository.Modifying;
         import org.springframework.data.jpa.repository.Query;
@@ -30,11 +29,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<AmbulatoryInfo> getAmbulatoryInfo(@Param("id") Long id);
 
     @Query(value = "select new com.nbu.projects.dentistappointmentsys.controllers.models.PatientResults(u.id, u.firstName, u.lastName, u.rating) " +
-            "from User u, Appointment a where u.id = a.patientId and a.userId = :id")
+            "from User u, Appointment a where u.id = a.patientId and a.user.id = :id")
     List<PatientResults> getPatients(@Param("id") Long id);
 
-    @Query("select new com.nbu.projects.dentistappointmentsys.controllers.models.PastAppointment(a.id, a.userId, a.patientId, u.firstName, u.lastName, a.date, a.comment)" +
-            " from Appointment a, User u where a.userId = :id and u.id = a.patientId and a.date < :now")
+    @Query("select new com.nbu.projects.dentistappointmentsys.controllers.models.PastAppointment(a.id, a.user.id, a.patientId, u.firstName, u.lastName, a.date, a.comment)" +
+            " from Appointment a, User u where a.user.id = :id and u.id = a.patientId and a.date < :now")
     List<PastAppointment> getPastAppointments(@Param("id") Long id, @Param("now") Timestamp now);
 
     Appointment findById(Long id);

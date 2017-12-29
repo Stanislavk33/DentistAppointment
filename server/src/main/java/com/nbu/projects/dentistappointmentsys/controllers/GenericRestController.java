@@ -8,7 +8,6 @@ import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.Lo
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.RegisterDentistModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.login.RegisterPatientModel;
 import com.nbu.projects.dentistappointmentsys.models.User;
-import com.nbu.projects.dentistappointmentsys.repositories.OpenHourRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.service.NotificationService;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
@@ -18,7 +17,6 @@ import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.nbu.projects.dentistappointmentsys.service.NotificationService;
 
 @RestController
 public class GenericRestController {
@@ -31,9 +29,6 @@ public class GenericRestController {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    OpenHourRepository openHourRepository;
 
   @PostMapping("/authenticate")
   public LoginResultModel login(@RequestBody LoginModel loginModel) {
@@ -81,8 +76,6 @@ public class GenericRestController {
     return new RegisterPatientModel(GenericConstants.RESULT_SUCCESSFUL,
                                     "",
                                     new UserResultModel(registered));
-
-
   }
 
   @PostMapping("/registerDentist")
