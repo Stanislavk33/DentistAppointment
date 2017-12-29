@@ -63,8 +63,6 @@ public class EventsController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        /*Integer res = eventsRepository.countAllByDentistIdAndStartTimeStartsWith(dentistId, formattedDate);
-        return eventsRepository.countAllByDentistIdAndStartTimeStartsWith(dentistId, formattedDate) > 0;*/
         return true;
     }
 

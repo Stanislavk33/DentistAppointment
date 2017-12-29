@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonUtil} from "../../../../util/common.util";
+import {AmbulatoryService} from "./ambulatory.service";
+import {AmbulatoryModel} from "./ambulatory.model";
 
 @Component({
               moduleId: module.id,
@@ -9,11 +11,15 @@ import {CommonUtil} from "../../../../util/common.util";
               providers: []
            })
 export class AmbulatoryComponent implements OnInit {
-  public userEmail;
-   constructor() {
+   private ambulatory: AmbulatoryModel[] = [];
+
+   constructor(private ambulatoryService: AmbulatoryService) {
    }
 
    ngOnInit() {
-     this.userEmail = CommonUtil.getSessionUserEmail();
+     this.ambulatoryService.getAmbulatoryInfo(CommonUtil.getSessionUserId())
+       .subscribe(data => {
+         this.ambulatory = data;
+       }, err => console.log(err));
    }
 }

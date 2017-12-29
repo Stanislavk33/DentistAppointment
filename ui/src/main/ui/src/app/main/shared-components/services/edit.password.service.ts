@@ -15,7 +15,6 @@ export class EditPasswordService {
 
     let requestModel: ChangePassModel = new ChangePassModel(userEmail, oldPass, newPass);
     return this.http.post<Boolean>('/changePassword', requestModel);
-
   }
 
 

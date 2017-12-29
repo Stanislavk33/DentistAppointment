@@ -3,6 +3,10 @@ import {Observable} from "rxjs/Observable";
 import {UsersResultModel} from "../models/users.result.model";
 import {Injectable} from "@angular/core";
 import {DentistModel} from "../models/dentist.model";
+import {UserModel} from "../models/user.model";
+import {PatientResultModel} from "../main/dentist-view/patients/patient.result.model";
+import {PastAppointmentModel} from "../models/appointment.model";
+import {CommentModel} from "../models/comment.model";
 
 @Injectable()
 export class UsersService {
@@ -20,4 +24,17 @@ export class UsersService {
    public getAllPatients(adminEmail: string): Observable<UsersResultModel> {
       return this.httpClient.post<UsersResultModel>(UsersService.GET_ALL_PATIENTS_URL, adminEmail);
    }
+
+   public getPatients(id: number): Observable<PatientResultModel[]> {
+     return this.httpClient.get<PatientResultModel[]>('/patients/' + id);
+   }
+
+   public getPastAppointments(id: number): Observable<PastAppointmentModel[]> {
+     return this.httpClient.get<PastAppointmentModel[]>('pastAppointments/' + id);
+   }
+
+   public addAppointmentComment(id: number, comment: string): Observable<Boolean> {
+     let requestModel: CommentModel = new CommentModel(id, comment);
+     return this.httpClient.post<Boolean>('addAppointmentComment', requestModel);
+  }
 }

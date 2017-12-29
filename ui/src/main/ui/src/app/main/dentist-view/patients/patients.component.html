@@ -1,3 +1,96 @@
 <div class="patient-profie-container">
-PATIENTS
+  <h4>PATIENTS</h4>
+  <div class="patients">
+    <clr-datagrid>
+      <clr-dg-column>First Name</clr-dg-column>
+      <clr-dg-column>Last Name</clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="patientComparator">Rating</clr-dg-column>
+      <clr-dg-column>Rate</clr-dg-column>
+      <clr-dg-column>Add to blacklist</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let patient of patients">
+        <clr-dg-cell>{{patient.firstName}}</clr-dg-cell>
+        <clr-dg-cell>{{patient.lastName}}</clr-dg-cell>
+        <clr-dg-cell>{{patient.rating}}</clr-dg-cell>
+        <clr-dg-cell> <button class="btn btn-primary" (click)="ratePatient(patient.id)">RATE</button> </clr-dg-cell>
+        <clr-dg-cell> <button class="btn btn-warning" (click)="addToBlacklist(patient.id)">ADD TO BLACKLIST</button> </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        {{patients.length}} patients
+        <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+  </div>
+
+  <clr-modal [(clrModalOpen)]="openRate" [clrModalSize]="'lg'">
+    <h3 class="modal-title">Rate patient</h3>
+    <div class="modal-body">
+      <h4>RATE AND COMMENT</h4>
+
+      <div class="alert alert-danger" *ngIf="!hideWarning" [class.hidden-warning]="hideWarning">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+            <span class="alert-text">{{message}}</span>
+          </div>
+        </div>
+        <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
+          <clr-icon aria-hidden="true" shape="close"></clr-icon>
+        </button>
+      </div>
+
+      <div class="rate-patient">
+        <div class="rating">
+          <fieldset class="rating">
+            <input type="radio"
+                   value="5"
+                   [name]="inputName"
+                   [checked]="rating===5" />
+            <label title="Perfect!" (click)='onClick(5)'>5 stars</label>
+
+            <input type="radio"
+                   value="4"
+                   [name]="inputName"
+                   [checked]="rating===4" />
+            <label title="Pretty good." (click)='onClick(4)'>4 stars</label>
+
+            <input type="radio"
+                   value="3"
+                   [name]="inputName"
+                   [checked]="rating===3" />
+            <label title="Meh.." (click)='onClick(3)'>3 stars</label>
+
+            <input type="radio"
+                   value="2"
+                   [name]="inputName"
+                   [checked]="rating===2" />
+            <label title="Seen better." (click)='onClick(2)'>2 stars</label>
+
+            <input type="radio"
+                   value="1"
+                   [name]="inputName"
+                   [checked]="rating===1" />
+            <label title="Sucks big time!" (click)='onClick(1)'>1 star</label>
+          </fieldset>
+        </div>
+        <div class="rate">
+          <form (ngSubmit)="onSubmit()"
+                #registerForm="ngForm">
+        <textarea id="formFields_8" rows="3"
+                  type="text"
+                  required
+                  [(ngModel)]="comment"
+                  name="comment"
+                  placeholder="Comment.."></textarea>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="openRate = false">Cancel</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Ok</button>
+    </div>
+  </clr-modal>
 </div>

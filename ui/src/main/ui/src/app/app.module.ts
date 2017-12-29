@@ -43,6 +43,7 @@ import {EventsService} from "./main/patient-view/dentist-results/events/events.s
 import {ScheduleService} from "./main/dentist-view/schedule/schedule.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DatePipe} from "@angular/common";
+import {AmbulatoryService} from "./main/patient-view/patient-profile/ambulatory/ambulatory.service";
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import {DatePipe} from "@angular/common";
     DentistCommonService,
     EventsService,
     ScheduleService,
-    DatePipe
+    DatePipe,
+    AmbulatoryService
   ],
   bootstrap: [MainComponent]
 })

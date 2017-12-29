@@ -20,6 +20,7 @@ class DentistComparator implements Comparator<UserModel> {
               providers: []
            })
 export class DentistResultsComponent implements OnInit {
+  private dentistComparator = new DentistComparator();
   public dentists: UserModel[] = [];
   public city: string = '';
   private name: string = '';

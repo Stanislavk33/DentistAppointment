@@ -1,5 +1,6 @@
 package com.nbu.projects.dentistappointmentsys.models;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -24,36 +25,34 @@ public class Appointment {
     @Column(name = "appointmentId")
     private Long id;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId", nullable = false)
+    @Column(name = "userId", nullable = false)
     private Long userId;
 
     @Column(nullable = true)
     private Long patientId;
 
     @Column(name = "date", nullable = false)
-    private Date date;
+    private Timestamp date;
 
     @Column(nullable = false)
     private Boolean canceled;
 
     @Column
-    @ElementCollection(targetClass = String.class)
-    private List<String> comments;
+    private String comment;
 
     public Appointment() {
     }
 
     public Appointment(Long userId,
                        Long patientId,
-                       Date date,
+                       Timestamp date,
                        Boolean canceled,
-                       List<String> comments) {
+                       String comments) {
         this.userId = userId;
         this.patientId = patientId;
         this.date = date;
         this.canceled = canceled;
-        this.comments = comments;
+        this.comment = comments;
     }
 
     public Long getId() {
@@ -80,11 +79,11 @@ public class Appointment {
         this.patientId = patientId;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -96,12 +95,12 @@ public class Appointment {
         this.canceled = canceled;
     }
 
-    public List<String> getComments() {
-        return comments;
+    public String getComments() {
+        return comment;
     }
 
-    public void setComments(List<String> comments) {
-        this.comments = comments;
+    public void setComments(String comments) {
+        this.comment = comments;
     }
 }
 

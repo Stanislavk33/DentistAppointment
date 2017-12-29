@@ -57,7 +57,7 @@ export class RatingsComponent implements OnChanges {
     }else{
       this.service.canRate(this.userId, this.dentistId).subscribe( success => {
         if(!success){
-          this.service.rateDentist(this.userId, this.dentistId, this.rating, this.comment).subscribe(success => {
+          this.service.rateUser(this.userId, this.dentistId, this.rating, this.comment).subscribe(success => {
             if(success){
               this.getRatings();
               this.comment = "";
