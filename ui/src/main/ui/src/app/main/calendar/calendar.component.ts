@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 @Component({
               selector: 'calendar-component',
               templateUrl: 'calendar.component.html',
-              styleUrls: ["calendar.component.css"],
+              styleUrls: ["calendar.component.scss"],
               providers: []
            })
 export class CalendarComponent implements OnInit {
