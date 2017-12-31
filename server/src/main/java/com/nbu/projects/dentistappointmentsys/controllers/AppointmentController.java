@@ -2,11 +2,7 @@ package com.nbu.projects.dentistappointmentsys.controllers;
 
 import static com.nbu.projects.dentistappointmentsys.util.GenericConstants.HOUR;
 
-import com.nbu.projects.dentistappointmentsys.controllers.models.AmbulatoryInfo;
-import com.nbu.projects.dentistappointmentsys.controllers.models.AppointmentModel;
-import com.nbu.projects.dentistappointmentsys.controllers.models.CommentModel;
-import com.nbu.projects.dentistappointmentsys.controllers.models.PastAppointment;
-import com.nbu.projects.dentistappointmentsys.controllers.models.PatientResults;
+import com.nbu.projects.dentistappointmentsys.controllers.models.*;
 import com.nbu.projects.dentistappointmentsys.controllers.request_models.appointments.CancelAppointmentModel;
 import com.nbu.projects.dentistappointmentsys.controllers.request_models.appointments.MakeAppointmentModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.appointments.UserAppointmentsResultModel;
@@ -24,11 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AppointmentController {
@@ -49,17 +41,47 @@ public class AppointmentController {
         return appointmentRepository.getPatients(id);
     }
 
-    @GetMapping("pastAppointments/{id}")
-    public List<PastAppointment> getPastAppointments(@PathVariable(value="id") Long id){
-        long time = System.currentTimeMillis();
-        Timestamp now = new Timestamp(time);
-        return this.appointmentRepository.getPastAppointments(id, now);
-    }
-
     @PostMapping("/addAppointmentComment")
     public Boolean addAppointmentComment(@RequestBody CommentModel commentModel){
         if(appointmentRepository.findById(commentModel.getId()) != null){
             appointmentRepository.updateAppointmentComment(commentModel.getId(), commentModel.getComment());
+            return true;
+        }
+        return false;
+    }
+
+    @GetMapping("pastAppointments/{id}")
+    public List<DentistAppointmentModel> getDentistPastAppointments(@PathVariable(value="id") Long id){
+        long time = System.currentTimeMillis();
+        Timestamp now = new Timestamp(time);
+        return this.appointmentRepository.getDentistPastAppointments(id, now);
+    }
+
+    @GetMapping("futureAppointments/{id}")
+    public List<DentistAppointmentModel> getDentistFutureAppointments(@PathVariable(value="id") Long id){
+        long time = System.currentTimeMillis();
+        Timestamp now = new Timestamp(time);
+        return this.appointmentRepository.getDentistFutureAppointments(id, now);
+    }
+
+    @GetMapping("patientFutureAppointments/{id}")
+    public List<PatientAppointmentModel> getPatientFutureAppointments(@PathVariable(value="id") Long id){
+        long time = System.currentTimeMillis();
+        Timestamp now = new Timestamp(time);
+        return this.appointmentRepository.getPatientFutureAppointments(id, now);
+    }
+
+    @GetMapping("patientPastAppointments/{id}")
+    public List<PatientAppointmentModel> getPatientPastAppointments(@PathVariable(value="id") Long id){
+        long time = System.currentTimeMillis();
+        Timestamp now = new Timestamp(time);
+        return this.appointmentRepository.getPatientPastAppointments(id, now);
+    }
+
+    @DeleteMapping("/cancelAppointment/{id}")
+    public Boolean cancelAppointment(@PathVariable(value="id") Long id) {
+        if(appointmentRepository.exists(id)){
+            appointmentRepository.delete(id);
             return true;
         }
         return false;

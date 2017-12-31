@@ -1,3 +1,81 @@
 <div class="patient-profie-container">
-APPOINTMENTS
+  <div>
+    <h4>ACTIVE APPOINTMENTS</h4>
+    <clr-datagrid>
+      <clr-dg-column>Date</clr-dg-column>
+      <clr-dg-column>Time</clr-dg-column>
+      <clr-dg-column>Dentist</clr-dg-column>
+      <clr-dg-column>Cancel</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let ap of futureAppointments">
+        <clr-dg-cell>{{ap.date | date}}</clr-dg-cell>
+        <clr-dg-cell>{{ap.date | date: 'HH:mm'}}</clr-dg-cell>
+        <clr-dg-cell> <a (click) = "openProfile(ap.dentistId)">{{ap.dentistFirstName}} {{ap.dentistLastName}}</a></clr-dg-cell>
+        <clr-dg-cell>
+          <div *ngIf="canCancel(ap.date); else templateName">
+            <button class="btn btn-warning" (click)="openCancelDialog(ap.id)">CANCEL</button>
+          </div>
+
+          <ng-template #templateName>
+            <button class="btn btn-warning" disabled>CANCEL</button>
+          </ng-template>
+
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        {{futureAppointments.length}} appointments
+        <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+  </div>
+  <div>
+    <h4>PAST APPOINTMENTS</h4>
+    <clr-datagrid>
+      <clr-dg-column>Date</clr-dg-column>
+      <clr-dg-column>Time</clr-dg-column>
+      <clr-dg-column>Dentist</clr-dg-column>
+      <clr-dg-column>Comment</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let ap of pastAppointments">
+        <clr-dg-cell>{{ap.date | date}}</clr-dg-cell>
+        <clr-dg-cell>{{ap.date | date: 'HH:mm'}}</clr-dg-cell>
+        <clr-dg-cell>
+          <a (click) = "openProfile(ap.dentistId)">{{ap.dentistFirstName}} {{ap.dentistLastName}}</a>
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <div *ngIf="hasComment(ap.comment); else templateName">
+            <button class="btn btn-primary" (click)="viewComment(ap.comment)">VIEW COMMENT</button>
+          </div>
+          <ng-template #templateName>
+            <button class="btn btn-warning" disabled>NO COMMENT AVAILABLE</button>
+          </ng-template>
+        </clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        {{futureAppointments.length}} appointments
+        <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
+  </div>
+
+  <clr-modal [(clrModalOpen)]="cancelWarning" [clrModalSize]="'md'">
+    <h3 class="modal-title">Cancel</h3>
+    <div class="modal-body">
+      <p>Are you sure you want cancel this appointment?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="cancelWarning = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="cancelAppointment()">Ok</button>
+    </div>
+  </clr-modal>
+
+  <clr-modal [(clrModalOpen)]="openComment" [clrModalSize]="'md'">
+    <h3 class="modal-title">Comment</h3>
+    <div class="modal-body">
+      <p>{{currentComment}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="openComment = false">Ok</button>
+    </div>
+  </clr-modal>
 </div>

@@ -10,7 +10,7 @@ import {Comparator, Datagrid, SortOrder} from "clarity-angular";
   moduleId: module.id,
   selector: 'schedule-component',
   templateUrl: 'schedule.component.html',
-  styleUrls: ["schedule.component.scss"],
+  styleUrls: ["schedule.component.css"],
   providers: []
 })
 export class ScheduleComponent implements OnInit {

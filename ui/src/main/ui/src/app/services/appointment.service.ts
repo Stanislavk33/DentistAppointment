@@ -8,6 +8,9 @@ import {WorkingDayModel} from "../models/working.day.model";
 import {DayScheduleModel} from "../main/dentist-view/schedule/model/day.schedule.model";
 import {AppointmentModel} from "../models/appointment.model";
 import {UserAppointmentsModel} from "../models/user.appointments.model";
+import {CommentModel} from "../models/comment.model";
+import {DentistAppointmentModel} from "../models/dentist.appointment.model";
+import {PatientAppointmentModel} from "../models/patient.appointment.model";
 
 @Injectable()
 export class AppointmentService {
@@ -52,4 +55,29 @@ export class AppointmentService {
                                                    data);
 
    }
+
+  public getDentistPastAppointments(id: number): Observable<DentistAppointmentModel[]> {
+    return this.httpClient.get<DentistAppointmentModel[]>('pastAppointments/' + id);
+  }
+
+  public getDentistFutureAppointments(id: number): Observable<DentistAppointmentModel[]> {
+    return this.httpClient.get<DentistAppointmentModel[]>('futureAppointments/' + id);
+  }
+
+  public addAppointmentComment(id: number, comment: string): Observable<Boolean> {
+    let requestModel: CommentModel = new CommentModel(id, comment);
+    return this.httpClient.post<Boolean>('addAppointmentComment', requestModel);
+  }
+
+  public cancelAppointment(id: number): Observable<Boolean> {
+    return this.httpClient.delete<Boolean>('cancelAppointment/' + id);
+  }
+
+  public getPatientFutureAppointments(id: number): Observable<PatientAppointmentModel[]> {
+    return this.httpClient.get<PatientAppointmentModel[]>('patientFutureAppointments/' + id);
+  }
+
+  public getPatientPastAppointments(id: number): Observable<PatientAppointmentModel[]> {
+    return this.httpClient.get<PatientAppointmentModel[]>('patientPastAppointments/' + id);
+  }
 }

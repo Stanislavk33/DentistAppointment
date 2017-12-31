@@ -29,7 +29,7 @@
       </clr-dg-cell>
       <clr-dg-cell>{{event.info}}</clr-dg-cell>
       <clr-dg-cell>
-        <button class="btn btn-warning-outline" *ngIf="isActive((event.startTime | date: 'yyyy-MM-dd'))" (click)="deleteEvent(event.id)">CANCEL</button>
+        <button class="btn btn-warning" *ngIf="isActive((event.startTime | date: 'yyyy-MM-dd'))" (click)="deleteEvent(event.id)">CANCEL</button>
       </clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>

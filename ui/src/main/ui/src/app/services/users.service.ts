@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {UsersResultModel} from "../models/users.result.model";
 import {Injectable} from "@angular/core";
@@ -22,6 +22,10 @@ export class UsersService {
    public getAllPatients(adminEmail: string): Observable<UsersResultModel> {
       return this.httpClient.post<UsersResultModel>(UsersService.GET_ALL_PATIENTS_URL, adminEmail);
    }
+
+  public getPatientsByName(id: number): Observable<PatientResultModel[]> {
+    return this.httpClient.get<PatientResultModel[]>('/patients/' + id);
+  }
 
    public getPatients(id: number): Observable<PatientResultModel[]> {
      return this.httpClient.get<PatientResultModel[]>('/patients/' + id);

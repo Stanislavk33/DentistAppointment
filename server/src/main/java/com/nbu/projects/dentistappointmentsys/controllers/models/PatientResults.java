@@ -5,15 +5,17 @@ public class PatientResults {
     private String firstName;
     private String lastName;
     private Double rating;
+    private Long visits;
 
     public PatientResults() {
     }
 
-    public PatientResults(Long id, String firstName, String lastName, Double rating) {
+    public PatientResults(Long id, String firstName, String lastName, Double rating, Long visits) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.rating = rating;
+        this.visits = visits;
     }
 
     public Long getId() {
@@ -46,5 +48,13 @@ public class PatientResults {
 
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    public Long getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Long visits) {
+        this.visits = visits;
     }
 }

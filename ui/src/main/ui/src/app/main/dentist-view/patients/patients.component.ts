@@ -5,11 +5,31 @@ import {UserModel} from "../../../models/user.model";
 import {DentistModel} from "../../../models/dentist.model";
 import {PatientResultModel} from "./patient.result.model";
 import {RatingsService} from "../../patient-view/dentist-results/dentist-profile/ratings/ratings.service";
-import {Comparator} from "clarity-angular";
+import {Comparator, StringFilter} from "clarity-angular";
 
-class PatientComparator implements Comparator<PatientResultModel> {
+class VisitsComparator implements Comparator<PatientResultModel> {
+  compare(a: PatientResultModel, b: PatientResultModel) {
+    return a.visits - b.visits;
+  }
+}
+
+class RatingsComparator implements Comparator<PatientResultModel> {
   compare(a: PatientResultModel, b: PatientResultModel) {
     return a.rating - b.rating;
+  }
+}
+
+class FirstNameFilter implements StringFilter<PatientResultModel> {
+  accepts(user: PatientResultModel, search: string):boolean {
+    return "" + user.id == search
+      || user.firstName.toLowerCase().indexOf(search) >= 0;
+  }
+}
+
+class LastNameFilter implements StringFilter<PatientResultModel> {
+  accepts(user: PatientResultModel, search: string):boolean {
+    return "" + user.id == search
+      || user.lastName.toLowerCase().indexOf(search) >= 0;
   }
 }
 
@@ -21,7 +41,12 @@ class PatientComparator implements Comparator<PatientResultModel> {
               providers: []
            })
 export class PatientsComponent implements OnInit {
-  private patientComparator = new PatientComparator();
+  private visitsComparator = new VisitsComparator();
+  private ratingsComparator = new RatingsComparator();
+  private firstNameFilter = new FirstNameFilter();
+  private lastNameFilter = new LastNameFilter();
+
+  private searchCriteria: string = '';
   @Input() patientId : number;
    public userId: number = 0;
    public patients: PatientResultModel[] = [];
@@ -40,9 +65,12 @@ export class PatientsComponent implements OnInit {
   }
 
   private refreshPatients(){
-    this.usersService.getPatients(this.userId)
-      .subscribe( data => this.patients = data,
-        err => console.log(err));
+    this.usersService.getPatientsByName(this.userId)
+      .subscribe( data => {
+        this.patients = data;
+        console.log(data);
+        },
+          err => console.log(err));
   }
 
   addToBlacklist(id) {
@@ -64,7 +92,6 @@ export class PatientsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('RATING: ' + this.rating + '  COMMENT: ' + this.comment + ' USER ID ' + this.userId);
     if(this.comment === "" || this.rating == 0){
       this.message = 'Please add both a COMMENT and RATE before submitting.';
       this.hideWarning = false;

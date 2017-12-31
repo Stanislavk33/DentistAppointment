@@ -2,15 +2,23 @@
   <h4>PATIENTS</h4>
   <div class="patients">
     <clr-datagrid>
-      <clr-dg-column>First Name</clr-dg-column>
-      <clr-dg-column>Last Name</clr-dg-column>
-      <clr-dg-column [clrDgSortBy]="patientComparator">Rating</clr-dg-column>
+      <clr-dg-column>
+        First Name
+        <clr-dg-string-filter [clrDgStringFilter]="firstNameFilter"></clr-dg-string-filter>
+      </clr-dg-column>
+      <clr-dg-column>
+        Last Name
+        <clr-dg-string-filter [clrDgStringFilter]="lastNameFilter"></clr-dg-string-filter>
+      </clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="visitsComparator">Total visits</clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="ratingsComparator">Rating</clr-dg-column>
       <clr-dg-column>Rate</clr-dg-column>
       <clr-dg-column>Add to blacklist</clr-dg-column>
 
       <clr-dg-row *clrDgItems="let patient of patients">
         <clr-dg-cell>{{patient.firstName}}</clr-dg-cell>
         <clr-dg-cell>{{patient.lastName}}</clr-dg-cell>
+        <clr-dg-cell>{{patient.visits}}</clr-dg-cell>
         <clr-dg-cell>{{patient.rating}}</clr-dg-cell>
         <clr-dg-cell> <button class="btn btn-primary" (click)="ratePatient(patient.id)">RATE</button> </clr-dg-cell>
         <clr-dg-cell> <button class="btn btn-warning" (click)="addToBlacklist(patient.id)">ADD TO BLACKLIST</button> </clr-dg-cell>

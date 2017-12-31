@@ -3,6 +3,7 @@ export class PatientResultModel {
   firstName: string = '';
   lastName: string = '';
   rating : number = 0;
+  visits: number = 0;
 
   constructor() {
   }
