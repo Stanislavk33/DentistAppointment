@@ -2,6 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {CommonUtil} from "../../../util/common.util";
 import {AppointmentService} from "../../../services/appointment.service";
 import {DentistAppointmentModel} from "../../../models/dentist.appointment.model";
+import {Comparator} from "clarity-angular";
+
+class DateComparator implements Comparator<DentistAppointmentModel> {
+  compare(a: DentistAppointmentModel, b: DentistAppointmentModel) {
+    return +new Date(b.date) - +new Date(a.date);
+  }
+}
 
 @Component({
               moduleId: module.id,
@@ -11,7 +18,7 @@ import {DentistAppointmentModel} from "../../../models/dentist.appointment.model
               providers: []
            })
 export class DentistAppointmentsComponent implements OnInit {
-
+   private dateComparator = new DateComparator();
    private appToCancel: number = 0;
    public cancelWarning: boolean = false;
    public userEmail;
@@ -47,6 +54,10 @@ export class DentistAppointmentsComponent implements OnInit {
      this.cancelWarning = true;
    }
 
+   hasComment(comment){
+     return comment!='';
+   }
+
   cancelAppointment(){
      this.appointmentsService.cancelAppointment(this.appToCancel).subscribe( success => {
        if(success){
@@ -66,6 +77,7 @@ export class DentistAppointmentsComponent implements OnInit {
       this.appointmentsService.addAppointmentComment(this.currentAppointment, this.comment).subscribe( success => {
         if(success){
           this.refreshPastAppointments();
+          this.openComment = false;
           this.comment = '';
           console.log('success');
         }

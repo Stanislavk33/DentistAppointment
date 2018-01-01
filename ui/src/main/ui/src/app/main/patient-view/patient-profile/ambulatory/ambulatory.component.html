@@ -1,6 +1,6 @@
 <div class="ambulatory-container">
   <clr-datagrid>
-    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
     <clr-dg-column>Doctor</clr-dg-column>
     <clr-dg-column [clrDgSortBy]="dentistComparator">Procedure</clr-dg-column>
 

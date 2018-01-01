@@ -23,8 +23,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     Appointment findByUserIdAndDate(Long userId, Date date);
 
     @Query(value = "select new com.nbu.projects.dentistappointmentsys.controllers.models.AmbulatoryInfo(u.firstName, u.lastName, a.date, a.comment)" +
-            "from Appointment a, User u where a.patientId = :id and u.id = :id and a.comment is not null")
-    List<AmbulatoryInfo> getAmbulatoryInfo(@Param("id") Long id);
+            "from Appointment a, User u where a.patientId = :id and u.id = a.user.id and a.comment is not null and a.comment <> '' and a.date < :now")
+    List<AmbulatoryInfo> getAmbulatoryInfo(@Param("id") Long id, @Param("now") Timestamp now);
 
     @Query(value = "select distinct new com.nbu.projects.dentistappointmentsys.controllers.models.PatientResults(u.id, u.firstName, u.lastName, u.rating, " +
             "(select count(a) from Appointment a where a.patientId = u.id and a.user.id = :id)) " +

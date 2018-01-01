@@ -33,7 +33,11 @@ public class AppointmentController {
     AppointmentRepository appointmentRepository;
 
     @GetMapping("/ambulatory/{id}")
-    public List<AmbulatoryInfo> getAmbulatoryInfo(@PathVariable(value="id") Long id) { return appointmentRepository.getAmbulatoryInfo(id); }
+    public List<AmbulatoryInfo> getAmbulatoryInfo(@PathVariable(value="id") Long id) {
+        long time = System.currentTimeMillis();
+        Timestamp now = new Timestamp(time);
+        return appointmentRepository.getAmbulatoryInfo(id, now);
+    }
 
     @GetMapping("/patients/{id}")
     public List<PatientResults> getPatients(@PathVariable(value="id") Long id) {
