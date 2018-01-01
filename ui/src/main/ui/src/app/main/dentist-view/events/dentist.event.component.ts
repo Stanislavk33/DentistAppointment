@@ -4,6 +4,13 @@ import {EventModel} from "../../../models/event.model";
 import {ScheduleService} from "../schedule/schedule.service";
 import {Constants} from "../../../models/constants";
 import {DatePipe} from "@angular/common";
+import {Comparator} from "clarity-angular";
+
+class DateComparator implements Comparator<EventModel> {
+  compare(a: EventModel, b: EventModel) {
+    return +new Date(b.startTime) - +new Date(a.startTime);
+  }
+}
 
 @Component({
   moduleId: module.id,
@@ -13,6 +20,7 @@ import {DatePipe} from "@angular/common";
   providers: []
 })
 export class DentistEventComponent implements OnInit {
+  private dateComparator = new DateComparator();
   public addEvent: boolean = false;
   public event: EventModel = new EventModel();
   public events: EventModel[] = [];

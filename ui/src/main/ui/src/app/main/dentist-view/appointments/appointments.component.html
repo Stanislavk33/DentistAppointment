@@ -2,7 +2,7 @@
   <div>
     <h4>ACTIVE APPOINTMENTS</h4>
     <clr-datagrid>
-      <clr-dg-column>Date</clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
       <clr-dg-column>Time</clr-dg-column>
       <clr-dg-column>Patient</clr-dg-column>
       <clr-dg-column>Cancel</clr-dg-column>
@@ -22,7 +22,7 @@
   <div>
     <h4>PAST APPOINTMENTS</h4>
     <clr-datagrid>
-      <clr-dg-column>Date</clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
       <clr-dg-column>Time</clr-dg-column>
       <clr-dg-column>Patient</clr-dg-column>
       <clr-dg-column>Comment</clr-dg-column>
@@ -33,7 +33,14 @@
         <clr-dg-cell>{{ap.date | date: 'HH:mm'}}</clr-dg-cell>
         <clr-dg-cell>{{ap.patientFirstName}} {{ap.patientLastName}}</clr-dg-cell>
         <clr-dg-cell>{{ap.comment}}</clr-dg-cell>
-        <clr-dg-cell> <button class="btn btn-primary" (click)="addComment(ap.id, ap.comment)">EDIT COMMENT</button> </clr-dg-cell>
+        <clr-dg-cell>
+          <div *ngIf="hasComment(ap.comment); else templateName">
+            <button class="btn btn-primary" (click)="addComment(ap.id, ap.comment)">EDIT COMMENT</button>
+          </div>
+          <ng-template #templateName>
+            <button class="btn btn-success" (click)="addComment(ap.id, ap.comment)">ADD COMMENT</button>
+          </ng-template>
+        </clr-dg-cell>
       </clr-dg-row>
       <clr-dg-footer>
         {{pastAppointments.length}} appointments

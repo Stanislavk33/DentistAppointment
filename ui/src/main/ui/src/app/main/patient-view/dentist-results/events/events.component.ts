@@ -3,10 +3,16 @@ import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
 import 'clarity-icons/shapes/technology-shapes';
 import {EventsService} from "./events.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {EventInfoModel} from "../../../../models/event.info.model";
 import {EventComment} from "./event.comment.model";
 import {CommonUtil} from "../../../../util/common.util";
+import {Comparator} from "clarity-angular";
+
+class DateComparator implements Comparator<EventInfoModel> {
+  compare(a: EventInfoModel, b: EventInfoModel) {
+    return +new Date(b.startTime) - +new Date(a.startTime);
+  }
+}
 
 @Component({
   selector: 'events',
@@ -15,6 +21,7 @@ import {CommonUtil} from "../../../../util/common.util";
   providers: [EventsService]
 })
 export class EventsComponent implements OnInit {
+  private dateComparator = new DateComparator();
   public events: EventInfoModel[] = [];
   public openInfo: Boolean = false;
   public currentEvent: EventInfoModel = new EventInfoModel();

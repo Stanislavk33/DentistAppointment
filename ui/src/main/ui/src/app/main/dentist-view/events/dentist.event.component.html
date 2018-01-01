@@ -17,7 +17,7 @@
   </div>
   <clr-datagrid class="events">
     <clr-dg-column>Title</clr-dg-column>
-    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
     <clr-dg-column>Time</clr-dg-column>
     <clr-dg-column>Info</clr-dg-column>
     <clr-dg-column>Remove</clr-dg-column>
