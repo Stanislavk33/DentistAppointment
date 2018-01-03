@@ -18,7 +18,14 @@ export class EditDentistProfileService{
                             city:string): Observable<Boolean> {
 
 
-    let requestModel: EditDentistProfileModel = new EditDentistProfileModel(email,id,firstName,lastName,dentistType,city);
+    let requestModel: EditDentistProfileModel =
+          new EditDentistProfileModel(CommonUtil.getSessionUserEmail(),
+                                      email,
+                                      id,
+                                      firstName,
+                                      lastName,
+                                      dentistType,
+                                      city);
     let defaultModel:UserModel = CommonUtil.getSessionUser();
 
     if (requestModel.email ===''){requestModel.email=defaultModel.email};

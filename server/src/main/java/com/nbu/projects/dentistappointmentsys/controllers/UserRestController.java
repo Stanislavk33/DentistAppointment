@@ -190,6 +190,14 @@ public class UserRestController {
 
   @PostMapping("/editDentistProfile")
   public Boolean ChangeDentistProfile(@RequestBody EditDentistProfileModel EditDentistModel){
+
+    if (!EditDentistModel.getCurrentUserEmail().equals(EditDentistModel.getEmail())) {
+      User userWithProvidedEmail = userRepository.findByEmail(EditDentistModel.getEmail());
+
+      if (userWithProvidedEmail != null) {
+        return false;
+      }
+    }
     userRepository.updateDentistInfo(EditDentistModel.getEmail(),
             EditDentistModel.getFirstName(),
             EditDentistModel.getLastName(),
