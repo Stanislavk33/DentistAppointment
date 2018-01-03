@@ -15,10 +15,11 @@ export class EditDentistProfileService{
                             firstName:string,
                             lastName:string,
                             dentistType:string,
-                            city:string): Observable<Boolean> {
+                            city:string,
+                            generalInformation:string): Observable<Boolean> {
 
 
-    let requestModel: EditDentistProfileModel = new EditDentistProfileModel(email,id,firstName,lastName,dentistType,city);
+    let requestModel: EditDentistProfileModel = new EditDentistProfileModel(email,id,firstName,lastName,dentistType,city,generalInformation);
     let defaultModel:UserModel = CommonUtil.getSessionUser();
 
     if (requestModel.email ===''){requestModel.email=defaultModel.email};
@@ -26,6 +27,7 @@ export class EditDentistProfileService{
     if (requestModel.lastName===''){requestModel.lastName=defaultModel.lastName};
     if(requestModel.dentistType===''){requestModel.dentistType=defaultModel.dentistType};
     if (requestModel.city===''){requestModel.city=defaultModel.city};
+    if(requestModel.generalInformation==='' ){requestModel.generalInformation=defaultModel.generalInformation};
 
 
     return this.http.post<Boolean>('/editDentistProfile', requestModel);

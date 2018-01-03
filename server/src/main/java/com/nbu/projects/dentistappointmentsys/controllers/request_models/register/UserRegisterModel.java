@@ -17,6 +17,8 @@ public class UserRegisterModel {
   private Role role;
   private String city;
   private DentistType dentistType;
+  private String generalInformation;
+
 
   public UserRegisterModel() {
   }
@@ -28,7 +30,8 @@ public class UserRegisterModel {
                            String lastName,
                            Role role,
                            String city,
-                           DentistType dentistType) {
+                           DentistType dentistType,
+                           String generalInformation) {
     this.Id=Id;
     this.email = email;
     this.password = password;
@@ -37,6 +40,8 @@ public class UserRegisterModel {
     this.role = role;
     this.city = city;
     this.dentistType = dentistType;
+    this.generalInformation=generalInformation;
+
   }
 
 
@@ -95,5 +100,13 @@ public class UserRegisterModel {
 
   public void setDentistType(DentistType dentistType) {
     this.dentistType = dentistType;
+  }
+
+  public String getGeneralInformation() {
+    return generalInformation;
+  }
+
+  public void setGeneralInformation(String generalInformation) {
+    this.generalInformation = generalInformation;
   }
 }

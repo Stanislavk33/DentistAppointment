@@ -14,4 +14,5 @@ export class UserModel {
    rating: number = 0;
    appointments: AppointmentModel[];
    workingDays: WorkingDayModel[];
+   generalInformation:string= "";
 }

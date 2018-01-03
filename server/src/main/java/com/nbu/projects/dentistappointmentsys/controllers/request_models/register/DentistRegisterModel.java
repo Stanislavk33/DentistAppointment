@@ -7,6 +7,7 @@ public class DentistRegisterModel extends UserRegisterModel {
 
   String city;
   DentistType dentistType;
+  String generalInformation;
 
   public DentistRegisterModel() {
   }
@@ -18,8 +19,9 @@ public class DentistRegisterModel extends UserRegisterModel {
                               String lastName,
                               Role role,
                               String city,
-                              DentistType dentistType) {
-    super(Id,email, password, firstName, lastName, role, city, dentistType);
+                              DentistType dentistType,
+                              String generalInformation) {
+    super(Id,email, password, firstName, lastName, role, city, dentistType,generalInformation);
     this.city = city;
     this.dentistType = dentistType;
   }
@@ -34,6 +36,16 @@ public class DentistRegisterModel extends UserRegisterModel {
 
   public DentistType getDentistType() {
     return dentistType;
+  }
+
+  @Override
+  public String getGeneralInformation() {
+    return generalInformation;
+  }
+
+  @Override
+  public void setGeneralInformation(String generalInformation) {
+    this.generalInformation = generalInformation;
   }
 
   public void setDentistType(DentistType dentistType) {

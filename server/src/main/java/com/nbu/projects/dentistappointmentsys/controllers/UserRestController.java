@@ -195,6 +195,7 @@ public class UserRestController {
             EditDentistModel.getLastName(),
             EditDentistModel.getDentistType(),
             EditDentistModel.getCity(),
+            EditDentistModel.getGeneralInformation(),
             EditDentistModel.getId());
         return true;
   }

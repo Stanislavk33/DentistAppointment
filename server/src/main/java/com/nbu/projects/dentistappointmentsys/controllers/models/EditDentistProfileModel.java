@@ -9,6 +9,7 @@ public class EditDentistProfileModel {
     private String lastName;
     private DentistType dentistType;
     private String city;
+    private String generalInformation;
 
     public String getEmail() {
         return email;
@@ -50,6 +51,14 @@ public class EditDentistProfileModel {
         this.dentistType = dentistType;
     }
 
+    public String getGeneralInformation() {
+        return generalInformation;
+    }
+
+    public void setGeneralInformation(String generalInformation) {
+        this.generalInformation = generalInformation;
+    }
+
     public String getCity() {
         return city;
     }
@@ -57,15 +66,23 @@ public class EditDentistProfileModel {
     public void setCity(String city) {
         this.city = city;
     }
+
     public EditDentistProfileModel() {}
 
-    public EditDentistProfileModel(String email, Long id, String firstName, String lastName, DentistType dentistType, String city) {
+    public EditDentistProfileModel(String email,
+                                   Long id,
+                                   String firstName,
+                                   String lastName,
+                                   DentistType dentistType,
+                                   String city,
+                                   String generalInformation) {
         this.email = email;
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dentistType = dentistType;
         this.city = city;
+        this.generalInformation=generalInformation;
     }
 }
 
