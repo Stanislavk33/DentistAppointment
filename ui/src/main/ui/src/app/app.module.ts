@@ -44,6 +44,7 @@ import {AppointmentService} from "./services/appointment.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {EventsService} from "./services/events.service";
 import {RatingsService} from "./services/ratings.service";
+import {CalendarService} from "./main/calendar/calendar.service";
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import {RatingsService} from "./services/ratings.service";
     EventsService,
     DatePipe,
     AmbulatoryService,
-    AppointmentService
+    AppointmentService,
+    CalendarService
   ],
   bootstrap: [MainComponent]
 })

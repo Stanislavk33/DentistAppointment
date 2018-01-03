@@ -4,15 +4,42 @@
       <clr-button (click)="loadEarlier()">< Earlier</clr-button>
       <clr-button (click)="loadLater()">Later ></clr-button>
    </clr-button-group>
-
+   <div class="alert alert-danger" *ngIf="appointmentIsMade == 2">
+      <div class="alert-items">
+         <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+               <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+            <span class="alert-text">
+               Could not register the appointment, please refresh the page an try again.
+            </span>
+         </div>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+         <clr-icon aria-hidden="true" shape="close"></clr-icon>
+      </button>
+   </div>
+   <div class="alert alert-success" *ngIf="appointmentIsMade == 1">
+      <div class="alert-items">
+         <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+               <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">The appointment was registered successfully.</span>
+         </div>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+         <clr-icon aria-hidden="true" shape="close"></clr-icon>
+      </button>
+   </div>
    <table class="table" *ngIf="calendarHours">
       <thead>
       <tr>
          <th *ngFor="let weekDay of WEEK_DAYS">
-            {{weekDay +
-              "\n" +
-            datesToShow[WEEK_DAYS.indexOf(weekDay)].toDateString().slice(4, 10)
-            }}</th>
+            {{weekDay}}
+            <br>
+            {{datesToShow[WEEK_DAYS.indexOf(weekDay)].toDateString().slice(4, 10)}}
+         </th>
       </tr>
       </thead>
       <tbody>
