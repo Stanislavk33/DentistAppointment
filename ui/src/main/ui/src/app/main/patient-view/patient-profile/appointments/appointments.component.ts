@@ -60,7 +60,7 @@ export class AppointmentsComponent implements OnInit {
   }
 
   hasComment(comment){
-    return comment != null;
+    return comment != null && comment != '';
   }
 
   viewComment(comment){
@@ -69,7 +69,7 @@ export class AppointmentsComponent implements OnInit {
   }
 
   cancelAppointment(){
-    this.appointmentService.cancelAppointment(this.appToCancel).subscribe( success => {
+    this.appointmentService.cancelAppointment(this.appToCancel, this.userId).subscribe( success => {
       if(success){
         this.cancelWarning = false;
         this.refreshFutureAppointments();

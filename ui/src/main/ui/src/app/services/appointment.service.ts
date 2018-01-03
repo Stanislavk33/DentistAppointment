@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {WorkingDaysResultModel} from "../models/working.days.result.model";
 import {EditWorkingDaysModel} from "../main/dentist-view/schedule/model/edit.working.days.model";
@@ -56,6 +56,13 @@ export class AppointmentService {
 
    }
 
+  public getCommonAppointments(id: number, patientId: number): Observable<DentistAppointmentModel[]> {
+    let params = new HttpParams()
+      .set('id', id.toString())
+      .set('patientId', patientId.toString());
+     return this.httpClient.get<DentistAppointmentModel[]>('commonAppointments/', {params: params});
+  }
+
   public getDentistPastAppointments(id: number): Observable<DentistAppointmentModel[]> {
     return this.httpClient.get<DentistAppointmentModel[]>('pastAppointments/' + id);
   }
@@ -69,8 +76,11 @@ export class AppointmentService {
     return this.httpClient.post<Boolean>('addAppointmentComment', requestModel);
   }
 
-  public cancelAppointment(id: number): Observable<Boolean> {
-    return this.httpClient.delete<Boolean>('cancelAppointment/' + id);
+  public cancelAppointment(id: number, userId: number): Observable<Boolean> {
+    let params = new HttpParams()
+      .set('id', id.toString())
+      .set('userId', userId.toString());
+    return this.httpClient.delete<Boolean>('cancelAppointment/', {params: params});
   }
 
   public getPatientFutureAppointments(id: number): Observable<PatientAppointmentModel[]> {

@@ -14,14 +14,18 @@
       <clr-dg-column [clrDgSortBy]="ratingsComparator">Rating</clr-dg-column>
       <clr-dg-column>Rate</clr-dg-column>
       <clr-dg-column>Add to blacklist</clr-dg-column>
+      <clr-dg-column>Ambulatory</clr-dg-column>
 
       <clr-dg-row *clrDgItems="let patient of patients">
         <clr-dg-cell>{{patient.firstName}}</clr-dg-cell>
         <clr-dg-cell>{{patient.lastName}}</clr-dg-cell>
         <clr-dg-cell>{{patient.visits}}</clr-dg-cell>
         <clr-dg-cell>{{patient.rating}}</clr-dg-cell>
-        <clr-dg-cell> <button class="btn btn-primary" (click)="ratePatient(patient.id)">RATE</button> </clr-dg-cell>
+        <clr-dg-cell>
+          <button class="btn btn-primary" (click)="ratePatient(patient)">RATE</button>
+        </clr-dg-cell>
         <clr-dg-cell> <button class="btn btn-warning" (click)="addToBlacklist(patient.id)">ADD TO BLACKLIST</button> </clr-dg-cell>
+        <clr-dg-cell> <button class="btn btn-success" (click)="seeHistory(patient.id)">HISTORY</button> </clr-dg-cell>
       </clr-dg-row>
       <clr-dg-footer>
         {{patients.length}} patients
@@ -99,6 +103,32 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-outline" (click)="openRate = false">Cancel</button>
       <button type="submit" class="btn btn-primary" (click)="onSubmit()">Ok</button>
+    </div>
+  </clr-modal>
+
+  <clr-modal [(clrModalOpen)]="openHistory" [clrModalSize]="'lg'">
+    <h3 class="modal-title">APPOINTMENTS HISTORY</h3>
+    <div class="modal-body">
+      <clr-datagrid>
+        <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
+        <clr-dg-column>Time</clr-dg-column>
+        <clr-dg-column>Patient</clr-dg-column>
+        <clr-dg-column>Comment</clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let ap of commonAppointments">
+          <clr-dg-cell>{{ap.date | date}}</clr-dg-cell>
+          <clr-dg-cell>{{ap.date | date: 'HH:mm'}}</clr-dg-cell>
+          <clr-dg-cell>{{ap.patientFirstName}} {{ap.patientLastName}}</clr-dg-cell>
+          <clr-dg-cell>{{ap.comment}}</clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer>
+          {{commonAppointments.length}} appointments
+          <clr-dg-pagination #pagination [clrDgPageSize]="4"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" (click)="openHistory = false">Ok</button>
     </div>
   </clr-modal>
 </div>

@@ -1,10 +1,10 @@
 import {Component, OnChanges, OnInit} from "@angular/core";
 import {CommonUtil} from "../../../util/common.util";
 import {EventModel} from "../../../models/event.model";
-import {ScheduleService} from "../schedule/schedule.service";
 import {Constants} from "../../../models/constants";
 import {DatePipe} from "@angular/common";
 import {Comparator} from "clarity-angular";
+import {EventsService} from "../../../services/events.service";
 
 class DateComparator implements Comparator<EventModel> {
   compare(a: EventModel, b: EventModel) {
@@ -29,11 +29,11 @@ export class DentistEventComponent implements OnInit {
   public hours: string[] = [];
   public errorMessage: string = '';
 
-  constructor(private service: ScheduleService, private datePipe: DatePipe) {
+  constructor(private eventsService: EventsService, private datePipe: DatePipe) {
   }
 
   private refreshEvents(){
-    this.service.getEvents(this.event.dentistId).subscribe( data => {
+    this.eventsService.getDentistEvents(this.event.dentistId).subscribe( data => {
       this.events = data;
     }, err => console.log(err));
   }
@@ -49,7 +49,7 @@ export class DentistEventComponent implements OnInit {
       this.errorMessage = 'Cannot create an event for a past date.';
       this.showWarning = true;
     }else{
-      this.service.addEvent(this.event).subscribe( success => {
+      this.eventsService.addEvent(this.event).subscribe( success => {
         if(success){
           this.addEvent = false;
           this.showWarning = false;
@@ -60,7 +60,7 @@ export class DentistEventComponent implements OnInit {
   }
 
   deleteEvent(eventId: number){
-    this.service.cancelEvent(eventId).subscribe(success => {
+    this.eventsService.cancelEvent(eventId).subscribe(success => {
       if(success){
         this.refreshEvents();
       }``

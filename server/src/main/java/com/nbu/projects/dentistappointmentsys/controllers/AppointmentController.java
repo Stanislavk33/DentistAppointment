@@ -12,6 +12,7 @@ import com.nbu.projects.dentistappointmentsys.models.User;
 import com.nbu.projects.dentistappointmentsys.models.types.Role;
 import com.nbu.projects.dentistappointmentsys.repositories.AppointmentRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
+import com.nbu.projects.dentistappointmentsys.service.NotificationService;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,6 +33,8 @@ public class AppointmentController {
     UserRepository userRepository;
     @Autowired
     AppointmentRepository appointmentRepository;
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("/ambulatory/{id}")
     public List<AmbulatoryInfo> getAmbulatoryInfo(@PathVariable(value="id") Long id) {
@@ -52,6 +56,14 @@ public class AppointmentController {
             return true;
         }
         return false;
+    }
+
+    @GetMapping("/commonAppointments")
+    public List<DentistAppointmentModel> getCommonAppointments(@RequestParam(value = "id") Long id,
+                                                               @RequestParam(value = "patientId") Long patientId){
+        long time = System.currentTimeMillis();
+        Timestamp now = new Timestamp(time);
+        return this.appointmentRepository.getCommonAppointments(id, patientId, now);
     }
 
     @GetMapping("pastAppointments/{id}")
@@ -82,11 +94,33 @@ public class AppointmentController {
         return this.appointmentRepository.getPatientPastAppointments(id, now);
     }
 
-    @DeleteMapping("/cancelAppointment/{id}")
-    public Boolean cancelAppointment(@PathVariable(value="id") Long id) {
+    @DeleteMapping("/cancelAppointment")
+    public Boolean cancelAppointment(@RequestParam(value = "id") Long id,
+                                     @RequestParam(value = "userId") Long userId) {
+        User user = userRepository.findById(userId);
+        Appointment appointment = appointmentRepository.findById(id);
         if(appointmentRepository.exists(id)){
-            appointmentRepository.delete(id);
-            return true;
+            if(user.getRole().equals(Role.PATIENT)){
+                appointmentRepository.delete(id);
+                try{
+                    String email = userRepository.findById(appointment.getUser().getId()).getEmail();
+                    notificationService.sendCancelledInfoToPatient(user, appointment, email);
+                }catch(MailException e){
+                    logger.info("Error Sending Email: " + e.getMessage());
+                }finally{
+                    return true;
+                }
+            }else if(user.getRole().equals(Role.DENTIST)){
+                appointmentRepository.delete(id);
+                try{
+                    String email = userRepository.findById(appointment.getPatientId()).getEmail();
+                    notificationService.sendCancelledInfoToDentist(user, appointment, email);
+                }catch(MailException e){
+                    logger.info("Error Sending Email: " + e.getMessage());
+                }finally{
+                    return true;
+                }
+            }
         }
         return false;
     }
