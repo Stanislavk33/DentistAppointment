@@ -31,6 +31,14 @@ public class RatingsController {
         }
     }
 
+    @GetMapping("dentistRating/{id}")
+    public Double getAvgRating(@PathVariable(value="id") Long id){
+        if(ratingsRepository.getAvgRating(id) == null){
+            return 0.;
+        }
+        return ratingsRepository.getAvgRating(id);
+    }
+
     @GetMapping("/canRate")
     public Boolean canRate(@RequestParam(value = "patientId", required = false) Long patientId,
                            @RequestParam(value = "dentistId", required = false) Long dentistId) {
@@ -38,14 +46,13 @@ public class RatingsController {
         return ratingsRepository.exists(patientId, dentistId);
     }
 
-    @GetMapping("dentistRating/{id}")
-    public Double getAvgRating(@PathVariable(value="id") Long id){ return ratingsRepository.getAvgRating(id);}
-
     @GetMapping("/getCurrentRate")
     public Rating getDentistRateForPatient(@RequestParam(value = "dentistId", required = false) Long dentistId,
                                            @RequestParam(value = "patientId", required = false) Long patientId) {
-        return ratingsRepository.getDentistRateForPatient(dentistId, patientId);
+        if(ratingsRepository.getCurrentRate(dentistId, patientId) == null){
+            return new Rating(0l,0l,0.,"");
+        }
+        return ratingsRepository.getCurrentRate(dentistId, patientId);
     }
 
 }
-

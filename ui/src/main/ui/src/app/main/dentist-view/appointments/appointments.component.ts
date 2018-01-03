@@ -44,7 +44,6 @@ export class DentistAppointmentsComponent implements OnInit {
        .subscribe( data => {
            this.pastAppointments = data;
            this.openComment = false;
-           console.log(this.pastAppointments);
          },
          err => console.log(err));
 
@@ -52,7 +51,6 @@ export class DentistAppointmentsComponent implements OnInit {
        .subscribe( data => {
            this.futureAppointments = data;
            this.openComment = false;
-           console.log(this.futureAppointments);
          },
          err => console.log(err));
    }

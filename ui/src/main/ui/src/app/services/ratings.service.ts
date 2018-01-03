@@ -35,4 +35,12 @@ export class RatingsService{
     return this.http.get<DentistRating>('getCurrentRate/', {params: params});
   }
 
+  public getPatientRatingForDentist(patientId, dentistId): Observable<DentistRating>{
+    let params = new HttpParams()
+      .set('dentistId', dentistId)
+      .set('patientId', patientId);
+    return this.http.get<DentistRating>('getCurrentRate/', {params: params});
+  }
+
+
 }
