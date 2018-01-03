@@ -48,6 +48,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<PatientAppointmentModel> getPatientPastAppointments(@Param("id") Long id, @Param("now") Timestamp now);
     Appointment findById(Long id);
 
+    @Query("select new com.nbu.projects.dentistappointmentsys.controllers.models.DentistAppointmentModel(a.id, a.user.id, a.patientId, u.firstName, u.lastName, a.date, a.comment)" +
+            " from Appointment a, User u where a.user.id = :id and a.patientId = :patientId and u.id = :patientId and a.date < :now")
+    List<DentistAppointmentModel> getCommonAppointments(@Param("id") Long id, @Param("patientId") Long patientId, @Param("now") Timestamp now);
+
     @Transactional
     @Modifying
     @Query("update Appointment a set a.comment = :comment where a.id = :id")

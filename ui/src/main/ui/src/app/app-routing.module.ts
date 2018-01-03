@@ -1,5 +1,5 @@
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterModule, Routes, RouterStateSnapshot} from "@angular/router";
-import {Injectable, NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {NgModule} from "@angular/core";
 import {MainComponent} from "./main/main.component";
 import {PatientComponent} from "./main/patient-view/patient.component";
 import {RoleGuard} from "./guards/role.guard";
@@ -37,6 +37,7 @@ const appRoutes: Routes = [
     ]},
     {path: 'patient', component: PatientComponent,
       children: [
+        {path: '', redirectTo: 'dentists', pathMatch: 'full'},
         { path: 'profile', component: PatientProfileComponent, children: [
           { path: '', redirectTo: 'edit', pathMatch: 'full'},
           { path: 'edit', pathMatch: 'full', component: EditProfileComponent},
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
 
     {path: 'dentist', component: DentistComponent,
       children: [
+        {path: '', redirectTo: 'appointments', pathMatch: 'full'},
         { path: 'changepass', component: ChangePasswordComponent},
         { path: 'appointments', component: DentistAppointmentsComponent},
         { path: 'schedule', component: ScheduleComponent},

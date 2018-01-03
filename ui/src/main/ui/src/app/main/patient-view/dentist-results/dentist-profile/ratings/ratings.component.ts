@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {DentistRating} from "./dentist.rating.model";
-import {RatingsService} from "./ratings.service";
 import {OnClickEvent, OnHoverRatingChangeEvent, OnRatingChangeEven} from "angular-star-rating";
 import {CommonUtil} from "../../../../../util/common.util";
+import {RatingsService} from "../../../../../services/ratings.service";
 
 @Component({
   selector: 'ratings-component',
@@ -55,7 +55,7 @@ export class RatingsComponent implements OnChanges {
       this.message = 'Please add both a COMMENT and RATE before submitting.';
       this.hideWarning = false;
     }else{
-      this.service.canRate(this.userId, this.dentistId).subscribe( success => {
+      this.service.existsRating(this.userId, this.dentistId).subscribe( success => {
         if(!success){
           this.service.rateUser(this.userId, this.dentistId, this.rating, this.comment).subscribe(success => {
             if(success){

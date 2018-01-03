@@ -15,7 +15,7 @@
       </clr-dg-row>
       <clr-dg-footer>
         {{futureAppointments.length}} appointments
-        <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>
+        <clr-dg-pagination #pagination [clrDgPageSize]="4"></clr-dg-pagination>
       </clr-dg-footer>
     </clr-datagrid>
   </div>
@@ -24,7 +24,10 @@
     <clr-datagrid>
       <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
       <clr-dg-column>Time</clr-dg-column>
-      <clr-dg-column>Patient</clr-dg-column>
+      <clr-dg-column>
+        Patient
+        <clr-dg-string-filter [clrDgStringFilter]="nameFilter"></clr-dg-string-filter>
+      </clr-dg-column>
       <clr-dg-column>Comment</clr-dg-column>
       <clr-dg-column>Add comment</clr-dg-column>
 
@@ -44,7 +47,7 @@
       </clr-dg-row>
       <clr-dg-footer>
         {{pastAppointments.length}} appointments
-        <clr-dg-pagination #pagination [clrDgPageSize]="14"></clr-dg-pagination>
+        <clr-dg-pagination #pagination [clrDgPageSize]="4"></clr-dg-pagination>
       </clr-dg-footer>
     </clr-datagrid>
 

@@ -2,11 +2,11 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
 import 'clarity-icons/shapes/technology-shapes';
-import {EventsService} from "./events.service";
 import {EventInfoModel} from "../../../../models/event.info.model";
 import {EventComment} from "./event.comment.model";
 import {CommonUtil} from "../../../../util/common.util";
 import {Comparator} from "clarity-angular";
+import {EventsService} from "../../../../services/events.service";
 
 class DateComparator implements Comparator<EventInfoModel> {
   compare(a: EventInfoModel, b: EventInfoModel) {

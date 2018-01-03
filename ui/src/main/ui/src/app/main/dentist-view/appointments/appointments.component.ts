@@ -2,11 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {CommonUtil} from "../../../util/common.util";
 import {AppointmentService} from "../../../services/appointment.service";
 import {DentistAppointmentModel} from "../../../models/dentist.appointment.model";
-import {Comparator} from "clarity-angular";
+import {Comparator, StringFilter} from "clarity-angular";
 
 class DateComparator implements Comparator<DentistAppointmentModel> {
   compare(a: DentistAppointmentModel, b: DentistAppointmentModel) {
     return +new Date(b.date) - +new Date(a.date);
+  }
+}
+
+class NameFilter implements StringFilter<DentistAppointmentModel> {
+  accepts(app: DentistAppointmentModel, search: string):boolean {
+    return "" + app.id == search
+      || (app.patientFirstName + " " + app.patientLastName).toLowerCase().indexOf(search) >= 0;
   }
 }
 
@@ -18,10 +25,11 @@ class DateComparator implements Comparator<DentistAppointmentModel> {
               providers: []
            })
 export class DentistAppointmentsComponent implements OnInit {
+   private nameFilter = new NameFilter();
    private dateComparator = new DateComparator();
    private appToCancel: number = 0;
    public cancelWarning: boolean = false;
-   public userEmail;
+   public userId: number = 0;
    public currentComment: string = '';
    public pastAppointments: DentistAppointmentModel[] = [];
    public futureAppointments: DentistAppointmentModel[] = [];
@@ -59,7 +67,7 @@ export class DentistAppointmentsComponent implements OnInit {
    }
 
   cancelAppointment(){
-     this.appointmentsService.cancelAppointment(this.appToCancel).subscribe( success => {
+     this.appointmentsService.cancelAppointment(this.appToCancel, this.userId).subscribe( success => {
        if(success){
          this.cancelWarning = false;
          this.refreshPastAppointments();
@@ -85,7 +93,7 @@ export class DentistAppointmentsComponent implements OnInit {
   }
 
    ngOnInit() {
-     this.userEmail = CommonUtil.getSessionUserEmail();
+     this.userId = CommonUtil.getSessionUserId();
      this.refreshPastAppointments();
    }
 }

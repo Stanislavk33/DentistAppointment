@@ -21,15 +21,15 @@ public class RatingsController {
 
     @PostMapping("/addRating")
     public Boolean addRating(@RequestBody Rating ratingsModel) {
-        Rating rating = new Rating(ratingsModel.getRated_id(),
-                                   ratingsModel.getRater_id(),
-                                   ratingsModel.getRate(),
-                                   ratingsModel.getComment());
-        return ratingsRepository.save(rating) != null;
+        if(!ratingsRepository.exists(ratingsModel.getRated_id(), ratingsModel.getRater_id())){
+            Rating rating = new Rating(ratingsModel.getRated_id(), ratingsModel.getRater_id(), ratingsModel.getRate(), ratingsModel.getComment());
+            ratingsRepository.save(rating);
+            return true;
+        }else{
+            ratingsRepository.updateRate(ratingsModel.getRated_id(), ratingsModel.getRater_id(), ratingsModel.getRate(), ratingsModel.getComment());
+            return true;
+        }
     }
-
-    @GetMapping("dentistRating/{id}")
-    public Double getAvgRating(@PathVariable(value="id") Long id){ return ratingsRepository.getAvgRating(id);}
 
     @GetMapping("/canRate")
     public Boolean canRate(@RequestParam(value = "patientId", required = false) Long patientId,
@@ -38,4 +38,14 @@ public class RatingsController {
         return ratingsRepository.exists(patientId, dentistId);
     }
 
+    @GetMapping("dentistRating/{id}")
+    public Double getAvgRating(@PathVariable(value="id") Long id){ return ratingsRepository.getAvgRating(id);}
+
+    @GetMapping("/getCurrentRate")
+    public Rating getDentistRateForPatient(@RequestParam(value = "dentistId", required = false) Long dentistId,
+                                           @RequestParam(value = "patientId", required = false) Long patientId) {
+        return ratingsRepository.getDentistRateForPatient(dentistId, patientId);
+    }
+
 }
+
