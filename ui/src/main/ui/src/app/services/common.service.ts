@@ -47,4 +47,5 @@ export class CommonService {
    public getUserInfo(id:number): Observable<UserModel>{
      return this.httpClient.get('user/'+ id);
    }
+
 }

@@ -5,10 +5,13 @@ import {EditPatientProfileModel} from "../../../services/model/edit.user.profile
 import {EditProfileResultModel} from "../../../models/editprofile.result.model";
 import {UserModel} from "../../../models/user.model";
 import {CommonUtil} from "../../../util/common.util";
+import {CommonService} from "../../../services/common.service";
 
 
 @Injectable()
 export class EditPatientProfileService{
+
+
 
   constructor(private http: HttpClient) {
   }
@@ -19,15 +22,21 @@ export class EditPatientProfileService{
                             id:number): Observable<EditProfileResultModel> {
 
 
+
+
     let requestModel: EditPatientProfileModel = new EditPatientProfileModel(email,firstName,lastName,id);
     let defaultModel:UserModel = CommonUtil.getSessionUser();
+
 
     if (requestModel.email ===''){requestModel.email=defaultModel.email};
     if(requestModel.firstName===''){requestModel.firstName=defaultModel.firstName};
     if (requestModel.lastName===''){requestModel.lastName=defaultModel.lastName};
 
 
+
+
     return this.http.post<EditProfileResultModel>('/editPatientProfile', requestModel);
+
 
   }
 }

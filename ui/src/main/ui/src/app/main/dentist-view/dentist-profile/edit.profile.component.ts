@@ -5,6 +5,8 @@ import {CommonUtil} from "../../../util/common.util";
 import {EditDentistProfileModel} from "../../../services/model/edit.dentist.profile.model";
 import {DentistModel} from "../../../models/dentist.model";
 import {Constants} from "../../../models/constants";
+import {UserModel} from "../../../models/user.model";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   moduleId: module.id,
@@ -14,15 +16,16 @@ import {Constants} from "../../../models/constants";
   providers: []
 })
 export class EditDentistProfileComponent implements OnInit {
-  private model: DentistModel = new DentistModel();
+
+  private User:UserModel;
+  private UserInfo:UserModel;
   private constants = Constants;
-  private userRole;
   public UserId: number = 0;
   private openFail: boolean = false;
   private failMessage: string = '';
   private openSuccess: boolean = false;
 
-  constructor(private service: EditDentistProfileService) {
+  constructor(private service: EditDentistProfileService,private UserService:CommonService) {
   }
 
   submit(email: string, firstName: string, lastName: string, dentistType: string, city: string,generalInformation:string) {
@@ -32,6 +35,12 @@ export class EditDentistProfileComponent implements OnInit {
           if (success) {
             this.openSuccess = true;//console log true
             this.openFail = false;
+            this.UserService.getUserInfo(this.UserId)
+              .subscribe(data => {
+                  this.User = data;
+                  CommonUtil.putSessionUser(this.User);},
+                err => console.log(err));
+
           } else {
             this.openFail = true;
             this.openSuccess = false;
@@ -51,5 +60,7 @@ export class EditDentistProfileComponent implements OnInit {
 
   ngOnInit() {
     this.UserId = CommonUtil.getSessionUserId();
+    this.UserInfo=CommonUtil.getSessionUser();
+
   }
 }
