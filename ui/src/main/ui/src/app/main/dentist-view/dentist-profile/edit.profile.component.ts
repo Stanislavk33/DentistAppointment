@@ -25,9 +25,9 @@ export class EditDentistProfileComponent implements OnInit {
   constructor(private service: EditDentistProfileService) {
   }
 
-  submit(email: string, firstName: string, lastName: string, dentistType: string, city: string) {
+  submit(email: string, firstName: string, lastName: string, dentistType: string, city: string,generalInformation:string) {
 
-    this.service.editDentistProfile(email, this.UserId, firstName, lastName, dentistType, city)
+    this.service.editDentistProfile(email, this.UserId, firstName, lastName, dentistType, city,generalInformation)
       .subscribe(success => {
           if (success) {
             this.openSuccess = true;//console log true
