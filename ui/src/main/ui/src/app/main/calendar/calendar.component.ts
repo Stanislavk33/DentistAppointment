@@ -7,7 +7,9 @@ import {WorkingDayModel} from "../../models/working.day.model";
 import {CalendarHour} from "./model/calendar.hour.model";
 import {CalendarHours} from "./model/calendar.hours.model";
 import {AppointmentService} from "../../services/appointment.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CalendarService} from "./calendar.service";
+import {EventModel} from "../../models/event.model";
 
 @Component({
               selector: 'calendar-component',
@@ -19,9 +21,12 @@ export class CalendarComponent implements OnInit {
 
    @Input('dentist')
    private dentist: UserModel;
+   private dentistEvents: EventModel[] = [];
 
    private opened: boolean = false;
    private appointmentSelected: CalendarHour;
+   //0 = null, 1 = success, 2 = failure.
+   private appointmentIsMade: number = 0;
 
    private WEEK_DAYS = Constants.WEEK_DAYS;
    private workingDays: WorkingDayModel[] = [];
@@ -34,7 +39,9 @@ export class CalendarComponent implements OnInit {
    private appointments: AppointmentModel[] = [];
    private currentUser: UserModel;
 
-   constructor(private appointmentService: AppointmentService,
+   constructor(private activatedRoute:ActivatedRoute,
+               private calendarService: CalendarService,
+               private appointmentService: AppointmentService,
                private router: Router) {
    }
 
@@ -44,18 +51,26 @@ export class CalendarComponent implements OnInit {
    }
 
    private loadData(): void {
-      this.appointmentService
+
+      let dentistId: number = this.activatedRoute.snapshot.params['id'];
+
+      this.calendarService.getEvents(dentistId)
+          .subscribe(dentistEvents => {
+             this.dentistEvents = dentistEvents;
+
+             this.appointmentService
                  .getDentistAppointments(this.dentist.email)
                  .subscribe(result => {
-                         this.appointments = result.appointments;
-                         this.dates = CalendarComponent.buildDates();
-                         this.datesCap = this.dates.length;
-                         this.datesToShow =
-                               this.dates.slice(this.datesToShowIndex, this.datesToShowIndex + 7);
-                         this.buildShownHours();
-                         return null
-                      },
-                      error => console.log(error));
+                    this.appointments = result.appointments;
+                    this.dates = CalendarComponent.buildDates();
+                    this.datesCap = this.dates.length;
+                    this.datesToShow =
+                          this.dates.slice(this.datesToShowIndex, this.datesToShowIndex + 7);
+                    this.buildShownHours();
+                    return null;
+                    },
+                            error => console.log(error))
+          }, e => console.log(e));
    }
 
    private askForAppointment(calendarHour: CalendarHour): void {
@@ -78,9 +93,14 @@ export class CalendarComponent implements OnInit {
       this.appointmentService.makeAppointment(this.dentist.email,
                                               this.currentUser.email,
                                               this.appointmentSelected.date)
-      //TODO: Show that the appointment is made.
-          .subscribe(result => this.loadData(),
-                     error => console.log(error));
+          .subscribe(done => {
+                        this.appointmentIsMade = 1;
+                        this.loadData();
+                     },
+                     error => {
+                        this.appointmentIsMade = 2;
+                        console.log(error);
+                     });
    }
 
    private loadLater(): void {
@@ -101,6 +121,10 @@ export class CalendarComponent implements OnInit {
       this.buildShownHours();
    }
 
+   private closeAlert(): void {
+      this.appointmentIsMade = 0;
+   }
+
    private buildShownHours(): void {
 
       let earliest: number = CalendarComponent.getEarliestHour(this.dentist.workingDays);
@@ -117,12 +141,12 @@ export class CalendarComponent implements OnInit {
             dailyCalendarHours.push(new CalendarHour(date1,
                                                      weekDay,
                                                      hour1,
-                                                     CalendarComponent.isWorking(weekDay, date1, this.dentist.workingDays),
+                                                     this.isWorking(weekDay, date1, this.dentist.workingDays),
                                                      this.isBooked(date1)));
             dailyCalendarHours.push(new CalendarHour(date2,
                                                      weekDay,
                                                      hour2,
-                                                     CalendarComponent.isWorking(weekDay, date2, this.dentist.workingDays),
+                                                     this.isWorking(weekDay, date2, this.dentist.workingDays),
                                                      this.isBooked(date2)));
          }
          calendarHours[weekDay] = dailyCalendarHours;
@@ -137,10 +161,23 @@ export class CalendarComponent implements OnInit {
       return date;
    }
 
-   private static isWorking(weekDay: string, date: Date, workingDays: WorkingDayModel[]): boolean {
+   private isWorking(weekDay: string, date: Date, workingDays: WorkingDayModel[]): boolean {
       if (date < new Date()) {
          return false;
       }
+
+      for (let event of this.dentistEvents) {
+         let startDate: Date = new Date(event.startTime);
+         let endDate: Date = new Date(event.endTime);
+         if (date.getFullYear() == startDate.getFullYear() &&
+             date.getMonth() == startDate.getMonth() &&
+             date.getDate() == startDate.getDate() &&
+             CalendarComponent.compareHours(date, startDate) >= 0 &&
+             CalendarComponent.compareHours(date, endDate) < 0) {
+               return false;
+             }
+      }
+
       let weekDayUC: string = weekDay.toUpperCase();
       for (let workingDay of workingDays) {
          if (weekDayUC == workingDay.weekDay &&
@@ -255,7 +292,7 @@ export class CalendarComponent implements OnInit {
          dates.push(newDate);
       }
       dates.push(today);
-      for (let i = 1; i < 42 - lowerLimit; i++) {
+      for (let i = 1; i < 63 - lowerLimit; i++) {
          let newDate: Date = new Date();
          newDate.setDate(today.getDate() + i);
          dates.push(newDate);

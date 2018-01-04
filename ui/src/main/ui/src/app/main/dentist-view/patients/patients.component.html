@@ -20,7 +20,7 @@
         <clr-dg-cell>{{patient.firstName}}</clr-dg-cell>
         <clr-dg-cell>{{patient.lastName}}</clr-dg-cell>
         <clr-dg-cell>{{patient.visits}}</clr-dg-cell>
-        <clr-dg-cell>{{patient.rating}}</clr-dg-cell>
+        <clr-dg-cell>{{patient.rating | number : '1.1-1' | number: formatDecimal}}</clr-dg-cell>
         <clr-dg-cell>
           <button class="btn btn-primary" (click)="ratePatient(patient)">RATE</button>
         </clr-dg-cell>

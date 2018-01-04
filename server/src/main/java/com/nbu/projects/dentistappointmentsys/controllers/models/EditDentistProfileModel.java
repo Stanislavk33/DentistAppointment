@@ -3,6 +3,7 @@ package com.nbu.projects.dentistappointmentsys.controllers.models;
 import com.nbu.projects.dentistappointmentsys.models.types.DentistType;
 
 public class EditDentistProfileModel {
+    private String currentUserEmail;
     private String email;
     private Long id;
     private String firstName;
@@ -10,6 +11,14 @@ public class EditDentistProfileModel {
     private DentistType dentistType;
     private String city;
     private String generalInformation;
+
+    public String getCurrentUserEmail() {
+        return currentUserEmail;
+    }
+
+    public void setCurrentUserEmail(String currentUserEmail) {
+        this.currentUserEmail = currentUserEmail;
+    }
 
     public String getEmail() {
         return email;
@@ -69,13 +78,17 @@ public class EditDentistProfileModel {
 
     public EditDentistProfileModel() {}
 
-    public EditDentistProfileModel(String email,
+
+
+    public EditDentistProfileModel(String currentUserEmail,
+                                   String email,
                                    Long id,
                                    String firstName,
                                    String lastName,
                                    DentistType dentistType,
                                    String city,
                                    String generalInformation) {
+        this.currentUserEmail = currentUserEmail;
         this.email = email;
         this.id = id;
         this.firstName = firstName;

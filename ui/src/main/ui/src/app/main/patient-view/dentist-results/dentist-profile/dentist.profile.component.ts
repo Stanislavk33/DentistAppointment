@@ -4,8 +4,8 @@ import 'clarity-icons/shapes/essential-shapes';
 import 'clarity-icons/shapes/technology-shapes';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserModel} from "../../../../models/user.model";
-import {CommonService} from "../../../../services/common.service";
 import {DentistCommonService} from "../services/dentist.common.service";
+import {CommonUtil} from "../../../../util/common.util";
 
 @Component({
   selector: 'dentist-profile',
@@ -31,7 +31,9 @@ export class DentistProfileComponent implements OnInit {
       err => console.log(err));
     this.dentistService.getAvgRating(this.id)
       .subscribe(rating => {
-        this.avgRating = rating;
+        if(rating != 0){
+          this.avgRating = rating;
+        }
       },
         err => console.log(err));
   }
