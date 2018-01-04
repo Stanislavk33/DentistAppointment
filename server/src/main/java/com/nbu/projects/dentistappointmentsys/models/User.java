@@ -55,7 +55,7 @@ public class User {
   private String city;
 
   @Column
-  private String generalInformaton;
+  private String generalInformation;
 
 
   @OneToMany(fetch = FetchType.EAGER)
@@ -82,7 +82,7 @@ public class User {
               DentistType dentistType,
               Set<Long> blacklist,
               Set<WorkingDay> workingDays,
-              String generalInformaton) {
+              String generalInformation) {
     this.id=id;
     this.email = email;
     this.role = role;
@@ -95,7 +95,7 @@ public class User {
     this.timesBlacklisted = 0;
     this.blacklist = blacklist;
     this.rating = 0.;
-    this.generalInformaton=generalInformaton;
+    this.generalInformation=generalInformation;
   }
 
   public User(UserRegisterModel registerModel) {
@@ -215,11 +215,11 @@ public class User {
     this.workingDays = workingDays;
   }
 
-  public String getGeneralInformaton() {
-    return generalInformaton;
+  public String getGeneralInformation() {
+    return generalInformation;
   }
 
-  public void setGeneralInformaton(String generalInformaton) {
-    this.generalInformaton = generalInformaton;
+  public void setGeneralInformation(String generalInformation) {
+    this.generalInformation = generalInformation;
   }
 }

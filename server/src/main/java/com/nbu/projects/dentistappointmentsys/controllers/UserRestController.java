@@ -56,6 +56,7 @@ public class UserRestController {
             resultModels);
   }
 
+
   @PostMapping("/getAllPatients")
   public UsersResultModel getAllPatients(@RequestBody String adminEmail) {
 
@@ -117,7 +118,7 @@ public class UserRestController {
     return new BaseResultModel(GenericConstants.RESULT_SUCCESSFUL, "");
   }
   @GetMapping("/user/{id}")
-  public User getDentistsByCity(@PathVariable(value="id") Long id) {
+  public User getDentistsById(@PathVariable(value="id") Long id) {
     return userRepository.findById(id);
 
   }

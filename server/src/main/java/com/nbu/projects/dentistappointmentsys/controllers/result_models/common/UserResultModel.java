@@ -22,6 +22,7 @@ public class UserResultModel {
   private Double rating;
   private Set<AppointmentModel> appointments;
   private Set<WorkingDayModel> workingDays;
+  private String generalInformation;
 
   public UserResultModel(Long id,
                          String email,
@@ -33,7 +34,8 @@ public class UserResultModel {
                          String city,
                          Double rating,
                          Set<AppointmentModel> appointments,
-                         Set<WorkingDayModel> workingDays) {
+                         Set<WorkingDayModel> workingDays,
+                         String generalInformation) {
     this.id = id;
     this.email = email;
     this.role = role;
@@ -45,6 +47,7 @@ public class UserResultModel {
     this.rating = rating;
     this.appointments = appointments;
     this.workingDays = workingDays;
+    this.generalInformation=generalInformation;
   }
 
   public UserResultModel(User user) {
@@ -58,7 +61,8 @@ public class UserResultModel {
          user.getCity(),
          user.getRating(),
          MixedUtil.buildAppointmentModels(user.getAppointments()),
-         MixedUtil.buildWorkingDayModels(user.getWorkingDays()));
+         MixedUtil.buildWorkingDayModels(user.getWorkingDays()),
+            user.getGeneralInformation());
   }
 
   public Long getId() { return id; }
@@ -139,5 +143,13 @@ public class UserResultModel {
 
   public void setWorkingDays(Set<WorkingDayModel> workingDays) {
     this.workingDays = workingDays;
+  }
+
+  public String getGeneralInformation() {
+    return generalInformation;
+  }
+
+  public void setGeneralInformation(String generalInformation) {
+    this.generalInformation = generalInformation;
   }
 }
