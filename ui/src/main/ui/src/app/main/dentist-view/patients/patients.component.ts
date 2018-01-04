@@ -84,7 +84,6 @@ export class PatientsComponent implements OnInit {
     this.usersService.getPatientsByName(this.userId)
       .subscribe( data => {
         this.patients = data;
-        console.log(data);
         },
           err => console.log(err));
   }
@@ -103,7 +102,6 @@ export class PatientsComponent implements OnInit {
 
   onClick(rating:number){
     this.rating = rating;
-    console.log(rating);
     this.ratingClick.emit({
       itemId: this.itemId,
       rating: rating
@@ -116,7 +114,6 @@ export class PatientsComponent implements OnInit {
      this.ratingsService.getDentistRatingForPatient(this.userId,patient.id)
        .subscribe( data => {
          this.currentRate = data;
-         console.log(this.currentRate);
          this.onClick(this.currentRate.rate);
          this.comment = this.currentRate.comment;
          },

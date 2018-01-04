@@ -1,4 +1,5 @@
 export class EditDentistProfileModel{
+  currentUserEmail: string = '';
   email: string='';
   firstName:string='';
   lastName:string='';
@@ -8,8 +9,17 @@ export class EditDentistProfileModel{
   generalInformation:string="";
 
 
+   constructor(currentUserEmail: string,
+               email: string,
+               id: number,
+               firstName: string,
+               lastName: string,
+               dentistType: string,
+               city: string,
+               generalInformation:string) {
 
-  constructor(email: string, id: number,firstName: string, lastName: string,  dentistType: string,city:string,generalInformation:string) {
+
+    this.currentUserEmail = currentUserEmail;
     this.email = email;
     this.id = id;
     this.firstName = firstName;

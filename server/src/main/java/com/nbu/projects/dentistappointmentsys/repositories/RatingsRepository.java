@@ -19,8 +19,8 @@ public interface RatingsRepository extends JpaRepository<Rating, Long> {
     @Query("select (count(r)>0) from Rating r where r.raterId = :raterId and r.ratedId = :ratedId")
     Boolean exists(@Param("raterId") Long raterId, @Param("ratedId") Long ratedId);
 
-    @Query("select r from Rating r where r.raterId = :dentistId and r.ratedId = :patientId")
-    Rating getDentistRateForPatient(@Param("dentistId") Long dentistId, @Param("patientId") Long patientId);
+    @Query("select r from Rating r where r.raterId = :raterId and r.ratedId = :ratedId")
+    Rating getCurrentRate(@Param("raterId") Long raterId, @Param("ratedId") Long ratedId);
 
     @Transactional
     @Modifying

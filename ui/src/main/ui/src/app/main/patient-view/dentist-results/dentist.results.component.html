@@ -74,7 +74,7 @@
           <clr-dg-cell>{{dentist.lastName}}</clr-dg-cell>
           <clr-dg-cell>{{dentist.city}}</clr-dg-cell>
           <clr-dg-cell>{{dentist.dentistType}}</clr-dg-cell>
-          <clr-dg-cell>{{dentist.rating}}</clr-dg-cell>
+          <clr-dg-cell>{{dentist.rating | number : '1.1-1' | number: formatDecimal}}</clr-dg-cell>
           <clr-dg-cell>
             <a (click) = "openProfile(this.dentist.id)">View Profile</a>
           </clr-dg-cell>

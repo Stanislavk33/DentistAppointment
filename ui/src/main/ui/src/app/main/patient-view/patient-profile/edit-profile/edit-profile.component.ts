@@ -4,8 +4,12 @@ import 'clarity-icons/shapes/essential-shapes';
 import 'clarity-icons/shapes/technology-shapes';
 import {CommonUtil} from "../../../../util/common.util";
 import {EditPatientProfileService} from "../../../shared-components/services/edit.patient.service";
+
 import {UserModel} from "../../../../models/user.model";
 import {CommonService} from "../../../../services/common.service";
+
+import {Constants} from "../../../../models/constants";
+
 
 
 @Component({
@@ -30,9 +34,9 @@ export class EditProfileComponent implements OnInit {
   submit(email: string,firstName:string,lastName:string){
 
       this.service.editPatientProfile(email,firstName,lastName,this.UserId)
-        .subscribe(success =>
+        .subscribe(result =>
           {
-            if(success){
+            if(result.result == Constants.RESULT_SUCCESSFUL){
               this.openSuccess = true;//console log true
               this.openFail = false;
               this.UserService.getUserInfo(this.UserId)

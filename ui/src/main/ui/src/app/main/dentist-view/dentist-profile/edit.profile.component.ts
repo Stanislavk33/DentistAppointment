@@ -60,7 +60,7 @@ export class EditDentistProfileComponent implements OnInit {
 
   ngOnInit() {
     this.UserId = CommonUtil.getSessionUserId();
-    console.log(this.UserId);
     this.UserInfo=CommonUtil.getSessionUser();
+
   }
 }
