@@ -4,8 +4,10 @@ import com.nbu.projects.dentistappointmentsys.controllers.admin.ManageBlockModel
 import com.nbu.projects.dentistappointmentsys.controllers.models.ChangePassModel;
 import com.nbu.projects.dentistappointmentsys.controllers.models.EditDentistProfileModel;
 import com.nbu.projects.dentistappointmentsys.controllers.models.EditUserProfileModel;
+import com.nbu.projects.dentistappointmentsys.controllers.request_models.BlacklistUserModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.BaseResultModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.EditUserResultModel;
+import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.UserBlacklistModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.UserResultModel;
 import com.nbu.projects.dentistappointmentsys.controllers.result_models.common.UsersResultModel;
 import com.nbu.projects.dentistappointmentsys.models.User;
@@ -14,6 +16,7 @@ import com.nbu.projects.dentistappointmentsys.models.types.Role;
 import com.nbu.projects.dentistappointmentsys.repositories.AppointmentRepository;
 import com.nbu.projects.dentistappointmentsys.repositories.UserRepository;
 import com.nbu.projects.dentistappointmentsys.util.GenericConstants;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -230,10 +233,71 @@ public class UserRestController {
 
     }
 
-    @PostMapping("/addToBlacklist/{id}")
-    public Boolean addToBlacklist(@PathVariable(value="id") Long id) {
-      //userRepository.addToBlacklist(id);
-      return true;
+  @PostMapping("/getUserBlacklist")
+  public UserBlacklistModel blacklistUser(@RequestBody Long userId) {
+    User user = userRepository.findById(userId);
+    if (user == null) {
+      return new UserBlacklistModel(GenericConstants.RESULT_ERROR,
+                                    "No such user: " + userId,
+                                    null);
+    }
+    return new UserBlacklistModel(GenericConstants.RESULT_SUCCESSFUL,
+                                  null,
+                                  user.getBlacklist());
+  }
+
+  @PostMapping("/blacklistUser")
+  public BaseResultModel blacklistUser(@RequestBody BlacklistUserModel blacklistUserModel) {
+    User executor = userRepository.findByEmail(blacklistUserModel.getExecutorEmail());
+    if (executor == null) {
+      return new BaseResultModel(GenericConstants.RESULT_ERROR,
+                                 "No such user: " + blacklistUserModel.getExecutorEmail());
     }
 
+    User target = userRepository.findById(blacklistUserModel.getTargetId());
+    if (target == null) {
+      return new BaseResultModel(GenericConstants.RESULT_ERROR,
+                                 "No such user: " + blacklistUserModel.getTargetId());
+    }
+
+    if (executor.getRole().equals(Role.DENTIST) && target.getRole().equals(Role.PATIENT) ||
+        executor.getRole().equals(Role.PATIENT) && target.getRole().equals(Role.DENTIST)) {
+      return blacklistUser(executor, target, blacklistUserModel.getDoBlacklist());
+    } else {
+      return new BaseResultModel(GenericConstants.RESULT_ERROR, "Users have the same role.");
+    }
+  }
+
+  private BaseResultModel blacklistUser(User executor, User target, Boolean block) {
+
+    if (block) {
+      if (executor.getBlacklist().contains(target.getId())) {
+        return new BaseResultModel(GenericConstants.RESULT_ERROR,
+                                   "User already blacklisted: " + target.getEmail());
+      }
+      executor.getBlacklist().add(target.getId());
+      target.setTimesBlacklisted(target.getTimesBlacklisted() + 1);
+    } else {
+      if (!executor.getBlacklist().contains(target.getId())) {
+        return new BaseResultModel(GenericConstants.RESULT_ERROR,
+                                   "User is not currently blacklisted: " + target.getEmail());
+      }
+      executor.getBlacklist().remove(target.getId());
+      if (target.getTimesBlacklisted() > 0) {
+        target.setTimesBlacklisted(target.getTimesBlacklisted() - 1);
+      } else {
+        target.setTimesBlacklisted(0);
+      }
+    }
+    List<User> saved = userRepository.save(new ArrayList<User>() {{
+      add(executor);
+      add(target);
+    }});
+
+    if (saved == null) {
+      return new BaseResultModel(GenericConstants.RESULT_ERROR,
+                                 "Could not perform blacklisting.");
+    }
+    return new BaseResultModel(GenericConstants.RESULT_SUCCESSFUL, null);
+  }
 }

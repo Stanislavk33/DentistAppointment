@@ -14,7 +14,7 @@ import {Constants} from "../../../../models/constants";
 
 @Component({
               moduleId: module.id,
-              selector: 'edit-component',
+              selector: 'edit-patient-profile-component',
               templateUrl: 'edit-profile.component.html',
               styleUrls: ["edit-profile.component.css"],
               providers: []

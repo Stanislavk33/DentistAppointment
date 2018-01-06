@@ -2,13 +2,13 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonUtil} from "../../../util/common.util";
 import {UsersService} from "../../../services/users.service";
 import {UserModel} from "../../../models/user.model";
-import {DentistModel} from "../../../models/dentist.model";
 import {PatientResultModel} from "./patient.result.model";
 import {Comparator, StringFilter} from "clarity-angular";
 import {DentistAppointmentModel} from "../../../models/dentist.appointment.model";
 import {AppointmentService} from "../../../services/appointment.service";
 import {RatingsService} from "../../../services/ratings.service";
 import {DentistRating} from "../../patient-view/dentist-results/dentist-profile/ratings/dentist.rating.model";
+import {Constants} from "../../../models/constants";
 
 class VisitsComparator implements Comparator<PatientResultModel> {
   compare(a: PatientResultModel, b: PatientResultModel) {
@@ -44,7 +44,7 @@ class DateComparator implements Comparator<DentistAppointmentModel> {
 
 @Component({
               moduleId: module.id,
-              selector: 'edit-component',
+              selector: 'patients-component',
               templateUrl: 'patients.component.html',
               styleUrls: ["patients.component.css"],
               providers: []
@@ -55,8 +55,12 @@ export class PatientsComponent implements OnInit {
   private firstNameFilter = new FirstNameFilter();
   private lastNameFilter = new LastNameFilter();
   private dateComparator = new DateComparator();
+  private Constants = Constants;
 
   private searchCriteria: string = '';
+   private dentist: UserModel;
+   private blacklist: number[] = [];
+   private blacklistMessage: string = null;
   @Input() patientId : number;
    public userId: number = 0;
    public patients: PatientResultModel[] = [];
@@ -80,24 +84,50 @@ export class PatientsComponent implements OnInit {
               private appointmentService: AppointmentService) {
   }
 
-  private refreshPatients(){
-    this.usersService.getPatientsByName(this.userId)
-      .subscribe( data => {
-        this.patients = data;
-        },
-          err => console.log(err));
+  private refreshPatients() {
+     this.usersService.getUserBlacklist(this.userId)
+         .subscribe(result => {
+                       if (result.result == Constants.RESULT_SUCCESSFUL) {
+                          this.blacklist = result.blacklist;
+                       } else {
+                          console.log(result.message);
+                       }
+                    },
+                    err => console.log(err));
+     this.usersService.getPatientsByName(this.userId)
+         .subscribe(data => {
+                       this.patients = data;
+                    },
+                    err => console.log(err));
   }
 
-  addToBlacklist(id) {
+   private addToBlacklist(patientId: any, add: boolean) {
+      this.blacklistMessage = null;
+      this.usersService
+          .blacklistUser(this.dentist.email, patientId, add)
+          .subscribe(result => {
+                        if (result.result == Constants.RESULT_SUCCESSFUL) {
+                           this.blacklistMessage = add ?
+                                                   Constants.PATIENT_BLACKLISTED_SUCCESSFULLY :
+                                                   Constants.PATIENT_UNBLACKLISTED_SUCCESSFULLY;
+                           this.refreshPatients();
+                        } else {
+                           this.blacklistMessage = result.message;
+                        }
+                     },
+                     error => console.log(error));
+   }
 
-  }
+   private closeBlacklistAlert(): void {
+      this.blacklistMessage = null;
+   }
 
   seeHistory(id:number){
     this.appointmentService.getCommonAppointments(this.userId, id).subscribe( data => {
         this.commonAppointments = data;
         this.openHistory = true;
       },
-      err => console.log(err));;
+      err => console.log(err));
   }
 
   onClick(rating:number){
@@ -140,9 +170,9 @@ export class PatientsComponent implements OnInit {
     this.hideWarning= !this.hideWarning;
   }
 
-
    ngOnInit() {
      this.userId = CommonUtil.getSessionUserId();
+     this.dentist = CommonUtil.getSessionUser();
      this.refreshPatients();
    }
 }

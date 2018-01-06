@@ -19,7 +19,7 @@ class NameFilter implements StringFilter<DentistAppointmentModel> {
 
 @Component({
               moduleId: module.id,
-              selector: 'edit-component',
+              selector: 'appointments-component',
               templateUrl: 'appointments.component.html',
               styleUrls: ["appointments.component.css"],
               providers: []

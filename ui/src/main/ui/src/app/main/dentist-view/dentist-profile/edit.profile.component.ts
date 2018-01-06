@@ -10,7 +10,7 @@ import {CommonService} from "../../../services/common.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'edit-component',
+  selector: 'edit-dentist-profile-component',
   templateUrl: 'edit.profile.component.html',
   styleUrls: ["edit.profile.component.css"],
   providers: []
