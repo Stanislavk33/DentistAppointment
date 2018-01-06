@@ -9,6 +9,7 @@ import {UserModel} from "../../../../models/user.model";
 import {CommonService} from "../../../../services/common.service";
 
 import {Constants} from "../../../../models/constants";
+import {EditPatientProfileModel} from "../../../../services/model/edit.user.profile.model";
 
 
 
@@ -21,6 +22,7 @@ import {Constants} from "../../../../models/constants";
            })
 export class EditProfileComponent implements OnInit {
 
+  private EUser:EditPatientProfileModel;
   private User: UserModel;
   public UserId: number= 0;
   private UserInfo:UserModel;
@@ -65,8 +67,8 @@ export class EditProfileComponent implements OnInit {
     this.UserId = CommonUtil.getSessionUserId();
     console.log(this.UserId);
 
-    this.UserInfo=CommonUtil.getSessionUser();
-
+    this.EUser=CommonUtil.getSessionUser();
+    this.EUser=this.UserInfo;
   }
 
 

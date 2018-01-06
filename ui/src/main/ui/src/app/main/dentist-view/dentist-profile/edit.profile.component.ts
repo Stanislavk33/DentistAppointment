@@ -19,6 +19,7 @@ export class EditDentistProfileComponent implements OnInit {
 
   private User:UserModel;
   private UserInfo:UserModel;
+  private EditUser:EditDentistProfileModel;
   private constants = Constants;
   public UserId: number = 0;
   private openFail: boolean = false;

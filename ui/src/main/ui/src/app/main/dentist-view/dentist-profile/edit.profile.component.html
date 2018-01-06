@@ -31,6 +31,7 @@
     </div>
   </div>
 
+<!--
   <div class="card-text">
     <p>Email: {{UserInfo.email}}</p>
     <p>First Name: {{UserInfo.firstName}}</p>
@@ -39,29 +40,32 @@
     <p>Dentist Type: {{UserInfo.dentistType}}</p>
     <p>General Information: {{UserInfo.generalInformation}}</p>
   </div>
+-->
 
 
-  <form>
+  <form #editForm="ngForm">
     <div>
       <section class="form-block">
         <div class="form-group">
           <label class="required">Email</label>
-          <input type="email" #email class="formFields_7" placeholder="Email">
+          <input type="email" [(ngModel)]="UserInfo.email" #email="ngModel" class="formFields_7" placeholder="Email" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group">
           <label class="required">FirstName</label>
-          <input type="FirstName" #firstName class="formFields_7" placeholder="FirstName">
+          <input type="FirstName" [(ngModel)]="UserInfo.firstName" #firstName="ngModel" class="formFields_7" placeholder="FirstName" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group">
           <label class="required">LastName</label>
-          <input type="LastName" #lastName class="formFields_7" placeholder="LastName">
+          <input type="LastName" [(ngModel)]="UserInfo.lastName" #lastName="ngModel" class="formFields_7" placeholder="LastName" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group">
           <label for="city">City</label>
           <div class="select">
             <select id="city"
                     name="city"
-                    #city
+                    [(ngModel)]="UserInfo.city"
+                    #city="ngModel"
+                    [ngModelOptions]="{standalone: true}"
                 >
               <option value={{constants.CITY_SOFIA}}>Sofia</option>
               <option value={{constants.CITY_VARNA}}>Varna</option>
@@ -76,7 +80,9 @@
           <div class="select">
             <select id="dentistType"
                     name="dentistType"
-                    #dentistType>
+                    [(ngModel)]="UserInfo.dentistType"
+                    #dentistType="ngModel" [ngModelOptions]="{standalone: true}">
+              <option value=" "></option>
               <option value={{constants.TYPE_NORMAL}}>Normal</option>
               <option value={{constants.TYPE_ORTHODONT}}>Orthodont</option>
               <option value="{{constants.TYPE_SURGEON}}">Surgeon</option>
@@ -86,17 +92,17 @@
 
         <div class="form-group">
           <label>General Information</label>
-          <input type="generalInformaton" #generalInformation class="formFields_7" placeholder="Add General Information">
+          <input type="generalInformaton" [(ngModel)]="UserInfo.generalInformation"  #generalInformation="ngModel" class="formFields_7" placeholder="Add General Information" [ngModelOptions]="{standalone: true}">
         </div>
 
       </section>
     </div>
     <button type="submit" class="btn btn-primary"(click)="submit(
-      email.value,
-    firstName.value,
-    lastName.value,
+      UserInfo.email,
+    UserInfo.firstName,
+    UserInfo.lastName,
     dentistType.value,
     city.value,
-    generalInformation.value)">Ok</button>
+    UserInfo.generalInformation)">Ok</button>
   </form>
 </div>

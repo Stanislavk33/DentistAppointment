@@ -29,58 +29,33 @@
     </div>
   </div>
 
-  <div class="card-text">
+ <!-- <div class="card-text">
     <p>Email: {{UserInfo.email}}</p>
     <p>First Name: {{UserInfo.firstName}}</p>
     <p>Last Name: {{UserInfo.lastName}}</p>
   </div>
 
+-->
 
 
-  <form>
+  <form #editForm="ngForm">
     <div>
       <section class="form-block">
         <div class="form-group">
           <label class="required">Email</label>
-          <input type="email" #email class="formFields_7" placeholder="Email">
+          <input type="email"  [(ngModel)]="EUser.email" #email="ngModel" class="formFields_7" placeholder="Email" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group">
           <label class="required">FirstName</label>
-          <input type="FirstName" #firstName class="formFields_7" placeholder="FirstName">
+          <input type="FirstName" #firstName="ngModel" [(ngModel)]="EUser.firstName"  class="formFields_7" placeholder="FirstName" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group">
           <label class="required">LastName</label>
-          <input type="LastName" #lastName class="formFields_7" placeholder="LastName">
+          <input type="LastName" #lastName="ngModel" [(ngModel)]="EUser.lastName" class="formFields_7" placeholder="LastName" [ngModelOptions]="{standalone: true}">
         </div>
       </section>
     </div>
-    <button type="submit" class="btn btn-primary"(click)="submit(email.value,firstName.value,lastName.value)">Ok</button>
-  </form>
+    <button type="submit" class="btn btn-primary"(click)="submit(EUser.email,EUser.firstName,EUser.lastName)">Ok</button>
+</form>
 </div>
 
-
-
- <!-- <form>
-    <div>
-      <section class="form-block">
-        <div class="form-group">
-          <label class="required">FirstName</label>
-          <input type="FirstName" #firstName class="formFields_7" placeholder="FirstName">
-        </div>
-      </section>
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="submit(firstName.value)">Ok</button>
-  </form>
-  <form>
-    <div>
-      <section class="form-block">
-        <div class="form-group">
-          <label class="required">LastName</label>
-          <input type="LastName" #lastName class="formFields_7" placeholder="LastName">
-        </div>
-      </section>
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="submit(lastName.value)">Ok</button>
-  </form>
-</div>
--->
