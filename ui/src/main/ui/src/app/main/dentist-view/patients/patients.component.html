@@ -1,5 +1,39 @@
 <div class="patient-profie-container">
   <h4>PATIENTS</h4>
+  <div 1class="alert alert-danger"
+       *ngIf="blacklistMessage &&
+              blacklistMessage != Constants.PATIENT_BLACKLISTED_SUCCESSFULLY &&
+              blacklistMessage != Constants.PATIENT_UNBLACKLISTED_SUCCESSFULLY">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+        </div>
+        <span class="alert-text">
+               Could blacklist the patient. Reason: {{blacklistMessage}}
+            </span>
+      </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeBlacklistAlert()">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div>
+  <div class="alert alert-success"
+       *ngIf="blacklistMessage &&
+              (blacklistMessage == Constants.PATIENT_BLACKLISTED_SUCCESSFULLY ||
+               blacklistMessage == Constants.PATIENT_UNBLACKLISTED_SUCCESSFULLY)">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+        </div>
+        <span class="alert-text">{{blacklistMessage}}</span>
+      </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeBlacklistAlert()">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div>
   <div class="patients">
     <clr-datagrid>
       <clr-dg-column>
@@ -24,7 +58,22 @@
         <clr-dg-cell>
           <button class="btn btn-primary" (click)="ratePatient(patient)">RATE</button>
         </clr-dg-cell>
-        <clr-dg-cell> <button class="btn btn-warning" (click)="addToBlacklist(patient.id)">ADD TO BLACKLIST</button> </clr-dg-cell>
+        <clr-dg-cell>
+          <button class="btn btn-warning"
+                  *ngIf="blacklist &&
+                         (blacklist.length == 0 ||
+                          blacklist.indexOf(patient.id) < 0)"
+                  (click)="addToBlacklist(patient.id, true)">
+            ADD TO BLACKLIST
+          </button>
+          <button class="btn btn-success"
+                  *ngIf="blacklist &&
+                         blacklist.length > 0 &&
+                         blacklist.indexOf(patient.id) >= 0"
+                  (click)="addToBlacklist(patient.id, false)">
+            REMOVE FROM BLACKLIST
+          </button>
+        </clr-dg-cell>
         <clr-dg-cell> <button class="btn btn-success" (click)="seeHistory(patient.id)">HISTORY</button> </clr-dg-cell>
       </clr-dg-row>
       <clr-dg-footer>

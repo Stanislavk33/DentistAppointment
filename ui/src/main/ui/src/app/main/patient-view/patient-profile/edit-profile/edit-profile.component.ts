@@ -15,7 +15,7 @@ import {EditPatientProfileModel} from "../../../../services/model/edit.user.prof
 
 @Component({
               moduleId: module.id,
-              selector: 'edit-component',
+              selector: 'edit-patient-profile-component',
               templateUrl: 'edit-profile.component.html',
               styleUrls: ["edit-profile.component.css"],
               providers: []

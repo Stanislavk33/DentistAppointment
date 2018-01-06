@@ -85,4 +85,8 @@ export class Constants {
                                                      "22:30",
                                                      "23:00",
                                                      "23:30"];
+   public static readonly PATIENT_BLACKLISTED_SUCCESSFULLY: string =
+         "The patient was added to your blacklist successfully.";
+   public static readonly PATIENT_UNBLACKLISTED_SUCCESSFULLY: string =
+         "The patient was removed from your blacklist successfully.";
 }
