@@ -67,7 +67,7 @@ export class EditProfileComponent implements OnInit {
     this.UserId = CommonUtil.getSessionUserId();
     console.log(this.UserId);
 
-    this.EUser=CommonUtil.getSessionUser();
+    this.UserInfo=CommonUtil.getSessionUser();
     this.EUser=this.UserInfo;
   }
 
