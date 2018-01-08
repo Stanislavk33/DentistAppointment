@@ -1,20 +1,26 @@
+.profile-container{
+  display: flex;
+  justify-content: center;
+}
+
 clr-datagrid {
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .profile-card {
   width: 800px;
-  display: inline-block;
+  display: block;
 }
 
 .dentist-info {
   display: inline-block;
   width: 800px;
   vertical-align: top;
+  align-content: center;
 }
 
 .card {
-  width: 750px;
+  width: 800px;
 }
 
 h4 {
@@ -23,5 +29,5 @@ h4 {
 
 .ratings {
   display: inline-block;
-  width: 750px;
+  width: 800px;
 }

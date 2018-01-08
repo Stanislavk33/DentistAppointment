@@ -2,7 +2,7 @@
   <div class="dentist-info">
     <h4>DENTIST INFO</h4>
     <div *ngIf="isDataAvailable" class="profile-card">
-      <div class="col-lg-5 col-md-8 col-md-3 col-m">
+      <div>
         <div class="card">
           <div class="card-header">
             Dr. {{dentist.firstName}} {{dentist.lastName}}
@@ -23,7 +23,6 @@
         </div>
       </div>
     </div>
-  </div>
   <div class="ratings">
     <h4>PATIENTS RATINGS</h4>
     <ratings-component [dentistId]="id"></ratings-component>
@@ -31,5 +30,6 @@
   <div class="calendar" *ngIf="dentist">
       <calendar-component [dentist]="dentist"></calendar-component>
   </div>
+</div>
 </div>
 

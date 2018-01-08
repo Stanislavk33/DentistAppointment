@@ -1,52 +1,41 @@
-<div class="container">
-  <div class="alert alert-danger" *ngIf="wrongPass">
-    <div class="alert-items">
-      <div class="alert-item static">
-        <div class="alert-icon-wrapper">
-          <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+<div class="login-container">
+  <div [hidden]="submitted">
+    <form class="login" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="label-login"><label><h2 class="welcome">Login Panel</h2></label></div>
+      <div class="form-group">
+        <label class="required">Email</label>
+        <input type="email"
+               id="email"
+               aria-label="Email"
+               required
+               [(ngModel)]="model.email"
+               name="email"
+               #email="ngModel"
+               placeholder="Enter email"
+               size="35">
+        <div [hidden]="email.valid || email.pristine"
+             class="alert alert-danger">
+          Email is required
         </div>
-        <span class="alert-text">Wrong password/email</span>
       </div>
-    </div>
+      <div class="form-group">
+        <label class="required">Password</label>
+        <input type="password"
+               id="password"
+               required
+               [(ngModel)]="model.password"
+               name="password"
+               #password="ngModel"
+               placeholder="Enter password"
+               size="35">
+        <div [hidden]="password.valid || password.pristine"
+             class="alert alert-danger">
+          Password is required
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.form.valid">
+        Log in
+      </button>
+    </form>
   </div>
-   <div [hidden]="submitted">
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-         <section class="form-block">
-            <label>Log in</label>
-            <div class="form-group">
-               <label for="email">Email</label>
-               <input type="email"
-                      id="email"
-                      required
-                      [(ngModel)]="model.email"
-                      name="email"
-                      #email="ngModel"
-                      placeholder="Enter email"
-                      size="35">
-               <div [hidden]="email.valid || email.pristine"
-                    class="alert alert-danger">
-                  Email is required
-               </div>
-            </div>
-            <div class="form-group">
-               <label for="password">Password</label>
-               <input type="password"
-                      id="password"
-                      required
-                      [(ngModel)]="model.password"
-                      name="password"
-                      #password="ngModel"
-                      placeholder="Enter password"
-                      size="35">
-               <div [hidden]="password.valid || password.pristine"
-                    class="alert alert-danger">
-                  Password is required
-               </div>
-            </div>
-            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">
-               Log in
-            </button>
-         </section>
-      </form>
-   </div>
 </div>

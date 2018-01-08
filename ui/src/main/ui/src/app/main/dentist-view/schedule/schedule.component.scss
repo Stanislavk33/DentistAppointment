@@ -1,3 +1,17 @@
+.schedule-container {
+  position: absolute;
+width: 1000px;
+}
+
+h4 {
+  margin-bottom: 30px;
+}
+
+.edit-schedule {
+  display: inline-block;
+  justify-content: center;
+  width: 750px;
+}
 :host {
   .input-fields {
     div {

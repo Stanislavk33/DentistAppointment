@@ -1,1 +1,10 @@
+.patient-edit-container {
+  position: absolute;
+  width: 400px;
+  left: 50%;
+  transform: translate(-50%);
+}
 
+h4{
+  text-align: center;
+}

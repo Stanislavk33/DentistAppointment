@@ -1,1 +1,10 @@
+.appointment-container{
+  position: absolute;
+  width: 1000px;
+  left: 50%;
+  transform: translate(-50%);
+}
 
+h4{
+  text-align: center;
+}

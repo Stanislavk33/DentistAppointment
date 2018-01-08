@@ -1,9 +1,15 @@
+h1{
+  text-align: center;
+}
+.calendar-buttons{
+  margin-left: 310px
+}
 :host {
   .alert {
-    width: 700px;
+    width: 800px;
   }
   table {
-    width: 700px;
+    width: 800px;
   }
   tr {
     padding: 0;
@@ -15,6 +21,6 @@
   button {
     margin: 0;
     padding: 0;
-    width: 100px;
+    width: 114px;
   }
 }

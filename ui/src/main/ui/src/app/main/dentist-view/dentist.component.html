@@ -1,31 +1,41 @@
 <div class="dentist-container">
-  <header class="header header-6">
+  <header class="header-6">
+    <div class="branding">
+      <a href="..." class="nav-link">
+        <div class="logo">
+          <img src="https://www.clker.com/cliparts/A/K/h/3/U/N/tooth-md.png" width="50" height="50">
+        </div>
+        <span class="title">Appointment App</span>
+      </a>
+    </div>
+    <div class="navButtons">
+      <div class="header-nav nav-justified">
+        <a class="nav-text nav-link" routerLink="/dentist/myprofile" routerLinkActive="active">My Profile</a>
+        <a class="nav-text nav-link" routerLink="/dentist/schedule" routerLinkActive="active">My Schedule</a>
+        <a class="nav-text nav-link" routerLink="/dentist/events" routerLinkActive="active">My Events</a>
+        <a class="nav-text nav-link" routerLink="/dentist/appointments" routerLinkActive="active">Appointment</a>
+        <a class="nav-text nav-link" routerLink="/dentist/patients" routerLinkActive="active">Patient</a>
+      </div>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger>
+          {{userFirstName}} {{userLastName}} {{userEmail}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+          <a clrDropdownItem routerLink="/dentist/myprofile" routerLinkActive="active">My Profile</a>
+          <a clrDropdownItem routerLink="/dentist/schedule" routerLinkActive="active">Schedule</a>
+          <a clrDropdownItem routerLink="/dentist/events" routerLinkActive="active">Events</a>
+          <a clrDropdownItem routerLink="/dentist/patients" routerLinkActive="active">Patients</a>
+          <a clrDropdownItem routerLink="/dentist/changepass" routerLinkActive="active">Change Password</a>
+          <div class="dropdown-divider"></div>
+          <button type="button" clrDropdownItem (click)="logout()">Log Out</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
   </header>
-  <nav class="header-navi">
-    <a class="nav" id="logo" routerLink="/home"></a>
-    <a class="nav" routerLink="/dentist/myprofile" routerLinkActive="active">MY PROFILE</a>
-    <a class="nav" routerLink="/dentist/schedule" routerLinkActive="active">MY SCHEDULE</a>
-    <a class="nav" routerLink="/dentist/events" routerLinkActive="active">MY EVENTS</a>
-    <a class="nav" routerLink="/dentist/appointments" routerLinkActive="active">APPOINTMENTS</a>
-    <a class="nav" routerLink="/dentist/patients" routerLinkActive="active">PATIENTS</a>
-    <clr-dropdown class="nav">
-      <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
-        {{userEmail}}
-        <clr-icon shape="caret down"></clr-icon>
-      </button>
-      <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-        <a clrDropdownItem routerLink="/dentist/myprofile" routerLinkActive="active">My Profile</a>
-        <a clrDropdownItem routerLink="/dentist/schedule" routerLinkActive="active">Schedule</a>
-        <a clrDropdownItem routerLink="/dentist/events" routerLinkActive="active">Events</a>
-        <a clrDropdownItem routerLink="/dentist/patients" routerLinkActive="active">Patients</a>
-        <a clrDropdownItem routerLink="/dentist/changepass" routerLinkActive="active">Change Password</a>
-        <div class="dropdown-divider"></div>
-        <button type="button" clrDropdownItem (click)="logout()">Log Out</button>
-      </clr-dropdown-menu>
-    </clr-dropdown>
-  </nav>
-  <div class="wrapper">
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet>
+  </router-outlet>
 </div>
 

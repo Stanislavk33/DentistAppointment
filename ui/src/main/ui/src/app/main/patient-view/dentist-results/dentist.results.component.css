@@ -1,10 +1,19 @@
 .search-container {
-  display: inline-block;
-  width: 100%;
-  padding-left: 30px;
+  position: absolute;
+  width: 900px;
+  height: 100%;
+  left: 50%;
+  transform: translate(-50%)
 }
+
+.search-result{
+  left: auto;
+  width: 900px
+}
+
 clr-datagrid {
-  max-width: 900px;
+  padding-top: 100px;
+  max-width: 850px;
 }
 
 h4 {
@@ -17,14 +26,15 @@ h4 {
 }
 
 .search-box {
-  display: inline-block;
+  position: absolute;
   width: 900px;
-  vertical-align: top;
-  margin-top: 20px;
+  height: 100px;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .criteria {
-  width: 1000px;
+  width: 900px;
 }
 
 .search-city {
@@ -54,8 +64,10 @@ h4 {
 }
 
 .events {
-  display: inline-block;
-  vertical-align: top;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 800px;
 }
 
 .select {

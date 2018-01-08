@@ -1,11 +1,20 @@
 <div class="main-container">
-  <div class="container">
-    <nav class="navbar navbar-dark bg-dark" style="background-color: #e3f2fd;">
-      <a class="nav" routerLink="/home" routerLinkActive="active">Home</a>
-      <a class="nav" routerLink="/login" routerLinkActive="active">Login</a>
-      <a class="nav" routerLink="/register" routerLinkActive="active">Register</a>
-    </nav>
-  </div>
-   <router-outlet>
-   </router-outlet>
+  <header class="header-6">
+    <div class="branding">
+      <a href="..." class="nav-link">
+        <div class="logo">
+          <img src="https://www.clker.com/cliparts/A/K/h/3/U/N/tooth-md.png" width="50" height="50">
+        </div>
+        <span class="title">Appointment App</span>
+      </a>
+    </div>
+
+    <div class="header-nav nav-justified">
+      <a class="nav-link nav-text" routerLink="/home" routerLinkActive="active">Home</a>
+      <a class="nav-link nav-text" routerLink="/login" routerLinkActive="active">Login</a>
+      <a class="nav-link nav-text" routerLink="/register" routerLinkActive="active">Register</a>
+    </div>
+  </header>
+  <router-outlet>
+  </router-outlet>
 </div>

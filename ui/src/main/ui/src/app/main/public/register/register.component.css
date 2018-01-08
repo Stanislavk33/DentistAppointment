@@ -5,3 +5,16 @@
 .no-style .ng-invalid {
   border-left: 1px solid #CCC
 }
+
+.register-container {
+  position: absolute;
+  height: 200px;
+  widht: 200px;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.label-login {
+  text-align: center;
+  padding-bottom: 30px;
+}

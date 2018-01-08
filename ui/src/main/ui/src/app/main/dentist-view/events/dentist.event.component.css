@@ -1,5 +1,15 @@
 .edit-events{
-  width: 950px;
+  width: 100%;
+}
+
+.new-event{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.card{
+  width:400px;
 }
 
 form-block {
@@ -10,12 +20,11 @@ form-block {
   text-align: center;
 }
 
-.add-new {
-  margin-left: 115px;
-}
-
-events {
-  width: 750px;
+.events {
+  position: absolute;
+  left: 50%;
+  width: 1000px;
+  transform: translate(-50%);
 }
 
 clr-modal {

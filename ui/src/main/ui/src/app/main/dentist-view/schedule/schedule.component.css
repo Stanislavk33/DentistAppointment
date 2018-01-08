@@ -1,5 +1,5 @@
 .schedule-container {
-  width: 1800px;
+  width: 1000px;
   padding-left: 200px;
   padding-top: 50px;
 }
@@ -10,6 +10,7 @@ h4 {
 
 .edit-schedule {
   display: inline-block;
+  justify-content: center;
   width: 750px;
   vertical-align: top;
 }

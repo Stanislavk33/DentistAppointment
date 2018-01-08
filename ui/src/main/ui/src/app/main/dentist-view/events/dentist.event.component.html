@@ -8,13 +8,14 @@
             </div>
             <div class="card-block">
               <div class="card-title">
-                <button class="btn btn-primary add-new" (click)="addEvent = true">ADD EVENT</button>
+                <button class="btn btn-primary btn-block add-new" (click)="addEvent = true">ADD EVENT</button>
               </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="eventsList">
   <clr-datagrid class="events">
     <clr-dg-column>Title</clr-dg-column>
     <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
@@ -37,6 +38,7 @@
       <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
     </clr-dg-footer>
   </clr-datagrid>
+    </div>
 
   <clr-modal [(clrModalOpen)]="addEvent" [clrModalSize]="'lg'">
     <h3 class="modal-title">Create Event</h3>

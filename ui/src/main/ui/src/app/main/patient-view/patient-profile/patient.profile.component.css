@@ -2,4 +2,7 @@
   height: 60px;
 }
 
-
+.patient-profie-container{
+  display: inline-block;
+  text-align: center;
+}

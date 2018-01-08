@@ -1,5 +1,5 @@
-<div class="patient-profie-container">
-
+<div class="patient-edit-container">
+  <h4>Edit Panel</h4>
     <div class="email-alert">
       <div class="alert alert-danger" *ngIf="openFail">
         <div class="alert-items">
@@ -38,15 +38,15 @@
         </div>
         <div class="form-group">
           <label class="required">FirstName</label>
-          <input type="FirstName" #firstName="ngModel" [(ngModel)]="EUser.firstName"  class="formFields_7" placeholder="FirstName" [ngModelOptions]="{standalone: true}">
+          <input type="text" #firstName="ngModel" [(ngModel)]="EUser.firstName"  class="formFields_7" placeholder="FirstName" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group">
           <label class="required">LastName</label>
-          <input type="LastName" #lastName="ngModel" [(ngModel)]="EUser.lastName" class="formFields_7" placeholder="LastName" [ngModelOptions]="{standalone: true}">
+          <input type="text" #lastName="ngModel" [(ngModel)]="EUser.lastName" class="formFields_7" placeholder="LastName" [ngModelOptions]="{standalone: true}">
         </div>
       </section>
     </div>
-    <button type="submit" class="btn btn-primary"(click)="submit(EUser.email,EUser.firstName,EUser.lastName)">Ok</button>
+    <button type="submit" class="btn btn-primary btn-block"(click)="submit(EUser.email,EUser.firstName,EUser.lastName)">Confirm</button>
 </form>
 </div>
 

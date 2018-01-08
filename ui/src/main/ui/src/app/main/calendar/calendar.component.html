@@ -1,9 +1,13 @@
 <div class="calendar-container">
+  <div class="calendar-top">
    <h1>Calendar</h1>
+    </div>
+  <div class="calendar-buttons">
    <clr-button-group>
       <clr-button (click)="loadEarlier()">< Earlier</clr-button>
       <clr-button (click)="loadLater()">Later ></clr-button>
    </clr-button-group>
+    </div>
    <div class="alert alert-danger" *ngIf="appointmentIsMade == 2">
       <div class="alert-items">
          <div class="alert-item static">

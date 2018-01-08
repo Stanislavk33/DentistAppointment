@@ -1,5 +1,5 @@
 .dentist-container{
-  background-color: white;
+  justify-content: center;
 }
 
 .header {
@@ -12,6 +12,10 @@
 
 .active {
   text-decoration: underline;
+}
+
+.logo{
+  padding-right: 5px;
 }
 
 .nav {

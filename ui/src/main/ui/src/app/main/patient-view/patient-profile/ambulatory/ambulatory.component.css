@@ -1,1 +1,16 @@
+clr-datagrid {
+  width: 1000px;
+  display: inline-block;
+  text-align: center;
+}
 
+h4 {
+  text-align: center;
+}
+
+.ambulatory-container{
+  position: absolute;
+  width: 1000px;
+  left: 50%;
+  transform: translate(-50%);
+}

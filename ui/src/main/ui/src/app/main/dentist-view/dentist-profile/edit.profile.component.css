@@ -1,1 +1,14 @@
+.dentist-edit-container{
+  display:flex;
+  justify-content: center;
+  height: 400px;
+}
 
+.edit-panel {
+  width: 440px;
+}
+
+.edit-label{
+  text-align: center;
+  padding-bottom: 30px;
+}

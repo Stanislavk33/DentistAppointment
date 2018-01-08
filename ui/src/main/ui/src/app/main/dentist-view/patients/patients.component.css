@@ -1,5 +1,11 @@
+.patients{
+  display:flex;
+  justify-content: center;
+  width: 1000px;
+}
+
 patients{
-  width: 800px;
+  width: 1000px;
 }
 
 .all-ratings {

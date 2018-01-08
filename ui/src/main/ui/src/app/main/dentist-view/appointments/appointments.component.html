@@ -1,5 +1,5 @@
-<div class="patient-profie-container">
-  <div>
+<div class="appointment-container">
+  <div class="active-appointments">
     <h4>ACTIVE APPOINTMENTS</h4>
     <clr-datagrid>
       <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
@@ -19,7 +19,7 @@
       </clr-dg-footer>
     </clr-datagrid>
   </div>
-  <div>
+  <div class="past-appointments">
     <h4>PAST APPOINTMENTS</h4>
     <clr-datagrid>
       <clr-dg-column [clrDgSortBy]="dateComparator">Date</clr-dg-column>
