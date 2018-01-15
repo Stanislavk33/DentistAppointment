@@ -1,6 +1,5 @@
-
 <div class="dentist-edit-container">
-
+  <h4>Edit Panel</h4>
   <div class="edit-profile-container">
     <div class="email-alert">
       <div class="alert alert-danger" *ngIf="openFail">
@@ -92,7 +91,8 @@
 
         <div class="form-group">
           <label>General Information</label>
-          <input type="text" [(ngModel)]="UserInfo.generalInformation"  #generalInformation="ngModel" class="formFields_7" size="25" placeholder="Add General Information" [ngModelOptions]="{standalone: true}">
+          <textarea [(ngModel)]="UserInfo.generalInformation"  #generalInformation="ngModel" class="formFields_7" rows="2" placeholder="Add General Information" [ngModelOptions]="{standalone: true}">
+          </textarea>
         </div>
 
       </section>

@@ -2,6 +2,10 @@
   max-height: 10px;
 }
 
+.logo {
+  padding-right: 5px;
+}
+
 .header-navi {
   height: 60px;
 }
@@ -10,5 +14,8 @@
   margin-top: 10px;
   display: inline-block;
   width:16%;
+  text-align: center;
+}
+h1{
   text-align: center;
 }
