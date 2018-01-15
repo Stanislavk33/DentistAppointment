@@ -12,7 +12,7 @@ import {Constants} from "../../../models/constants";
               providers: []
            })
 export class LoginComponent implements OnInit {
-   private wrongPass = false;
+   private error: string;
    private model: LoginModel = new LoginModel();
    private userRole;
 
@@ -23,11 +23,12 @@ export class LoginComponent implements OnInit {
    }
 
    onSubmit() {
+      this.error = null;
       this.commonService.logIn(this.model)
           .subscribe(result => {
-                if(result.user == null){
-                  this.wrongPass = true;
-                }else{
+                if (result.user == null) {
+                  this.error = result.message;
+                } else {
                   CommonUtil.putSessionUser(result.user);
                   this.userRole = CommonUtil.getSessionUserRole();
                   switch(this.userRole){

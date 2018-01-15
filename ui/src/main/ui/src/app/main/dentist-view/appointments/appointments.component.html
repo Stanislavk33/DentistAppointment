@@ -50,59 +50,59 @@
         <clr-dg-pagination #pagination [clrDgPageSize]="4"></clr-dg-pagination>
       </clr-dg-footer>
     </clr-datagrid>
-
-    <clr-modal [(clrModalOpen)]="cancelWarning" [clrModalSize]="'md'">
-      <h3 class="modal-title">Cancel</h3>
-      <div class="modal-body">
-        <p>Are you sure you want cancel this appointment?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="cancelWarning = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="cancelAppointment()">Ok</button>
-      </div>
-    </clr-modal>
-
-    <clr-modal [(clrModalOpen)]="openComment" [clrModalSize]="'lg'">
-      <h3 class="modal-title">Add a comment</h3>
-      <div class="modal-body">
-        <div [hidden]="submitted">
-          <div (ngSubmit)="onSubmit()"
-               ngForm #commentForm="ngForm">
-            <div class="form-group description">
-              <label for="info">Comment</label>
-              <textarea id="info" rows="4"
-                        type="text"
-                        required
-                        [(ngModel)]="comment"
-                        name="info"
-                        #info="ngModel"
-                        placeholder="{{currentComment}}">
-                </textarea>
-              <div [hidden]="info.valid || info.pristine"
-                   class="alert alert-danger">
-                Information about the event is required!
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="alert alert-danger error-msg" *ngIf="showWarning">
-          <div class="alert-items">
-            <div class="alert-item static">
-              <div class="alert-icon-wrapper">
-                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
-              </div>
-              <span class="alert-text">Cannot add empty comment</span>
-            </div>
-          </div>
-          <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
-            <clr-icon aria-hidden="true" shape="close"></clr-icon>
-          </button>
-        </div>
-        <button type="button" class="btn btn-outline" (click)="openComment = false">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!commentForm.form.valid" (click)="onSubmit()">Ok</button>
-      </div>
-    </clr-modal>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="cancelWarning" [clrModalSize]="'md'">
+  <h3 class="modal-title">Cancel</h3>
+  <div class="modal-body">
+    <p>Are you sure you want cancel this appointment?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelWarning = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="cancelAppointment()">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="openComment" [clrModalSize]="'lg'">
+  <h3 class="modal-title">Add a comment</h3>
+  <div class="modal-body">
+    <div [hidden]="submitted">
+      <div (ngSubmit)="onSubmit()"
+           ngForm #commentForm="ngForm">
+        <div class="form-group description">
+          <label for="info">Comment</label>
+          <textarea id="info" rows="4"
+                    type="text"
+                    required
+                    [(ngModel)]="comment"
+                    name="info"
+                    #info="ngModel"
+                    placeholder="{{currentComment}}">
+            </textarea>
+          <div [hidden]="info.valid || info.pristine"
+               class="alert alert-danger">
+            Information about the event is required!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="alert alert-danger error-msg" *ngIf="showWarning">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">Cannot add empty comment</span>
+        </div>
+      </div>
+      <button type="button" class="close" (click)="closeWarning()" aria-label="Close">
+        <clr-icon aria-hidden="true" shape="close"></clr-icon>
+      </button>
+    </div>
+    <button type="button" class="btn btn-outline" (click)="openComment = false">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!commentForm.form.valid" (click)="onSubmit()">Ok</button>
+  </div>
+</clr-modal>

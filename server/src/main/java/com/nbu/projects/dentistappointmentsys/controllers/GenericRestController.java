@@ -37,6 +37,11 @@ public class GenericRestController {
     User user = userRepository.findByEmail(loginModel.getEmail());
     if (user != null &&
         user.getPassword().equals(loginModel.getPassword())) {
+      if (user.getTimesBlacklisted() >= 4) {
+        return new LoginResultModel(GenericConstants.RESULT_FAILED,
+                                    "Blocked by system.",
+                                    null);
+      }
       return new LoginResultModel(GenericConstants.RESULT_SUCCESSFUL,
                                   "",
                                   new UserResultModel(user));

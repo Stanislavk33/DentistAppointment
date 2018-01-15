@@ -57,25 +57,25 @@
       </clr-dg-footer>
     </clr-datagrid>
   </div>
-
-  <clr-modal [(clrModalOpen)]="cancelWarning" [clrModalSize]="'md'">
-    <h3 class="modal-title">Cancel</h3>
-    <div class="modal-body">
-      <p>Are you sure you want cancel this appointment?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline" (click)="cancelWarning = false">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="cancelAppointment()">Ok</button>
-    </div>
-  </clr-modal>
-
-  <clr-modal [(clrModalOpen)]="openComment" [clrModalSize]="'md'">
-    <h3 class="modal-title">Comment</h3>
-    <div class="modal-body">
-      <p>{{currentComment}}</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline" (click)="openComment = false">Ok</button>
-    </div>
-  </clr-modal>
 </div>
+
+<clr-modal [(clrModalOpen)]="cancelWarning" [clrModalSize]="'md'">
+  <h3 class="modal-title">Cancel</h3>
+  <div class="modal-body">
+    <p>Are you sure you want cancel this appointment?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelWarning = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="cancelAppointment()">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="openComment" [clrModalSize]="'md'">
+  <h3 class="modal-title">Comment</h3>
+  <div class="modal-body">
+    <p>{{currentComment}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="openComment = false">Ok</button>
+  </div>
+</clr-modal>

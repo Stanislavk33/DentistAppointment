@@ -45,7 +45,12 @@ public class ScheduleRestController {
       WorkingDay workingDay = workingDayRepository.findByUserAndWeekDay(dentist, model.getWeekDay());
       WorkingDay saved;
       if (workingDay == null) {
-         saved = workingDayRepository.save(new WorkingDay(dentist, model));
+         if (model.getFrom1() != null) {
+            saved = workingDayRepository.save(new WorkingDay(dentist, model));
+         } else {
+            // No workday to delete so we do nothing and return a successful result.
+            saved = new WorkingDay();
+         }
       } else if (model.getFrom1() == null) {
          workingDayRepository.delete(workingDay.getId());
          return new BaseResultModel(GenericConstants.RESULT_SUCCESSFUL, null);

@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
                            if(this.userRole == Constants.ROLE_ADMIN) {
                               this.router.navigate(['/admin']);
                            } else if (this.userRole == Constants.ROLE_DENTIST) {
-                              this.router.navigate(['/dentist']);
+                              this.router.navigate(['/dentist/schedule']);
                            } else if (this.userRole == Constants.ROLE_PATIENT) {
                               this.router.navigate(['/patient']);
                            }

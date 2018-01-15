@@ -1,11 +1,17 @@
 .patients{
   display:flex;
   justify-content: center;
-  width: 1000px;
+  margin: 0 auto;
 }
 
-patients{
-  width: 1000px;
+.first-name-cell {
+  min-width: 230px;
+}
+.last-name-cell {
+  min-width: 230px;
+}
+.blacklist-cell {
+  min-width: 230px;
 }
 
 .all-ratings {

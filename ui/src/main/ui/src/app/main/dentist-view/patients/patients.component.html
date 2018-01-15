@@ -1,6 +1,6 @@
 <div class="dentist-patients-container">
   <h4>PATIENTS</h4>
-  <div 1class="alert alert-danger"
+  <div class="alert alert-danger"
        *ngIf="blacklistMessage &&
               blacklistMessage != Constants.PATIENT_BLACKLISTED_SUCCESSFULLY &&
               blacklistMessage != Constants.PATIENT_UNBLACKLISTED_SUCCESSFULLY">
@@ -51,14 +51,14 @@
       <clr-dg-column>Ambulatory</clr-dg-column>
 
       <clr-dg-row *clrDgItems="let patient of patients">
-        <clr-dg-cell>{{patient.firstName}}</clr-dg-cell>
-        <clr-dg-cell>{{patient.lastName}}</clr-dg-cell>
+        <clr-dg-cell class="first-name-cell">{{patient.firstName}}</clr-dg-cell>
+        <clr-dg-cell class="last-name-cell">{{patient.lastName}}</clr-dg-cell>
         <clr-dg-cell>{{patient.visits}}</clr-dg-cell>
         <clr-dg-cell>{{patient.rating | number : '1.1-1' | number: formatDecimal}}</clr-dg-cell>
         <clr-dg-cell>
           <button class="btn btn-primary" (click)="ratePatient(patient)">RATE</button>
         </clr-dg-cell>
-        <clr-dg-cell>
+        <clr-dg-cell class="blacklist-cell">
           <button class="btn btn-warning"
                   *ngIf="blacklist &&
                          (blacklist.length == 0 ||
@@ -74,7 +74,7 @@
             REMOVE FROM BLACKLIST
           </button>
         </clr-dg-cell>
-        <clr-dg-cell> <button class="btn btn-success" (click)="seeHistory(patient.id)">HISTORY</button> </clr-dg-cell>
+        <clr-dg-cell> <button class="btn btn-primary" (click)="seeHistory(patient.id)">HISTORY</button> </clr-dg-cell>
       </clr-dg-row>
       <clr-dg-footer>
         {{patients.length}} patients
