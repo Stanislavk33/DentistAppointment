@@ -30,18 +30,6 @@
     </div>
   </div>
 
-<!--
-  <div class="card-text">
-    <p>Email: {{UserInfo.email}}</p>
-    <p>First Name: {{UserInfo.firstName}}</p>
-    <p>Last Name: {{UserInfo.lastName}}</p>
-    <p>City: {{UserInfo.city}}</p>
-    <p>Dentist Type: {{UserInfo.dentistType}}</p>
-    <p>General Information: {{UserInfo.generalInformation}}</p>
-  </div>
--->
-
-
   <form #editForm="ngForm">
     <div class="edit-panel">
       <section class="form-block">
@@ -90,7 +78,7 @@
 
         <div class="form-group">
           <label>General Information</label>
-          <textarea [(ngModel)]="UserInfo.generalInformation"  #generalInformation="ngModel" class="formFields_7" rows="2" placeholder="Add General Information" [ngModelOptions]="{standalone: true}">
+          <textarea [(ngModel)]="UserInfo.generalInformation"  #generalInformation="ngModel" class="formFields_7" rows="8" placeholder="Add General Information" [ngModelOptions]="{standalone: true}">
           </textarea>
         </div>
 

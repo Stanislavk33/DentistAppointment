@@ -3,18 +3,19 @@
     <div class="branding">
       <a href="..." class="nav-link">
         <div class="logo">
-        <img src="https://www.clker.com/cliparts/A/K/h/3/U/N/tooth-md.png" width="50" height="50">
+          <img src="https://www.clker.com/cliparts/A/K/h/3/U/N/tooth-md.png" width="50" height="50">
         </div>
         <span class="title">Appointment App</span>
       </a>
     </div>
-<div class="navButtons">
-    <div class="header-nav nav-justified">
-      <a class="nav-link nav-text" routerLink="/patient/profile/edit" routerLinkActive="active">My profile</a>
-      <a class="nav-link nav-text" routerLink="/patient/dentists" routerLinkActive="active">Dentists</a>
-      <a class="nav-link nav-text" routerLink="/patient/profile/appointments" routerLinkActive="active">My appointments</a>
+    <div class="navButtons">
+      <div class="header-nav nav-justified">
+        <a class="nav-link nav-text" routerLink="/patient/profile/edit" routerLinkActive="active">My profile</a>
+        <a class="nav-link nav-text" routerLink="/patient/dentists" routerLinkActive="active">Dentists</a>
+        <a class="nav-link nav-text" routerLink="/patient/profile/appointments" routerLinkActive="active">My appointments</a>
+        <a class="nav-link nav-text" routerLink="/patient/profile/ambulatory" routerLinkActive="active">Ambulatory Info</a>
+      </div>
     </div>
-</div>
     <div class="header-actions">
       <clr-dropdown>
         <button class="nav-text" clrDropdownTrigger>
@@ -31,7 +32,7 @@
     </div>
   </header>
   <div class="patient-router">
-  <router-outlet>
-  </router-outlet>
-    </div>
+    <router-outlet>
+    </router-outlet>
+  </div>
 </div>
