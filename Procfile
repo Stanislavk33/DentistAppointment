@@ -1,0 +1,1 @@
+web: java -jar /app/tmp/cache/.m2/repository/com/nbu/projects/dentist-appointment-sys/server/0.0.1-SNAPSHOT/server-0.0.1-SNAPSHOT.jar
